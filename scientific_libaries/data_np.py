@@ -2,14 +2,14 @@
 
 # import standard libraries
 import numpy as np
-#import warnings
-#from sys import exit as sysexit
+# import warnings
+# from sys import exit as sysexit
 
 print()
 # Let's make some simple arrays
 if True:
     a = [1, 2, 3]
-    b = np.array([1, 2, 3])   # Create a rank 1 array
+    b = np.array([1, 2, 3])  # Create a rank 1 array
     print('type(a):', type(a))
     print('type(b):', type(b))
     print('type(b[0]):', type(b[0]))
@@ -52,12 +52,12 @@ if False:
 if False:
     a = np.arange(10)
     print('a:', a)
-    print('a[0:5]:', a[0:5]) # selects upto but not including index 5
-    print('a[0:]:', a[0:]) # selects everthing to end of array
-    print('a[:5]:', a[:5]) # selects everthing to upto but not including index 5
-    print('a[3:5]:', a[3:5]) # selects everthing from 3 to upto but not including index 5
-    print('a[0:-1]:', a[0:-1]) # selects upto but not including index 5
-    print('a[0:100]:', a[0:100]) # index is past end of array?!?
+    print('a[0:5]:', a[0:5])  # selects upto but not including index 5
+    print('a[0:]:', a[0:])  # selects everthing to end of array
+    print('a[:5]:', a[:5])  # selects to upto but not including index 5
+    print('a[3:5]:', a[3:5])  # selects from 3 upto but not including index 5
+    print('a[0:-1]:', a[0:-1])  # selects upto but not including index 5
+    print('a[0:100]:', a[0:100])  # index is past end of array?!?
 
 # Let's get metadata about our arrays.
 if False:
@@ -86,29 +86,24 @@ if False:
     print('c[1, 2:4]:', c[1, 2:4])
     print('c[:, 2:4]:\n', c[:, 2:4])
     print('c[0, :]:', c[0, :])
-    print('c[1, 2:100]:', c[1, 2:100]) # over indexing is handled OK? Maybe this works?
+    print('c[1, 2:100]:', c[1, 2:100])  # over index handled OK? Maybe works
 
-    
 # Let's create some more complicated arrays
 if False:
     a = np.zeros((2, 2))    # Create an array of all zeros
-    print('a:\n', a)        # Prints "[[ 0.  0.]
-                            #          [ 0.  0.]]"
+    print('a:\n', a)
 
     b = np.ones((2, 2))    # Create an array of all ones
     print('b:\n', b)
 
     c = np.full((2, 2), 7, dtype=int)   # Create a constant array
-    print('c:\n', c)         # Prints "[[ 7.  7.]
-                             #          [ 7.  7.]]"
+    print('c:\n', c)
 
     d = np.eye(2)           # Create a 2x2 identity matrix
-    print('d:\n', d)        # Prints "[[ 1.  0.]
-                            #          [ 0.  1.]]"
+    print('d:\n', d)
 
     e = np.random.random((2, 2))  # Create an array filled with random values
-    print(e)                     # Might print "[[ 0.91940167  0.08143941]
-                             #               [ 0.68744134  0.87236687]]"
+    print(e)
 
 # Let's play with broadcasting
 if False:
@@ -155,7 +150,7 @@ if False:
 
 # Let's play with IEEE NaN for missing data
 if False:
-    a = np.arange(10)#, dtype=float)
+    a = np.arange(10)  # dtype=float)
     print('a:', a)
 
     a[a == 9] = np.nan  # This will initially fail because NaN is a float
@@ -182,7 +177,8 @@ if False:
 
     print('np.mean(a):', np.mean(a))
     print('np.nanmean(a):', np.nanmean(a))
-    print('np.nanmean(np.array([np.nan, np.nan])):', np.nanmean(np.array([np.nan, np.nan])))
+    print('np.nanmean(np.array([np.nan, np.nan])):',
+          np.nanmean(np.array([np.nan, np.nan])))
     print()
 
     # Have we imported warnings?
@@ -221,47 +217,47 @@ if False:
 
 # Now let's paly with matrix addition, subtraction, division, ...
 if False:
-    x = np.array([[1,2],[3,4]], dtype=np.float64)
-    y = np.array([[5,6],[7,8]], dtype=np.float64)
+    x = np.array([[1, 2], [3, 4]], dtype=np.float64)
+    y = np.array([[5, 6], [7, 8]], dtype=np.float64)
 
     print('x:\n', x)
     print('y:\n', y)
 
-    v = np.array([9,10])
+    v = np.array([9, 10])
     w = np.array([11, 12])
 
     print('v:\n', v)
     print('w:\n', w)
     print()
-    
+
     # Elementwise sum; both produce the array
     # [[ 6.0  8.0]
     #  [10.0 12.0]]
     print('x + y:\n', x + y)
     print('np.add(x, y):\n', np.add(x, y))
     print()
-    
+
     # Elementwise difference; both produce the array
     # [[-4.0 -4.0]
     #  [-4.0 -4.0]]
     print('x - y:\n', x - y)
     print('np.subtract(x, y):\n', np.subtract(x, y))
     print()
-    
+
     # Elementwise product; both produce the array
     # [[ 5.0 12.0]
     #  [21.0 32.0]]
     print('x * y:\n', x * y)
     print('np.multiply(x, y):\n', np.multiply(x, y))
     print()
-    
+
     # Elementwise division; both produce the array
     # [[ 0.2         0.33333333]
     #  [ 0.42857143  0.5       ]]
     print('x / y:\n', x / y)
     print('np.divide(x, y):\n', np.divide(x, y))
     print()
-    
+
     # Elementwise square root; produces the array
     # [[ 1.          1.41421356]
     #  [ 1.73205081  2.        ]]
@@ -284,10 +280,9 @@ if False:
     print('x.dot(y):\n', x.dot(y))
     print('np.dot(x, y):\n', np.dot(x, y))
 
-
 # Now some more broadcasting fun
 if False:
-    x = np.array([[1,2,3], [4,5,6], [7,8,9], [10, 11, 12]])
+    x = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])
     v = np.array([1, 0, 1])
     y = x + v  # Add v to each row of x using broadcasting
     print('y:\n', y)
