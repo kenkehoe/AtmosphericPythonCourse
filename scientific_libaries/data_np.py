@@ -2,37 +2,57 @@
 
 # import standard libraries
 import numpy as np
-# import warnings
+import numpy.ma as ma
+import warnings
 # from sys import exit as sysexit
 
 print()
-# Let's make some simple arrays
+
+# What is the difference between regular Python and Numpy?
 if True:
+    print(type(1))
+    print(type(1.))
+    print(type('Hello World'))
+    print(np.zeros(1, dtype=np.int8).dtype)
+    print(np.zeros(1, dtype=np.int16).dtype)
+    print(np.zeros(1, dtype=np.int32).dtype)
+    print(np.zeros(1, dtype=np.int64).dtype)
+    print(np.zeros(1, dtype=np.float16).dtype)
+    print(np.zeros(1, dtype=np.float32).dtype)
+    print(np.zeros(1, dtype=np.float64).dtype)
+    print(np.zeros(1, dtype=np.bool_).dtype)
+    print(np.zeros(1, dtype=np.int_).dtype)
+    print(np.zeros(1, dtype=np.float_).dtype)
+    print(np.zeros(1, dtype=np.uint).dtype)
+    print(np.zeros(1, dtype=np.complex).dtype)
+    print()
+
+# Let's make some simple arrays
+if False:
     a = [1, 2, 3]
-    b = np.array([1, 2, 3])  # Create a rank 1 array
+    b = np.array([1, 2, 3])  # Create a 1-D array
     print('type(a):', type(a))
     print('type(b):', type(b))
     print('type(b[0]):', type(b[0]))
+    print('b.dtype:', b.dtype)  # a.dtype will not work. dtype is numpy only.
     print('a:', a)
     print('b:', b)
 
 # Let's make an array but of type float
 if False:
     a = np.array([1, 2, 3.])
-    print('type(a[0]):', type(a[0]))
+    print('a.dtype:', a.dtype)
     print('a:', a)
     print()
 
     b = np.array([1, 2, 3], dtype=float)
-    print('type(b[0]):', type(b[0]))
+    print('b.dtype:', b.dtype)
     print('b:', b)
 
-# Let's make an array and set the type to what we want after.
-if False:
-    b = np.array([4, 5, 6])
-    b = b.astype(float)
-    print('type(b[0]):', type(b[0]))
-    print('b:', b)
+    c = np.array([4, 5, 6])
+    c = c.astype(float)
+    print('c.dtype:', c.dtype)
+    print('c:', c)
 
 
 # Let's start making larger arrays without needing to type all the values
@@ -138,7 +158,7 @@ if False:
     bool_idx = c > 4
     print('bool_idx:', bool_idx)
     print('type(bool_idx):', type(bool_idx))
-    print('type(bool_idx[0]):', type(bool_idx[0]))
+    print('type(bool_idx[0]):', bool_idx.dtype)
     print('c[bool_idx]: ', c[bool_idx])
 
     c[c > 6] = -1
@@ -215,7 +235,7 @@ if False:
     print('d:', d)
 
 
-# Now let's paly with matrix addition, subtraction, division, ...
+# Now let's play with matrix addition, subtraction, division, ...
 if False:
     x = np.array([[1, 2], [3, 4]], dtype=np.float64)
     y = np.array([[5, 6], [7, 8]], dtype=np.float64)
@@ -305,5 +325,116 @@ if False:
     c = a + b  # Add v to each row of x using broadcasting
     print('\nc:\n', c)
 
+# Now lets look at Numpy masked arrays and why they are awesome!
+if False:
+    # First create a numpy array
+    a = np.array([0, 1, 2, 3, 4, 5])
+    # Next create a numpy masked array and set the mask values.
+    # A 0 = False and 1 = True
+    masked_a = ma.masked_array(a, mask=[0, 1, 0, 0, 1, 0])
+    print('masked_a:', masked_a)
+    # Calculate the mean not using the masked values
+    masked_a_mean = masked_a.mean()
+    print('masked_a_mean:', masked_a_mean)
+    print()
+
+    # Create a masked array and set all the mask values to False
+    # and set a fill_value other than the default.
+    masked_a = ma.masked_array(a, mask=False, fill_value=-99999)
+    print('masked_a:', masked_a)
+    print('masked_a.data:', masked_a.data)
+    print('masked_a.mask:', masked_a.mask)
+    print('masked_a.fill_value:', masked_a.fill_value)
+    print()
+
+    # Create a masked array where all values less than or equal to
+    # 1 are masked
+    masked_c = ma.masked_less_equal(a, 1)
+    print('masked_c:', masked_c)
+    print('masked_c.data:', masked_c.data)
+    print('masked_c.mask:', masked_c.mask)
+    print('masked_c.mean():', masked_c.mean())
+    print('np.mean(masked_c.data):', np.mean(masked_c.data))
+    print()
+
+    # Create a masked arra where all values less than or equal to
+    # 1 are masked. Same as above but with different syntax.
+    masked_d = ma.masked_where(a <= 1, a)
+    print('masked_d:', masked_d)
+
+    # Create a masked array with no mask set, yet.
+    masked_d = ma.masked_array(a)
+    print('masked_d:', masked_d)
+
+    # Set the mask to True for all indexes less than 3.
+    # Notice that we never create a mask, all that is done automatically.
+    masked_d[:3] = ma.masked
+    print('masked_d:', masked_d)
+    print()
+
+    # Reset the mask to all False
+    masked_d.mask = False
+    print('masked_d:', masked_d)
+
+# Some of the nuances of performance with masked arrays
+if False:
+    num = 5000000  # The size of the array we are going to play with
+    # We can create an array of all ones with type integer 16 bit
+    masked_a = ma.ones(num, dtype=np.int16)
+    print('masked_a.dtype:', masked_a.dtype)
+    print('masked_a.size:', masked_a.size)
+    print()
+
+    # Now we will set most of the values to be masked
+    masked_a[:num-1000] = ma.masked
+    # Now lets print the sum of the mased array using default masked array
+    # methods and then we will sum using numpy of just the data stored in
+    # the masked array without using the mask.
+    print('masked_a.sum():', masked_a.sum())
+    print('np.sum(masked_a.data):', np.sum(masked_a.data))
+    print()
+
+    # Create a new clean masked array with mask not set yet.
+    # Since the mask array is the same size as data array this can be
+    # large and take longer.
+    masked_a = ma.ones(num, dtype=np.int16)
+
+    # Now we will add a random number to the masked array of ones.
+    masked_a = masked_a + np.random.random(num)
+
+    # Next we calculate the standard deviation of the masked array
+    masked_a_std = ma.std(masked_a)
+    print('masked_a_std:', masked_a_std)
+    print()
+
+    # Here we add some random noise spikes
+    masked_a[np.random.randint(0, high=num, size=10000)] = 20
+
+    # Here we mask out the values that are great than one standard deviation.
+    # Now the mask is created, since it did not exist before this.
+    masked_b = ma.masked_outside(masked_a, 1 - masked_a_std, 1 + masked_a_std)
+
+    # Here we mask out some random values. Notice we are not using
+    # masked_b.mask. That is slower and not correct. If the mask did not
+    # already exist it would have an error. This way will create the mask
+    # if it was not already created.
+    masked_b[np.random.randint(0, high=num, size=1000)] = ma.masked
+
+    # This is the sum of the data with all masked values excluded
+    print('np.sum(masked_a):', np.sum(masked_b))
+
+    # This is the sum of the data without excluding any values.
+    print('np.sum(masked_b.data):', np.sum(masked_b.data))
+    print()
+
+    # Now lets convert everything back to a regular numpy array
+    # but set the masked values to NaNs in the numpy array
+    masked_b.fill_value = np.nan
+    b = ma.filled(masked_b)
+    print('type(masked_b):', type(masked_b))
+    print('b.dtype:', b.dtype)
+    # Notice the value is NaN because we are not using np.nanmax(). This means
+    # there is at least one NaN in the array.
+    print('np.max(b):', np.max(b))
 
 print()
