@@ -1,9 +1,9 @@
 #! /usr/bin/env python3
 
-# import standard libraries
 import numpy as np
 import numpy.ma as ma
 import warnings
+from datetime import datetime, timedelta
 # from sys import exit as sysexit
 
 print()
@@ -38,6 +38,48 @@ if False:
     print('a:', a)
     print('b:', b)
 
+# What's the difference between regular Python and numpy?
+if False:
+    num = 50000000
+    print("Looping over {} values using for loop with list".format(num))
+    a = list(range(0, num))
+    start_datetime = datetime.now()
+    # Don't do this. This is not good python programming.
+    for ii in a:
+        a[ii] = a[ii] + 1
+
+    diff = (datetime(1970, 1, 1, 0, 0, 0) +
+            timedelta(seconds=(datetime.now() - start_datetime).seconds))
+    print('Finished loop.')
+    print('Elapsed Time: ' + diff.strftime("%H:%M:%S"), '\n')
+    print()
+
+    print("Using numpy to do same operation using Numpy arrays "
+          "with {} values.".format(num*10))
+    start_datetime = datetime.now()
+    a = np.arange(num*10, dtype=np.int16) + 1
+    print("Finished array")
+    diff = datetime(1970, 1, 1, 0, 0, 0)+timedelta(seconds=(
+        datetime.now()-start_datetime).seconds)
+    print('Elapsed Time: ' + diff.strftime("%H:%M:%S"), '\n')
+
+# Can you swith between regular Python and numpy?
+if False:
+    num = 1000
+    a = list(range(0, num))
+    print('type(a):', type(a))
+    print('len(a):', len(a))
+    print()
+
+    b = np.array(a)
+    print('type(b):', type(b))
+    print('b.shape:', b.shape)
+    print()
+
+    c = list(b)
+    print('type(c):', type(c))
+    print('len(c):', len(c))
+
 # Let's make an array but of type float
 if False:
     a = np.array([1, 2, 3.])
@@ -53,7 +95,6 @@ if False:
     c = c.astype(float)
     print('c.dtype:', c.dtype)
     print('c:', c)
-
 
 # Let's start making larger arrays without needing to type all the values
 if False:
