@@ -1,21 +1,40 @@
+#! /usr/bin/env python3
+
 import xarray as xr
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pint
+import numpy as np
+import sys
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
 # Read in one netCDF data file. Look at the default vs. optional for
 # scalar variables.
-if False:
+if True:
+    ## ncdump ../data/sgpmetE13.b1/sgpmetE13.b1.20191101.000000.cdf | less
     met_ds = xr.open_mfdataset('../data/sgpmetE13.b1/sgpmetE13.b1.20191101.000000.cdf',
                                combine='nested', concat_dim='time')
 #    met_ds = xr.open_mfdataset('../data/sgpmetE13.b1/sgpmetE13.b1.20191101.000000.cdf',
 #                               combine='nested', concat_dim='time', data_vars='minimal')
 
     print(met_ds)
-    print(met_ds.data_vars)
-    print(list(met_ds.data_vars))
+#    print(met_ds.data_vars)
+#    print(list(met_ds.data_vars))
+#    print(met_ds['atmos_pressure'])
+#    print(met_ds['atmos_pressure'].data)
+##    np.set_printoptions(threshold=sys.maxsize)
+#    print(type(met_ds['atmos_pressure'].values))
+#    print(met_ds['atmos_pressure'].values)
+#    print(met_ds['atmos_pressure'].attrs)
+#    print(met_ds['atmos_pressure'].attrs['long_name'])
+#    print(met_ds['atmos_pressure'].attrs['does_not_exist'])
+
+#    try:
+#        print(met_ds['atmos_pressure'].attrs['does_not_exist'])
+#    except KeyError:
+#        print('\nCaught the error for "{var_name}" and am now executing the print statement'
+#              ' under the except.\n'.format(var_name='atmos_pressure'))
 
 # Read in netCDF data file and exclude some variables.
 if False:
@@ -80,14 +99,17 @@ if False:
 # Lets pause with Xarray plotting and start with the true library that is making
 # the plot, matplotlib. Once we understand what is going on underneath we can
 # make the plots we want with the same/similar calls with Xarray.
-if True:
+if False:
     met_ds = xr.open_mfdataset('../data/sgpmetE13.b1/sgpmetE13.b1.20191104.000000.cdf',
                                combine='nested', concat_dim='time')
 
+    # It will always save you time in the future if you can reduce the number
+    # of hardcoded values in the code. This seems like extra work but it will
+    # save you loads of time later on.
     var_name = 'temp_mean'
     var_name2 = 'rh_mean'
 
-    if True:
+    if False:
         # Convert the units of the data
         desired_temp_unit = 'degF'
         ureg = pint.UnitRegistry()
@@ -95,7 +117,7 @@ if True:
         data = data * ureg[met_ds[var_name].attrs['units']]
         # Remember the data is in "pint" space now, not numpy only space. That means
         # the data is not going to work with the regular numpy or matplotlib functions.
-        print('data.magnitude:', data.magnitude)
+        print('\ndata.magnitude:', data.magnitude)
         print('data.units:', data.units)
 
         # Here we use a method to change the units from degC to degF.
@@ -112,63 +134,73 @@ if True:
         # really necessary) and stops us from using it incorrectly later.
         del data
 
+    # Create the figure (the blank white space) and the axes (the box where plotted
+    # data goes and set variabls to call later.
     fig, axes = plt.subplots()
-    line1 = axes.plot(met_ds['time'], met_ds[var_name], label='Temp')
-    myFmt = mdates.DateFormatter('%H:%M')
-    axes.xaxis.set_major_formatter(myFmt)
 
-    # Get the first time value from the object
-    first_time = met_ds['time'].values[0]
-    print(first_time.astype('datetime64[ms]'))
-    print(first_time.astype('datetime64[s]'))
-    print(first_time.astype('datetime64[h]'))
-    print(first_time.astype('datetime64[Y]'))
-    print(first_time.astype('datetime64[D]'))
+    # Now make the plot by extracting the time and data from object.
+    # matplotlib is smart enough to extract what it needs if you pass it the dataarray
+    # instead of a numpy array.
+    line1 = axes.plot(met_ds['time'], met_ds[var_name], label='Temperature')
 
-    # Change the precision of the time value from sub-second to day.
-    # Then add one to that value to set the end of the range value.
-    xrng = [first_time.astype('datetime64[D]'),
-            first_time.astype('datetime64[D]') + 1]
-    print(xrng)
-
-    axes.set_xlim(xrng)  # Set the xrange for plot window
-
-    # Now lets be a real scientist and add some axis labels
-    y_label = met_ds[var_name].attrs['long_name']
-    y_label = y_label + ' (' + met_ds[var_name].attrs['units'] + ')'
-    axes.set_ylabel(y_label)
-
-    # Set the x-axis label
-    axes.set_xlabel('Time (UTC)')
-
-    # But when you plot temperature you typically want to plot RH next.
-    # How about on the same plot? (Wow mind blown!)
-    axes_right = axes.twinx()
-    line2 = axes_right.plot(met_ds['time'], met_ds[var_name2], color='green', label='RH')
-    axes.legend()
-
-    if False:
-        # Add the two lines plotted to same list
-        lines = line1+line2
-        # Use list comprehension to get the label names we set in the plot
-        # call and add them to a list to pass along to the legend call.
-        labels = [l.get_label() for l in lines]
-        # Now we make the legend with the list of lines plotted (gets color)
-        # and the label names we want to display.
-        axes.legend(lines, labels)
-
-    y_label2 = met_ds[var_name2].attrs['long_name']
-    y_label2 = y_label2 + ' (' + met_ds[var_name2].attrs['units'] + ')'
-    axes_right.set_ylabel(y_label2)
-
-    # The xaxis shares the same values but we updated the orginal format
-    # of the axis. The right plot did not update the plot for the xaxis for us.
-    # To get the axis to look correct just update the xaxis again.
-    axes.xaxis.set_major_formatter(myFmt)
-
-    # And the most important part of all, a title.
-    axes.set_title(('An amazing plot of Temp. and RH. '
-                    'on {}').format(first_time.astype('datetime64[D]')))
+    # Format the x-axis to show hour and minutes only.
+#    myFmt = mdates.DateFormatter('%H:%M')
+#    axes.xaxis.set_major_formatter(myFmt)
+#
+#    # Get the first time value from the object
+#    first_time = met_ds['time'].values[0]
+#    # We can change the precision by changing the datatype.
+#    print(first_time.astype('datetime64[ms]'))  # milisecond
+#    print(first_time.astype('datetime64[s]'))  # second
+#    print(first_time.astype('datetime64[h]'))  # hour
+#    print(first_time.astype('datetime64[Y]'))  # year
+#    print(first_time.astype('datetime64[D]'))  # date
+#
+#    # Change the precision of the time value from sub-second to day.
+#    # Then add one to that value to set the end of the range value.
+#    xrng = [first_time.astype('datetime64[D]'),
+#            first_time.astype('datetime64[D]') + 1]
+#    print(xrng)
+#
+#    axes.set_xlim(xrng)  # Set the xrange for plot window
+#
+#    # Now lets be a real scientist and add some axis labels
+#    y_label = met_ds[var_name].attrs['long_name']
+#    y_label = y_label + ' (' + met_ds[var_name].attrs['units'] + ')'
+#    axes.set_ylabel(y_label)
+#
+#    # Set the x-axis label
+#    axes.set_xlabel('Time (UTC)')
+#
+#    # But when you plot temperature you typically want to plot RH next.
+#    # How about on the same plot? (Wow mind blown!)
+#    axes_right = axes.twinx()
+#    line2_color = 'green'
+#    line2 = axes_right.plot(met_ds['time'], met_ds[var_name2], color=line2_color, label='RH')
+#    axes.legend()
+#
+#    if False:
+#        # Add the two lines plotted to same list
+#        lines = line1+line2
+#        # Use list comprehension to get the label names we set in the plot
+#        # call and add them to a list to pass along to the legend call.
+#        labels = [l.get_label() for l in lines]
+#        # Now we make the legend with the list of lines plotted (gets color)
+#        # and the label names we want to display.
+#        axes.legend(lines, labels)
+#
+#    y_label2 = met_ds[var_name2].attrs['long_name']
+#    y_label2 = y_label2 + ' (' + met_ds[var_name2].attrs['units'] + ')'
+#    axes_right.set_ylabel(y_label2)#, color=line2_color)
+#
+#    # The xaxis shares the same values but we updated the orginal format
+#    # of the axis. The right plot did not update the plot for the xaxis for us.
+#    # To get the axis to look correct just update the xaxis again.
+#    axes.xaxis.set_major_formatter(myFmt)
+#
+#    # And the most important part of all, a title.
+#    axes.set_title(('An amazing plot of Temp. and RH. '
+#                    'on {}').format(first_time.astype('datetime64[D]')))
 
     if True:
         plt.show()  # Show the plot in a new window
