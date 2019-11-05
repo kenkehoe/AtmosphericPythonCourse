@@ -1,0 +1,36 @@
+{
+"a_variable_name": "A value to list with the variable",
+"b_variable_name": 1,
+"c_variable_name": 11.0,
+
+"d_list_name": 
+    {"one": 1,
+     "two": 2,
+     "three'": 3.0,
+     "four": "four",
+     "five": "a big long string"
+     },
+
+    "site": {
+        "DEN": {
+            "description": "A very large airport",
+            "lat": 39.8561,
+            "lon": 104.6737,
+            "dates": [20190101, 20210301]
+        },
+
+        "ATL": {
+            "description": "An even larger airport",
+            "lat": 33.6407,
+            "lon": 84.4277,
+            "dates": [19700101, 20300301]
+        },
+
+        "GRB": {
+            "description": "A not so large airport",
+            "lat": 44.4927,
+            "lon": 88.1272,
+            "dates": [19761125, 20761125]
+        }
+    }
+} 
