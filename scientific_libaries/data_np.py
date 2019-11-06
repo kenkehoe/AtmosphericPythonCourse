@@ -3,13 +3,16 @@
 import numpy as np
 import numpy.ma as ma
 import warnings
-from datetime import datetime, timedelta
+from datetime import datetime as dt
+from datetime import timedelta as td
+import datetime
+import pytz
 # from sys import exit as sysexit
 
 print()
 
 # What is the difference between regular Python and Numpy?
-if True:
+if False:
     print(type(1))
     print(type(1.))
     print(type('Hello World'))
@@ -40,28 +43,33 @@ if False:
 
 # What's the difference between regular Python and numpy?
 if False:
-    num = 50000000
+    num = 5000000
     print("Looping over {} values using for loop with list".format(num))
+
+    start_datetime = dt.now()
     a = list(range(0, num))
-    start_datetime = datetime.now()
     # Don't do this. This is not good python programming.
     for ii in a:
         a[ii] = a[ii] + 1
 
-    diff = (datetime(1970, 1, 1, 0, 0, 0) +
-            timedelta(seconds=(datetime.now() - start_datetime).seconds))
-    print('Finished loop.')
-    print('Elapsed Time: ' + diff.strftime("%H:%M:%S"), '\n')
+    if num < 10000000:
+        python_time = (dt.now() - start_datetime).microseconds/1000000
+    else:
+        python_time = (dt.now() - start_datetime).seconds
+
+    print('Elapsed Time: {}  seconds'.format(python_time))
     print()
+    del a
 
     print("Using numpy to do same operation using Numpy arrays "
           "with {} values.".format(num*10))
-    start_datetime = datetime.now()
+    start_datetime = dt.now()
     a = np.arange(num*10, dtype=np.int16) + 1
-    print("Finished array")
-    diff = datetime(1970, 1, 1, 0, 0, 0)+timedelta(seconds=(
-        datetime.now()-start_datetime).seconds)
-    print('Elapsed Time: ' + diff.strftime("%H:%M:%S"), '\n')
+    numpy_time = (dt.now() - start_datetime).microseconds/1000000
+
+    print('Elapsed Time: {}  seconds'.format(numpy_time))
+
+    print("\nRation of native python/numpy:", python_time/numpy_time)
 
 # Can you swith between regular Python and numpy?
 if False:
@@ -477,5 +485,140 @@ if False:
     # Notice the value is NaN because we are not using np.nanmax(). This means
     # there is at least one NaN in the array.
     print('np.max(b):', np.max(b))
+
+# Because we will work with time series data let's learn about Python datetime objects.
+# This is so we understand how the native time works with Python. We will then 
+# learn about Numpy dates and times.
+if False:
+    a = datetime.datetime.now()
+    print('datetime.datetime.now():', a)
+
+    a = datetime.date.today()
+    print('datetime.date.today():', a)
+
+    a = datetime.date(2019, 4, 13)
+    print('datetime.date(2019, 4, 13):', a)
+
+    # timestamp is number of seconds from 1970-01-01 00:00:00 or epoch.
+    timestamp = datetime.date.fromtimestamp(1326244364)
+    print("\ntimestamp:", timestamp)
+    timestamp = datetime.datetime.fromtimestamp(1326244364)
+    print("timestamp:", timestamp)
+
+    # date object of today's date
+    today = datetime.date.today()
+    print("\ntoday.year:", today.year)
+    print("today.month:", today.month)
+    print("today.day:", today.day)
+
+    # time(hour = 0, minute = 0, second = 0)
+    a = datetime.time()
+    print("\ndatetime.time():", a)
+    # time(hour, minute and second)
+    b = datetime.time(11, 34, 56)
+    print("datetime.time(11, 34, 56):", b)
+    # time(hour, minute and second)
+    c = datetime.time(hour=11, minute=34, second=56)
+    print("c:", c)
+    # time(hour, minute, second, microsecond)
+    d = datetime.time(11, 34, 56, 234566)
+    print("d:", d)
+
+    # datetime(year, month, day)
+    e = datetime.datetime(2018, 11, 28)
+    print("\ne:", e)
+    # datetime(year, month, day, hour, minute, second, microsecond)
+    f = datetime.datetime(2017, 11, 28, 23, 55, 59, 342380)
+    print("f:", f)
+
+    # current date and time
+    now = datetime.datetime.now()
+    g = now.strftime("%Y-%m-%d %H:%M:%S")
+    print("\ng:", g)
+    h = now.strftime("%m/%d/%Y, %H:%M:%S")
+    print("h:", h)
+
+    date_string = "21 June, 2018"
+    print("\ndate_string =", date_string)
+    date_object = datetime.datetime.strptime(date_string, "%d %B, %Y")
+    print("date_object =", date_object)
+
+    local = datetime.datetime.now()
+    print("\nLocal:", local.strftime("%m/%d/%Y, %H:%M:%S"))
+    tz_NY = pytz.timezone('America/New_York')
+    datetime_NY = datetime.datetime.now(tz_NY)
+    print("New York:", datetime_NY.strftime("%m/%d/%Y, %H:%M:%S"))
+    tz_Paris = pytz.timezone('Europe/Paris')
+    datetime_Paris = datetime.datetime.now(tz_Paris)
+    print("Paris:", datetime_Paris.strftime("%m/%d/%Y, %H:%M:%S"))
+    tz_utc = pytz.timezone('UTC')
+    datetime_utc = datetime.datetime.now(tz_utc)
+    print("UTC:", datetime_utc.strftime("%m/%d/%Y, %H:%M:%S"))
+    datetime_utc =  datetime.datetime.utcnow()
+    print("utcnow():", datetime_utc.strftime("%m/%d/%Y, %H:%M:%S"))
+
+
+# Because we will work with time series data let's learn about Numpy datetime objects.
+# Initially all datetimes were in UTC. Now the datatime is timezone naive. You can use
+# a timezone offset from UTC but that feature is being phased out.
+if False:
+    date = np.datetime64('2005-02-25')
+    print('date:', date)
+    print('date.dtype:', date.dtype)
+
+    dt1 = np.datetime64('2005-02-25T03:30:55')
+    print('\ndt1:', dt1)
+
+    dt2 = np.datetime64('2012-03', 's')
+    print('\ndt2:', dt2)
+    print("dt2.astype('datetime64[h]'):", dt2.astype('datetime64[h]'))
+
+    dt3 = np.arange('2005-02', '2005-03', dtype='datetime64[D]')
+    print('\ndt3:', dt3)
+
+    dt_diff1 = np.datetime64('2009-01-01') - np.datetime64('2008-01-01')
+    print('\ndt_diff1:', dt_diff1)
+
+    dt_diff2 = np.datetime64('2011-06-15T00:00') + np.timedelta64(12, 'h')
+    print('\ndt_diff2:', dt_diff2)
+
+    print("\nnp.datetime64('nat'):", np.datetime64('nat'))
+    print("np.datetime64():", np.datetime64())
+
+    dt4 = np.arange('2005-02-01T00:00:00', '2005-02-05T00:00:00', dtype='datetime64[D]')
+    print('dt4:', dt4)
+    print("\ndt4 + 23:", dt4 + 23)
+
+    dt4 = dt4 + 23
+    dt4 = dt4.astype('datetime64[s]')
+    print("\ndt4:", dt4)
+
+    print("\nnp.datetime64('today'):", np.datetime64('today'))
+    print("np.datetime64('now'):", np.datetime64('now'))
+    print("np.datetime64('now'):", np.datetime64('now', 'ns'))
+
+# How do we convert from python datetime to numpy datetime64 and vice a versa?
+if False:
+    dt = datetime.datetime.utcnow()
+    dt64 = np.datetime64(dt)
+#    dt64 = np.datetime64('now', 'us')
+    print('dt:  ', dt)
+    print('dt64:', dt64)
+
+    # To convert from numpy datetime64 to python datetime
+    # set precision to seconds and convert to integer. This will
+    # give number of seconds since epoch, or timestamp.
+    ts = dt64.astype('datetime64[s]').astype(int)
+    print("\nts:", ts)
+    # Use the timestamp with datetime timestamp method in UTC.
+    dt64_to_dt = datetime.datetime.utcfromtimestamp(ts)
+    print('dt64_to_dt:', dt64_to_dt)
+
+    # To convert from python datetime to numpy datetime64 put the 
+    # python datetime into numpy datetime64. You can set the
+    # numpy precision to seconds to match for printing.
+    dt_to_dt64 = np.datetime64(dt)
+    dt_to_dt64 = dt_to_dt64.astype('datetime64[s]')
+    print("dt_to_dt64:", dt_to_dt64)
 
 print()
