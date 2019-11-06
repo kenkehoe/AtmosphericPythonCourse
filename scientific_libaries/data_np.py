@@ -12,7 +12,7 @@ import pytz
 print()
 
 # What is the difference between regular Python and Numpy?
-if False:
+if True:
     print(type(1))
     print(type(1.))
     print(type('Hello World'))
