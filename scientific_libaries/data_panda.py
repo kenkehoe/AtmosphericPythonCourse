@@ -3,15 +3,13 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
 if True:
-
-    data = {
-        'apples': [3, 2, 0, 1], 
-        'oranges': [0, 3, 7, 2]
-        }
+    data = {'apples': [3, 2, 0, 1],
+            'oranges': [0, 3, 7, 2]}
     purchases = pd.DataFrame(data)
 
     print(type(purchases))
@@ -57,20 +55,20 @@ if False:
     print(S + S2)
 
 if False:
-    cities = {"London":    8615246, 
-          "Berlin":    3562166, 
-          "Madrid":    3165235, 
-          "Rome":      2874038, 
-          "Paris":     2273305, 
-          "Vienna":    1805681, 
-          "Bucharest": 1803425, 
-          "Hamburg":   1760433,
-          "Budapest":  1754000,
-          "Warsaw":    1740119,
-          "Barcelona": 1602386,
-          "Munich":    1493900,
-#          "Boulder":   None, 
-          "Milan":     1350680}
+    cities = {"London":    8615246,
+              "Berlin":    3562166,
+              "Madrid":    3165235,
+              "Rome":      2874038,
+              "Paris":     2273305,
+              "Vienna":    1805681,
+              "Bucharest": 1803425,
+              "Hamburg":   1760433,
+              "Budapest":  1754000,
+              "Warsaw":    1740119,
+              "Barcelona": 1602386,
+              "Munich":    1493900,
+#              "Boulder":   None,
+              "Milan":     1350680}
 
     city_series = pd.Series(cities)
     print(city_series)
@@ -91,8 +89,8 @@ if False:
     print(data.fillna(0))
 
 if False:
-    data = pd.read_csv('../data/sgpmetE13.b1/sgpmetE13.00.20191105.150801.raw.dat',
-                       delimiter=',', header=0, skiprows=[0,2,3], parse_dates=[0])
+    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.00.20191105.150801.raw.dat'))
+    data = pd.read_csv(filename, delimiter=',', header=0, skiprows=[0, 2, 3], parse_dates=[0])
     print(data[0:10])
     print()
 
@@ -113,8 +111,8 @@ if False:
         plt.show()
 
 if False:
-    data = pd.read_csv('../data/sgpmetE13.b1/sgpmetE13.00.20191105.150801.raw.dat',
-                       delimiter=',', header=0, skiprows=[0,2,3], parse_dates=[0])
+    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.00.20191105.150801.raw.dat'))
+    data = pd.read_csv(filename, delimiter=',', header=0, skiprows=[0, 2, 3], parse_dates=[0])
 
     pressure_sum = data['Pressure_kPa'].sum()
     print('pressure_sum:', pressure_sum)
@@ -133,8 +131,8 @@ if False:
 #    print(data.cov())
 
 if False:
-    data = pd.read_csv('../data/sgpmetE13.b1/sgpmetE13.00.20191105.150801.raw.dat',
-                       delimiter=',', header=0, skiprows=[0,2,3], parse_dates=[0])
+    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.00.20191105.150801.raw.dat'))
+    data = pd.read_csv(filename, delimiter=',', header=0, skiprows=[0, 2, 3], parse_dates=[0])
 
     rh = data['RH_Avg']
     rh_rolling_mean = rh.rolling(10).mean()
@@ -147,5 +145,3 @@ if False:
 #    plt.plot(data['TIMESTAMP'], rh)
 #    plt.plot(data['TIMESTAMP'], rh_rolling_mean, color='red')
 #    plt.show()
-
-
