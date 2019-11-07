@@ -4,7 +4,7 @@ import numpy as np
 import numpy.ma as ma
 import warnings
 from datetime import datetime as dt
-from datetime import timedelta as td
+# from datetime import timedelta as td
 import datetime
 import pytz
 # from sys import exit as sysexit
@@ -487,7 +487,7 @@ if False:
     print('np.max(b):', np.max(b))
 
 # Because we will work with time series data let's learn about Python datetime objects.
-# This is so we understand how the native time works with Python. We will then 
+# This is so we understand how the native time works with Python. We will then
 # learn about Numpy dates and times.
 if False:
     a = datetime.datetime.now()
@@ -554,7 +554,7 @@ if False:
     tz_utc = pytz.timezone('UTC')
     datetime_utc = datetime.datetime.now(tz_utc)
     print("UTC:", datetime_utc.strftime("%m/%d/%Y, %H:%M:%S"))
-    datetime_utc =  datetime.datetime.utcnow()
+    datetime_utc = datetime.datetime.utcnow()
     print("utcnow():", datetime_utc.strftime("%m/%d/%Y, %H:%M:%S"))
 
 
@@ -614,7 +614,7 @@ if False:
     dt64_to_dt = datetime.datetime.utcfromtimestamp(ts)
     print('dt64_to_dt:', dt64_to_dt)
 
-    # To convert from python datetime to numpy datetime64 put the 
+    # To convert from python datetime to numpy datetime64 put the
     # python datetime into numpy datetime64. You can set the
     # numpy precision to seconds to match for printing.
     dt_to_dt64 = np.datetime64(dt)
