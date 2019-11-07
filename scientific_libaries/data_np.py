@@ -207,32 +207,43 @@ if False:
     bool_idx = c > 4
     print('bool_idx:', bool_idx)
     print('type(bool_idx):', type(bool_idx))
-    print('type(bool_idx[0]):', bool_idx.dtype)
+    print('bool_idx.dtype:', bool_idx.dtype)
     print('c[bool_idx]: ', c[bool_idx])
 
+    # Finde where c is great than 6 and set to -1
     c[c > 6] = -1
-    print('c:', c)
+    print('\nc:', c)
     print()
 
+    # Find index numbers where c is great than or equal to 2
     d = np.where(c >= 2)
     print('d:', d)
+    print('type(d):', type(d))
+    print('d[0]:', d[0])
+
+    # What about testing all the values in the array?
+    e = np.zeros(10, dtype=bool)  # Create an array of all False
+    e[3:8] = True  # Set values at index 3 to 7 to True
+    print('\ne:', e)
+    print('e.all():', e.all())  # Check if all values are True
+    print('e.any():', e.any())  # Check if any values are True
 
 # Let's play with IEEE NaN for missing data
 if False:
-    a = np.arange(10)  # dtype=float)
+    # Initially create an integer array. But we will see that it needs to be a float.
+    a = np.arange(10)  # , dtype=float)
     print('a:', a)
 
-    a[a == 9] = np.nan  # This will initially fail because NaN is a float
-    a[3:5] = np.nan
+#    a[a == 9] = np.nan  # This will initially fail because NaN is a float
+    a[3:7] = np.nan  # This will have issues because a is an int. Needs to be float.
     print('a:', a)
 
     b = (a == np.nan)
-    print('b:', b)
+    print('\nb:', b)
 
     b = np.isnan(a)
-    print('b:', b)
+    print('\nb:', b)
     print()
-
 
 # Let's calculate some statistics with NaNs! Whew finally!
 if False:
@@ -244,17 +255,22 @@ if False:
     a[0] = np.nan
     print()
 
+    # Calculate the mean. Notice how it returns NaN. The NaNs are tainting
+    # all the operations.
     print('np.mean(a):', np.mean(a))
-    print('np.nanmean(a):', np.nanmean(a))
-    print('np.nanmean(np.array([np.nan, np.nan])):',
-          np.nanmean(np.array([np.nan, np.nan])))
-    print()
 
-    # Have we imported warnings?
-    with warnings.catch_warnings():
-        warnings.filterwarnings("ignore", category=RuntimeWarning)
-        b = np.array([np.nan, np.nan])
-        print('with np.nanmean():', np.nanmean(b))
+    # This is telling Numpy to ignore the NaN values in the calculations.
+    print('np.nanmean(a):', np.nanmean(a))
+
+    # This will work but it will create a warning message.
+    if True:
+        print('\nnp.nanmean(np.array([np.nan, np.nan])):',
+              np.nanmean(np.array([np.nan, np.nan])))
+    else:
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=RuntimeWarning)
+            b = np.array([np.nan, np.nan])
+            print('\nnp.nanmean(np.array([np.nan, np.nan])):', np.nanmean(b))
 
 # Let's calculate some statistics of multi dimentional data!
 if False:
@@ -367,9 +383,10 @@ if False:
     print()
 
     # Reshape the array to be in correct orientation
-#    b = b.reshape((3, 1))
-#    print('b.shape:', b.shape)
-#    print('b:\n', b)
+    if False:
+        b = b.reshape((3, 1))
+        print('b.shape:', b.shape)
+        print('b:\n', b)
 
     c = a + b  # Add v to each row of x using broadcasting
     print('\nc:\n', c)
@@ -599,9 +616,15 @@ if False:
 
 # How do we convert from python datetime to numpy datetime64 and vice a versa?
 if False:
-    dt = datetime.datetime.utcnow()
+
+    dt = datetime.datetime.utcnow()  # Get current date and time with python datetime
+    # Get current date and time with in Numpy using same date and time
+    # from python datetime
     dt64 = np.datetime64(dt)
-#    dt64 = np.datetime64('now', 'us')
+    if False:
+        # This is how we can get current date and time with just Numpy datetime.
+        # Notice the precision is only down to second.
+        dt64 = np.datetime64('now', 'us')
     print('dt:  ', dt)
     print('dt64:', dt64)
 
