@@ -99,6 +99,8 @@ if False:
 
     print("\nxr_da:", xr_ds, "\n")
 
+# Let's look at an example of using the organization of Datasets to fix a problem with
+# differeing units.
 if False:
     # Create some data
     data1 = np.arange(10000, dtype=float) + 32.
