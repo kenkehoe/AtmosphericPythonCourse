@@ -69,7 +69,7 @@ if False:
     # Now we make the DataArray and tell it what is the coordinate dimention,
     # in this case time.
     da1 = xr.DataArray(data1, dims=['time'], coords=[time])
-    # We are reuing the same coordinate dimention so we don't need to provide it
+    # We are reusing the same coordinate dimention so we don't need to provide the values
     # when we add the second variable. But we could, it would not hurt anything.
     da2 = xr.DataArray(data2, dims=['time'])
 
@@ -80,8 +80,8 @@ if False:
     xr_ds['data2'] = da2
     print("\nxr_da:", xr_ds, "\n")
 
-    # Or we can create the Dataset from scratch. The DataArrays are created
-    # automatically.
+    # Or we can create the Dataset from scratch all at once. The DataArrays inside the 
+    # Dataset are created automatically.
     xr_ds = xr.Dataset(
         # This is the data section.
         # Notice all data is wrappted in a dictionary. In that dict the key
@@ -135,12 +135,12 @@ if False:
 #        print(type(data))
 
         # Now we use the units registry with the units in the Xarray objct
-        # to tell Pint what units is the data in.
+        # to tell Pint what units the data are in.
         xarry_units = xr_ds[var_name].attrs['units']
         data = data * ureg[xarry_units]
 #        print(type(data))
 
-        # Here we use a Pint method to change the units from to degK.
+        # Here we use a Pint method to change the units to degK.
         data = data.to(ureg[desired_temp_unit])
 
         # We changed the data but we have not put it back into the Xarray object yet.
