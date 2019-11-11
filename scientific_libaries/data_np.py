@@ -34,14 +34,15 @@ if True:
 if False:
     a = [1, 2, 3]
     b = np.array([1, 2, 3])  # Create a 1-D array
-    print('type(a):', type(a))
-    print('type(b):', type(b))
-    print('type(b[0]):', type(b[0]))
+    print('type(a):', type(a))  # Get type of a
+    print('type(b):', type(b))  # Get type of b
+    print('type(b[0]):', type(b[0]))  # Get type of index 0 of b
     print('b.dtype:', b.dtype)  # a.dtype will not work. dtype is numpy only.
     print('a:', a)
     print('b:', b)
 
 # What's the difference between regular Python and numpy?
+# The speed increase gets better with multidimentional data.
 if False:
     num = 5000000
     print("Looping over {} values using for loop with list".format(num))
