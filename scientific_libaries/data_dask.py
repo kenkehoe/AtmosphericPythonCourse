@@ -9,7 +9,7 @@ from datetime import datetime as dt
 #                n_workers=1, memory_limit='2GB')
 # client
 
-if False:
+if True:
 
     # Create a data array with dask module, similar to Numpy.
     # We define chunks to help manage multiprocessing and allow for smaller
@@ -75,13 +75,15 @@ if False:
     print('\nNumpy Elapsed Time: {}  seconds'.format(python_time_1))
     print()
 
+    del b
     start_datetime = dt.now()
     # What if we need to convert Numpy array to dask array to get
     # data in dask space first. Does this change the performance?
-    if False:
-        b = da.asarray(np.ones(num)) - da.random.random(num)
+    chunks = int(num/10)
+    if True:
+        b = da.asarray(np.ones(num)) - da.random.random(num, chunks=chunks)
     else:
-        b = da.ones(num) - da.random.random(num)
+        b = da.ones(num, chunks=chunks) - da.random.random(num, chunks=chunks)
     b[da.random.randint(0, 1, num).astype(bool)] = np.nan
     b = da.nanmean(b)
     b = b.compute()
