@@ -10,7 +10,7 @@ import pytz
 print()
 
 # What is the difference between regular Python and Numpy?
-if False:
+if True:
     print(type(1))
     print(type(1.))
     print(type('Hello World'))
@@ -29,7 +29,7 @@ if False:
     print()
 
 # Let's make some simple arrays
-if True:
+if False:
     a = [1, 2, 3]
     b = np.array([1, 2, 3])  # Create a 1-D array
     print('type(a):', type(a))  # Get type of a
@@ -59,7 +59,7 @@ if False:
     print("Using numpy to do same operation using Numpy arrays "
           "with {} values.".format(num*10))
     start_time = time.time()
-    a = np.arange(num*10, dtype=np.int16) + 1
+    a = np.arange(num, dtype=np.int16) + 1
     numpy_time = time.time() - start_time
     print('Elapsed Time: {}  seconds'.format(numpy_time))
 
@@ -68,33 +68,36 @@ if False:
 # Can you swith between regular Python and numpy?
 if False:
     num = 1000
-    a = list(range(0, num))
+    a = list(range(0, num))  # Defaults to integer values
     print('type(a):', type(a))
     print('len(a):', len(a))
     print()
 
+    # Convert the python list into numpy array
     b = np.array(a)
     print('type(b):', type(b))
     print('b.shape:', b.shape)
     print()
 
+    # convert the numpy array back into python list
     c = list(b)
     print('type(c):', type(c))
     print('len(c):', len(c))
 
 # Let's make an array but of type float
 if False:
-    a = np.array([1, 2, 3.])
+    a = np.array([1, 2, 3.])  # Will be set as float because 3. is a float value.
     print('a.dtype:', a.dtype)
-    print('a:', a)
+    print('a:', a)  # Notice all values are floats
     print()
 
     b = np.array([1, 2, 3], dtype=float)
     print('b.dtype:', b.dtype)
     print('b:', b)
 
+    # Create an integer array
     c = np.array([4, 5, 6])
-    c = c.astype(float)
+    c = c.astype(float)  # Convert the type from int to float
     print('c.dtype:', c.dtype)
     print('c:', c)
 
@@ -116,10 +119,10 @@ if False:
     a = np.arange(10)
     print('a:', a)
     print('a[0:5]:', a[0:5])  # selects upto but not including index 5
-    print('a[0:]:', a[0:])  # selects everthing to end of array
+    print('a[0:]:', a[3:])  # selects everthing from 3 to end of array
     print('a[:5]:', a[:5])  # selects to upto but not including index 5
     print('a[3:5]:', a[3:5])  # selects from 3 upto but not including index 5
-    print('a[0:-1]:', a[0:-1])  # selects upto but not including index 5
+    print('a[0:-1]:', a[:-1])  # selects upto but not including index 5
     print('a[0:100]:', a[0:100])  # index is past end of array?!?
 
 # Let's get metadata about our arrays.
@@ -141,8 +144,8 @@ if False:
     c = np.arange(10)
     c = c.reshape((2, 5))
     print('c:\n', c)
-    print('c.shape:', b.shape)
-    print('c.size:', b.size)
+    print('c.shape:', c.shape)
+    print('c.size:', c.size)
     print()
 
     print('c[1, 4]:', c[1, 4])
@@ -162,10 +165,10 @@ if False:
     c = np.full((2, 2), 7, dtype=int)   # Create a constant array
     print('c:\n', c)
 
-    d = np.eye(2)           # Create a 2x2 identity matrix
+    d = np.eye(3)           # Create a 2x2 identity matrix
     print('d:\n', d)
 
-    e = np.random.random((2, 2))  # Create an array filled with random values
+    e = np.random.random((2, 4))  # Create an array filled with random values
     print(e)
 
 # Let's play with broadcasting
@@ -173,18 +176,21 @@ if False:
     a = np.zeros(20, dtype=int)
     print('a:', a)
 
-    a = a + 1.
-    print('a:', a)
+    a = a + 1.  # Note how it upconverted from int to float
+    print('\a:', a)
 
     a = a.astype(int)
-    a[0:9] = a[0:9] + 10
-    print('a:', a)
+    if False:
+        a[3:8] + 10
+    else:
+        a[3:8] = a[3:8] + 10
+    print('\na:', a)
 
     a = a + np.arange(a.size)
-    print('a:', a)
+    print('\na:', a)
 
-    a += 100
-    print(a)
+    a += 1000
+    print('\na:', a)
 
 # Let's start to work with booleans
 if False:
@@ -203,33 +209,48 @@ if False:
     print('type(bool_idx):', type(bool_idx))
     print('bool_idx.dtype:', bool_idx.dtype)
     print('c[bool_idx]: ', c[bool_idx])
+    print('c[c > 4]: ', c[c > 4])
 
     # Finde where c is great than 6 and set to -1
     c[c > 6] = -1
     print('\nc:', c)
     print()
+    d = np.arange(c.size, dtype=int)
+    d[c > 6] = -2
+    print('d:', d)
+    print()
 
     # Find index numbers where c is great than or equal to 2
-    d = np.where(c >= 2)
-    print('d:', d)
-    print('type(d):', type(d))
-    print('d[0]:', d[0])
+    e = np.where(c >= 2)
+    print('e:', e)
+    print('type(e):', type(e))
+    print('c[e]:', c[e])
+    print('e[0]:', e[0])
 
     # What about testing all the values in the array?
-    e = np.zeros(10, dtype=bool)  # Create an array of all False
-    e[3:8] = True  # Set values at index 3 to 7 to True
-    print('\ne:', e)
-    print('e.all():', e.all())  # Check if all values are True
-    print('e.any():', e.any())  # Check if any values are True
+    f = np.zeros(10, dtype=bool)  # Create an array of all False
+    f[3:8] = True  # Set values at index 3 to 7 to True
+    print('\nf:', f)
+    print('f.all():', f.all())  # Check if all values are True
+    print('f.any():', f.any())  # Check if any values are True
 
-# Let's play with IEEE NaN for missing data
+# Let's play with IEEE Not a Number (NaN) for missing data
 if False:
-    # Initially create an integer array. But we will see that it needs to be a float.
-    a = np.arange(10)  # , dtype=float)
-    print('a:', a)
 
-#    a[a == 9] = np.nan  # This will initially fail because NaN is a float
-    a[3:7] = np.nan  # This will have issues because a is an int. Needs to be float.
+    print(np.nan)
+    print(type(np.nan))
+    print(10. * np.nan)
+    print(11 + np.nan, 12 - np.nan, 13 * np.nan, 14 / np.nan)
+
+    # Initially create an integer array. But we will see that it needs to be a float.
+    if True:
+        a = np.arange(10, dtype=float)
+    else:
+        a = np.arange(10)
+    print('\na:', a)
+
+    a[a == 9] = np.nan  # This will initially fail because NaN is a float
+    a[3:7] = np.nan
     print('a:', a)
 
     b = (a == np.nan)
@@ -238,6 +259,7 @@ if False:
     b = np.isnan(a)
     print('\nb:', b)
     print()
+    
 
 # Let's calculate some statistics with NaNs! Whew finally!
 if False:
@@ -247,24 +269,24 @@ if False:
     print('np.min(a):', np.min(a))  # This is numpy min function
 
     a[0] = np.nan
-    print()
+    print('\na', a)
 
     # Calculate the mean. Notice how it returns NaN. The NaNs are tainting
     # all the operations.
-    print('np.mean(a):', np.mean(a))
+    print('\nnp.min(a):', np.min(a))
 
     # This is telling Numpy to ignore the NaN values in the calculations.
-    print('np.nanmean(a):', np.nanmean(a))
+    print('\nnp.nanmin(a):', np.nanmin(a))
 
     # This will work but it will create a warning message.
     if True:
-        print('\nnp.nanmean(np.array([np.nan, np.nan])):',
-              np.nanmean(np.array([np.nan, np.nan])))
+        b = np.array([np.nan, np.nan])
+        print('\nnp.nanmean(b):', np.nanmean(b))
     else:
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=RuntimeWarning)
             b = np.array([np.nan, np.nan])
-            print('\nnp.nanmean(np.array([np.nan, np.nan])):', np.nanmean(b))
+            print('\nnp.nanmean(b):', np.nanmean(b))
 
 # Let's calculate some statistics of multi dimentional data!
 if False:
@@ -272,7 +294,7 @@ if False:
     a = a.reshape((4, 5))  # This is now a 2-D array (or matrix)
     print('a:\n', a)
 
-    b = np.max(a, axis=1)
+    b = np.max(a)
     print('b:', b)
 
     c = np.mean(a, axis=0)
@@ -391,7 +413,7 @@ if False:
     a = np.array([0, 1, 2, 3, 4, 5])
     # Next create a numpy masked array and set the mask values.
     # A 0 = False and 1 = True
-    masked_a = ma.masked_array(a, mask=[0, 1, 0, 0, 1, 0])
+    masked_a = ma.masked_array(a, mask=[False, False, True, False, True, True])
     print('masked_a:', masked_a)
     # Calculate the mean not using the masked values
     masked_a_mean = masked_a.mean()
@@ -400,11 +422,11 @@ if False:
 
     # Create a masked array and set all the mask values to False
     # and set a fill_value other than the default.
-    masked_a = ma.masked_array(a, mask=False, fill_value=-99999)
-    print('masked_a:', masked_a)
-    print('masked_a.data:', masked_a.data)
-    print('masked_a.mask:', masked_a.mask)
-    print('masked_a.fill_value:', masked_a.fill_value)
+    masked_b = ma.masked_array(a, mask=False, fill_value=-99999)
+    print('masked_b:', masked_b)
+    print('masked_b.data:', masked_b.data)
+    print('masked_b.mask:', masked_b.mask)
+    print('masked_b.fill_value:', masked_b.fill_value)
     print()
 
     # Create a masked array where all values less than or equal to
@@ -424,17 +446,20 @@ if False:
 
     # Create a masked array with no mask set, yet.
     masked_d = ma.masked_array(a)
-    print('masked_d:', masked_d)
+    print('\nmasked_d:', masked_d)
+    print('masked_d.mask:', masked_d.mask)
 
     # Set the mask to True for all indexes less than 3.
     # Notice that we never create a mask, all that is done automatically.
     masked_d[:3] = ma.masked
-    print('masked_d:', masked_d)
+    print('\nmasked_d:', masked_d)
+    print('masked_d.mask:', masked_d.mask)
     print()
 
     # Reset the mask to all False
-    masked_d.mask = False
-    print('masked_d:', masked_d)
+    masked_d.mask = ma.nomask
+    print('\nmasked_d:', masked_d)
+    print('masked_d.mask:', masked_d.mask)
 
 # Some of the nuances of performance with masked arrays
 if False:
@@ -597,7 +622,7 @@ if False:
     print("np.datetime64():", np.datetime64())
 
     dt4 = np.arange('2005-02-01T00:00:00', '2005-02-05T00:00:00', dtype='datetime64[D]')
-    print('dt4:', dt4)
+    print('\ndt4:', dt4)
     print("\ndt4 + 23:", dt4 + 23)
 
     dt4 = dt4 + 23
