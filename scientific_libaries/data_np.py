@@ -10,7 +10,7 @@ import pytz
 print()
 
 # What is the difference between regular Python and Numpy?
-if True:
+if False:
     print(type(1))
     print(type(1.))
     print(type('Hello World'))
@@ -29,7 +29,7 @@ if True:
     print()
 
 # Let's make some simple arrays
-if False:
+if True:
     a = [1, 2, 3]
     b = np.array([1, 2, 3])  # Create a 1-D array
     print('type(a):', type(a))  # Get type of a
