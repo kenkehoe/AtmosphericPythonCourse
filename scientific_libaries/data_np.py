@@ -41,7 +41,7 @@ if False:
 
 # What's the difference between regular Python and numpy?
 # The speed increase gets better with multidimentional data.
-if True:
+if False:
     num = 5000000
     print("Looping over {} values using for loop with list".format(num))
 
