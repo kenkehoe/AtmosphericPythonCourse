@@ -2,7 +2,7 @@
 
 import numpy as np
 import dask.array as da
-from datetime import datetime as dt
+import time
 
 # from dask.distributed import Client, progress
 # client = Client(processes=False, threads_per_worker=4,
@@ -65,31 +65,27 @@ if False:
     num = 100000000
     # What if that array is smaller?
 #    num = 10000
-    start_datetime = dt.now()
+    start_time = time.time()
     b = np.ones(num) - np.random.random(num)
     b[np.random.randint(0, num, int(num/10))] = np.nan
     b = np.nanmean(b)
-    python_time_microseconds = (dt.now() - start_datetime).microseconds
-    python_time_seconds = (dt.now() - start_datetime).seconds
-    python_time_1 = python_time_seconds + python_time_microseconds/1000000.
+    python_time_1 = time.time() - start_time
     print('\nNumpy Elapsed Time: {}  seconds'.format(python_time_1))
     print()
 
     del b
-    start_datetime = dt.now()
+    start_time = time.time()
     # What if we need to convert Numpy array to dask array to get
     # data in dask space first. Does this change the performance?
     chunks = int(num/10)
-    if True:
+    if False:
         b = da.asarray(np.ones(num)) - da.random.random(num, chunks=chunks)
     else:
         b = da.ones(num, chunks=chunks) - da.random.random(num, chunks=chunks)
     b[da.random.randint(0, 1, num, chunks=chunks).astype(bool)] = np.nan
     b = da.nanmean(b)
     b = b.compute()
-    python_time_microseconds = (dt.now() - start_datetime).microseconds
-    python_time_seconds= (dt.now() - start_datetime).seconds
-    python_time_2 = python_time_seconds + python_time_microseconds/1000000.
+    python_time_2 = time.time() - start_time
     print('dask Elapsed Time: {}  seconds'.format(python_time_2))
     print()
 

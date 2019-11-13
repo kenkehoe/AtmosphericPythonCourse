@@ -3,11 +3,9 @@
 import numpy as np
 import numpy.ma as ma
 import warnings
-from datetime import datetime as dt
-# from datetime import timedelta as td
+import time
 import datetime
 import pytz
-# from sys import exit as sysexit
 
 print()
 
@@ -43,30 +41,26 @@ if False:
 
 # What's the difference between regular Python and numpy?
 # The speed increase gets better with multidimentional data.
-if False:
+if True:
     num = 5000000
     print("Looping over {} values using for loop with list".format(num))
 
-    start_datetime = dt.now()
+    start_time = time.time()
     a = list(range(0, num))
     # Don't do this. This is not good python programming.
     for ii in a:
         a[ii] = a[ii] + 1
 
-    python_time_microseconds = (dt.now() - start_datetime).microseconds
-    python_time_seconds = (dt.now() - start_datetime).seconds
-    python_time = python_time_seconds + python_time_microseconds/1000000.
+    python_time = time.time() - start_time
     print('Elapsed Time: {}  seconds'.format(python_time))
     print()
     del a
 
     print("Using numpy to do same operation using Numpy arrays "
           "with {} values.".format(num*10))
-    start_datetime = dt.now()
+    start_time = time.time()
     a = np.arange(num*10, dtype=np.int16) + 1
-    python_time_microseconds = (dt.now() - start_datetime).microseconds
-    python_time_seconds = (dt.now() - start_datetime).seconds
-    numpy_time = python_time_seconds + python_time_microseconds/1000000.
+    numpy_time = time.time() - start_time
     print('Elapsed Time: {}  seconds'.format(numpy_time))
 
     print("\nRation of native python/numpy:", python_time/numpy_time)
