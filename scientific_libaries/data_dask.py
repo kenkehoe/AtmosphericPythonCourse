@@ -84,7 +84,7 @@ if False:
         b = da.asarray(np.ones(num)) - da.random.random(num, chunks=chunks)
     else:
         b = da.ones(num, chunks=chunks) - da.random.random(num, chunks=chunks)
-    b[da.random.randint(0, 1, num).astype(bool)] = np.nan
+    b[da.random.randint(0, 1, num, chunks=chunks).astype(bool)] = np.nan
     b = da.nanmean(b)
     b = b.compute()
     python_time_microseconds = (dt.now() - start_datetime).microseconds
