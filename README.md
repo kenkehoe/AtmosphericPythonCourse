@@ -9,7 +9,7 @@ information printed to the screen.
 There is also a test_requirements.py script that will ensure all the libraries listed
 in requirements.txt are installed. Run that script to check for missing libraries.
 If a missing library is detected insall using pip.
-
+```
 > pip install <missing library name>
-
+```
 Enjoy and happy coding.
