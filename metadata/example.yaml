@@ -19,6 +19,10 @@ d_list_name:
     - "this is a string
        with a return in the YAML file
        but not once it it is read in." # using ' or " will work the same
+    - >
+        This is a different
+        way to have multiline text
+        in the YAML file. It will be stored as a single string in Python. 
     - ['or', 'a', 'list', 'of', 'something']
     - True  # Note how this is not being stored as a string. It's being stored as boolean
     - 'False'  # but this is stored as a string
