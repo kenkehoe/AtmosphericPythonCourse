@@ -22,7 +22,12 @@ d_list_name:
     - >
         This is a different
         way to have multiline text
-        in the YAML file. It will be stored as a single string in Python. 
+        in the YAML file. It will be stored as a single string in Python.
+        Notice how the end has a newline added at end of string.
+    - |
+        This will be a string
+        that preserves the new line
+        in the read in string.
     - ['or', 'a', 'list', 'of', 'something']
     - True  # Note how this is not being stored as a string. It's being stored as boolean
     - 'False'  # but this is stored as a string
@@ -33,19 +38,19 @@ d_list_name:
 # levels are defined by spaces, just like python loops.
 site:
     DEN:
-        description: 'A very large airport'  # This is a string
+        description: A very large airport'  # This is a string
         lat: 39.8561  # This is a float
         lon: 104.6737  # This is a float
         dates: [20190101, 20210301]  # This is a list of integers
 
     ATL:
-        description: 'An even larger airport'
+        description: An even larger airport
         lat: 33.6407
         lon: 84.4277
         dates: [19700101, 20300301]
 
     GRB:
-        description: 'A not so large airport'
+        description: A not so large airport
         lat: 44.4927
         lon: 88.1272
         dates: [19761125, 20761125]
