@@ -12,7 +12,7 @@ register_matplotlib_converters()
 
 # Read in one netCDF data file. Look at the default vs. optional for
 # scalar variables.
-if False:
+if True:
     # Just setting a default value to be careful
     extraction = None
 
@@ -82,11 +82,11 @@ if False:
     # us to select multiple files to read instead of just one.
     filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.*.cdf')
     # The filename glob is understood by open_mfdataset() and correctly grabs all
-    # the files that match the file glob. We also tell it what dimention we want to 
+    # the files that match the file glob. We also tell it what dimention we want to
     # concatinate along.
     met_ds = xr.open_mfdataset(str(filename), combine='nested', concat_dim='time')#, parallel=True)
 
-    # Notice how many time samples we have in the Xarray Dataset. A single 
+    # Notice how many time samples we have in the Xarray Dataset. A single
     # data file only has 1440 values.
     print(met_ds.dims)
 
@@ -118,10 +118,9 @@ if False:
         plt.show()
 
     else:
-        # Here we 
+        # Here we make two plots
         fig, axes = plt.subplots(nrows=2)
         met_ds['temp_mean'].plot(ax=axes[0])
-
         met_ds['rh_mean'].plot(ax=axes[1])
 
     plt.show()
@@ -144,7 +143,7 @@ if False:
 # Lets pause with Xarray plotting and start with the true library that is making
 # the plot, matplotlib. Once we understand what is going on underneath we can
 # make the plots we want with the same/similar calls with Xarray.
-if True:
+if False:
     # Read data file
     filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191104.000000.cdf'))
     met_ds = xr.open_dataset(filename)
@@ -165,7 +164,7 @@ if True:
         # Now we use the units registry with the units in the Xarray objct
         # to tell Pint what units is the data are set with.
         xarry_units = met_ds[var_name].attrs['units']
-        data = data * ureg[xarry_units]
+        data = data * ureg.parse_expression(xarry_units)
 
         # Remember the data is in "Pint" space now, not Numpy only space. That means
         # the data may not work with the regular numpy or matplotlib functions?
@@ -173,7 +172,7 @@ if True:
         print('data.units:', data.units)
 
         # Here we use a Pint method to change the units from degC to degF.
-        data = data.to(ureg[desired_temp_unit])
+        data = data.to(ureg.parse_expression(desired_temp_unit))
         print('\ndata:', data)
         print()
 
@@ -243,9 +242,9 @@ if True:
         # Do we want to add a legend?
         axes.legend()
 
-    #===================# 
+    # ==================================== #
     # ---- if time, return to False ---- #
-    #===================# 
+    # ==================================== #
     # But why is the RH line not in the legend? This is a bit complicated so if
     # you want to ignore that's fine.
     if False:

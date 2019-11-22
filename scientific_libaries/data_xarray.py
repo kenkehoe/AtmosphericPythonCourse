@@ -80,7 +80,7 @@ if False:
     xr_ds['data2'] = da2
     print("\nxr_da:", xr_ds, "\n")
 
-    # Or we can create the Dataset from scratch all at once. The DataArrays inside the 
+    # Or we can create the Dataset from scratch all at once. The DataArrays inside the
     # Dataset are created automatically.
     xr_ds = xr.Dataset(
         # This is the data section.
@@ -137,11 +137,11 @@ if False:
         # Now we use the units registry with the units in the Xarray objct
         # to tell Pint what units the data are in.
         xarry_units = xr_ds[var_name].attrs['units']
-        data = data * ureg[xarry_units]
+        data = data * ureg.parse_expression(xarry_units)
 #        print(type(data))
 
         # Here we use a Pint method to change the units to degK.
-        data = data.to(ureg[desired_temp_unit])
+        data = data.to(ureg.parse_expression(desired_temp_unit))
 
         # We changed the data but we have not put it back into the Xarray object yet.
         # We don't want to put the Pint object back in, we need to extract
