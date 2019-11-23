@@ -16,7 +16,8 @@ if True:
     # as to how many axis labels to show. Also the size of the plot has
     # a default. Any other things you notice?
     plt.plot(np.arange(100))
-#    plt.plot(np.ones(10))
+    if False:
+        plt.plot(np.ones(50))  # What about a second plot of all zeros, but fewer?
     plt.show()
 
 
@@ -41,6 +42,12 @@ if False:
     # function to show the plot
     plt.show()
 
+    # What if make a second plot right after making the first?
+    if False:
+         plt.plot(x, y, linestyle='', marker='*', markersize=10, color='red')
+         plt.show()
+
+
 # Let's get a littl more complicated with plots.
 if False:
     # numpy.linspace returns evenly spaced numbers over a specified interval.
@@ -55,13 +62,12 @@ if False:
 
     # Create the plot figure and set up the space. We are defining two plots
     # with one column and two rows. Set the first plot for all the
-    # following calls. Note the use of kwargs. This means all the rest of
-    # the possible keyword arguments that can be passed into the plottin call.
+    # following calls. Note the use of **kwargs. This means all the rest of
+    # the possible keyword arguments that can be passed into the plotting call.
     # You will not see all possible arguments in the function defintion because
     # the the kwargs are passed to sub-routines as well. So you may need to
     # dig a bit to get the argument you need.
-    # subplot(nrows, ncols, index, **kwargs)
-    plt.subplot(2, 1, 1)
+    plt.subplot(2, 1, 1)  # subplot(nrows, ncols, index, **kwargs)
 
     # Plot the data using large plotting symbol and a line connecting
     # the symbols. It will default to use black for axes and blue for
@@ -83,22 +89,21 @@ if False:
     # symbol and line color.
     plt.plot(x2, y2, '.--', color='green')
 
-    # Now we add a x-axis title.
+    # Now we add a x-axis title to the second plot.
     plt.xlabel('time (s)')
 
     # And of coures a y-axix because we are not heathens.
     plt.ylabel('Undamped')
 
-    # So far everything has happened in plottin space but no plot was
-    # actually created. We need to no state the plot should be drawn.
+    # So far everything has happened in plotting space but no plot was
+    # actually created. We need to state the plot should be drawn.
     # Up until now we could change any
-    # parameter and the plot would be "updated". Once we call to make the plot
+    # parameter and the plot would be updated. Once we call to make the plot
     # the latest settings will be used. By default a new window will appear.
     plt.show()
 
 if False:
-    # Set the seed for random value. This means we get the same result
-    # every time.
+    # Set the seed for random value. This means we get the same result every time.
     np.random.seed(19680801)
 
     # example data
@@ -109,25 +114,27 @@ if False:
     num_bins = 50
 
     # This is setting up the figure and axes variables.
-    # Figure is the genear white space and ax is the plotting part. We can
-    # have one figure but as many axes as we want.
-    fig, ax = plt.subplots()
+    # Figure is the general white space and axes is the plotting part. We can
+    # have one figure but as many axes as we want. Axis is the x and y axis that
+    # have tick marks and lables.
+    fig, axes = plt.subplots()
 
     # the histogram of the data
-    n, bins, patches = ax.hist(x, num_bins, density=1)
+    n, bins, patches = axes.hist(x, num_bins, density=1)
 
     # add a 'best fit' line
     y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *
          np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
-    ax.plot(bins, y, '--')
-    ax.set_xlabel('Smarts')
-    ax.set_ylabel('Probability density')
+    axes.plot(bins, y, '--')
+    axes.set_xlabel('Smarts')
+    axes.set_ylabel('Probability density')
+
     # The 'r' at the start of a string means regular expression. This forces
     # the string to be exactly as it is listed in memory.' The specail
     # characters are used as escape sequences to set Greek letters.'
-    ax.set_title(r'Histogram of IQ: $\mu=100$, $\sigma=15$')
+    axes.set_title(r'Histogram of IQ: $\mu=100$, $\sigma=15$')
 
-    # Tweak spacing to prevent clipping of ylabel
+    # Tweak spacing to prevent clipping of ylabel. Not sure it's needed?
     fig.tight_layout()  # This adjusts the spaceing at ends of plot ranges.
     plt.show()
 
@@ -138,29 +145,30 @@ if False:
     # Make a 2-D array
     data = np.random.randn(2, 100)
 
-    # this is setting up the figure and set ho many plots we are going to make.
+    # this is setting up the figure and set how many plots we are going to make.
     # We are making two rows and two columns for a total of four plots.
     # We are also stating how big the figure size should be. The numbers for
     # figsize are *100 = pixels. So (5, 5) is (500, 500) pixels.
-    fig, axs = plt.subplots(2, 2, figsize=(5, 5))
+    fig, axes = plt.subplots(2, 2, figsize=(5, 5))
 
-    # When we made the figure and returned axs, that is a list of length two
+    # When we made the figure and returned axes, that is a list of length two
     # with each element being a list of lenght two. This means we can make
     # each plot or update each plot by referencing the axes. Start at upper
     # left. [row, column] Axes is the plot, axis is the x and y axis.
-    print(axs)
-    axs[0, 0].hist(data[0])
-    axs[1, 0].scatter(data[0], data[1])
-    axs[0, 1].plot(data[0], data[1])
-    axs[1, 1].hist2d(data[0], data[1])
+    print('axes:\n', axes)
+    print('type(axes):', type(axes))
+    axes[0, 0].hist(data[0])  # Histogram of one slice of the 2-D array.
+    axes[1, 0].scatter(data[0], data[1])  # Scatter of 1 slice vs. other slice
+    axes[0, 1].plot(data[0], data[1])  # Plot of 1 slice with other as axis
+    axes[1, 1].hist2d(data[0], data[1])  # 2 dimentional histogram
 
     plt.show()
 
 if False:
-    # make these smaller to increase the resolution
+    # Some constants. Make these smaller to increase the resolution.
     dx, dy = 0.05, 0.05
 
-    # generate 2 2d grids for the x & y bounds. Don't worry much about this
+    # generate two 2-D grids for the x & y bounds. Don't worry much about this
     # it is just to make some data to plot.
     y, x = np.mgrid[slice(1, 5 + dy, dy),
                     slice(1, 5 + dx, dx)]
@@ -168,7 +176,8 @@ if False:
     z = np.sin(x)**10 + np.cos(10 + y*x) * np.cos(x)
 
     # x and y are bounds, so z should be the value *inside* those bounds.
-    # Therefore, remove the last value from the z array.
+    # Therefore, remove the last value from the z array. Again don't worry too
+    # much about this just making data for an example plot.
     z = z[:-1, :-1]
     levels = MaxNLocator(nbins=15).tick_values(z.min(), z.max())
 
@@ -182,28 +191,34 @@ if False:
     # means we can reference with name only instead of needing to
     # subset.
     fig, (ax0, ax1) = plt.subplots(nrows=2)
+    print(type((ax0, ax1)))
+    print(type(ax0))
 
     # Now we make the plot for first row. We are using the color map
     # defined above. If we didn't it would choose a default.
-    # Also notice that we are returnin a variable that is used to
-    # set the colorbar. This variael is referencing the plotted data
+    # Also notice that we are returning a variable that is used to
+    # set the colorbar. This variable is referencing the plotted data
     # specifically not including the x and y axes.
     im = ax0.pcolormesh(x, y, z, cmap=cmap, norm=norm)
+
+    # This is adding a colorbar to the plot.
+    # What if we didn't add a colorbar, what would happen?
     fig.colorbar(im, ax=ax0)
     ax0.set_title('pcolormesh with levels')
 
-    # contours are *point* based plots, so convert our bound into point
-    # centers
+    # Contours are *point* based plots, so convert our bound into point
+    # centers.
     # This is the second plot. Notice how we have called using ax1 from
     # previous plt.subplots call.
     cf = ax1.contourf(x[:-1, :-1] + dx/2.,
                       y[:-1, :-1] + dy/2., z, levels=levels,
                       cmap=cmap)
-    fig.colorbar(cf, ax=ax1)
+    fig.colorbar(cf, ax=ax1)  # Add a colorbar to the plot
     ax1.set_title('contourf with levels')
 
     # adjust spacing between subplots so `ax1` title and `ax0` tick labels
-    # don't overlap
+    # don't overlap. Try it without and see what happens. There is another way
+    # to finetune the spacing if you don't like this.
     fig.tight_layout()
 
     plt.show()
