@@ -12,29 +12,32 @@ def main():
     """[docstring/purpose of this script]"""
     print("Spam & eggs")
 
-    # args=parse_arguments()
-    # print(args.optionalArg)
-    # if args.squareit : print(args.squareit**2)
+    args=parse_arguments()
+    print(args.optionalArg)
+    if args.secondOptionalArg : print(args.secondOptionalArg*2)
 
 
 def parse_arguments():
-    """Configure and return command line arguements"""
+    """Configure and return command line arguments"""
     parser = argparse.ArgumentParser(
             description="A description for this script",
             epilog="An epilog for the help"
             )
 
-    # parser.add_argument("requiredArg")
+    parser.add_argument("requiredArg")
     parser.add_argument("-o", "--optionalArg",
                         default='spam',
-                        help='This is an optional arguement'
+                        help='This is an optional argument'
                         )
-    parser.add_argument("-s", "--squareit",
+    parser.add_argument("-s", "--secondOptionalArg",
                         default=0,
                         type=int,
-                        help="""Pass a number greater than zero and this will
-                        print the square"""
+                        help="""This is an optional argparse
+                        that requires an int"""
                         )
+    parser.add_argument("-b", "--booleanFlag",
+                        action='store_true',
+                        help="""True when passed, defaults to false""")
 
     args = parser.parse_args()
 
