@@ -9,6 +9,7 @@ import pytz
 
 print()
 
+# Block 1
 # What is the difference between regular Python and Numpy?
 if True:
     print(type(1))
@@ -28,6 +29,7 @@ if True:
     print(np.zeros(1, dtype=np.complex).dtype)
     print()
 
+# Block 2
 # Let's make some simple arrays
 if False:
     a = [1, 2, 3]
@@ -39,6 +41,7 @@ if False:
     print('a:', a)
     print('b:', b)
 
+# Block 3
 # What's the difference between regular Python and numpy?
 # The speed increase gets better with multidimentional data.
 if False:
@@ -65,6 +68,7 @@ if False:
 
     print("\nRation of native python/numpy:", python_time/numpy_time)
 
+# Block 4
 # Can you swith between regular Python and numpy?
 if False:
     num = 1000
@@ -84,6 +88,7 @@ if False:
     print('type(c):', type(c))
     print('len(c):', len(c))
 
+# Block 5
 # Let's make an array but of type float
 if False:
     a = np.array([1, 2, 3.])  # Will be set as float because 3. is a float value.
@@ -101,6 +106,7 @@ if False:
     print('c.dtype:', c.dtype)
     print('c:', c)
 
+# Block 6
 # Let's start making larger arrays without needing to type all the values
 if False:
     a = np.array(range(10))
@@ -114,6 +120,7 @@ if False:
     print('d:', d)
     print('e:', e)
 
+# Block 7
 # Let's select values from our arrays
 if False:
     a = np.arange(10)
@@ -125,6 +132,7 @@ if False:
     print('a[0:-1]:', a[:-1])  # selects upto but not including index 5
     print('a[0:100]:', a[0:100])  # index is past end of array?!?
 
+# Block 8
 # Let's get metadata about our arrays.
 if False:
     a = np.arange(10)
@@ -154,6 +162,7 @@ if False:
     print('c[0, :]:', c[0, :])
     print('c[1, 2:100]:', c[1, 2:100])  # over index handled OK? Maybe works
 
+# Block 9
 # Let's create some more complicated arrays
 if False:
     a = np.zeros((2, 2))    # Create an array of all zeros
@@ -171,6 +180,7 @@ if False:
     e = np.random.random((2, 4))  # Create an array filled with random values
     print(e)
 
+# Block 10
 # Let's play with broadcasting
 if False:
     a = np.zeros(20, dtype=int)
@@ -192,6 +202,7 @@ if False:
     a += 1000
     print('\na:', a)
 
+# Block 11
 # Let's start to work with booleans
 if False:
 
@@ -234,6 +245,7 @@ if False:
     print('f.all():', f.all())  # Check if all values are True
     print('f.any():', f.any())  # Check if any values are True
 
+# Block 12
 # Let's play with IEEE Not a Number (NaN) for missing data
 if False:
 
@@ -259,8 +271,8 @@ if False:
     b = np.isnan(a)
     print('\nb:', b)
     print()
-    
 
+# Block 13
 # Let's calculate some statistics with NaNs! Whew finally!
 if False:
     a = np.arange(10, dtype=float)
@@ -288,6 +300,7 @@ if False:
             b = np.array([np.nan, np.nan])
             print('\nnp.nanmean(b):', np.nanmean(b))
 
+# Block 14
 # Let's calculate some statistics of multi dimentional data!
 if False:
     a = np.arange(20)  # This is a 1-D array
@@ -315,7 +328,7 @@ if False:
     d = np.nansum(a, axis=1)
     print('d:', d)
 
-
+# Block 15
 # Now let's play with matrix addition, subtraction, division, ...
 if False:
     x = np.array([[1, 2], [3, 4]], dtype=np.float64)
@@ -381,6 +394,7 @@ if False:
     print('x.dot(y):\n', x.dot(y))
     print('np.dot(x, y):\n', np.dot(x, y))
 
+# Block 16
 # Now some more broadcasting fun
 if False:
     x = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])
@@ -407,6 +421,7 @@ if False:
     c = a + b  # Add v to each row of x using broadcasting
     print('\nc:\n', c)
 
+# Block 17
 # Now lets look at Numpy masked arrays and why they are awesome!
 if False:
     # First create a numpy array
@@ -461,6 +476,7 @@ if False:
     print('\nmasked_d:', masked_d)
     print('masked_d.mask:', masked_d.mask)
 
+# Block 18
 # Some of the nuances of performance with masked arrays
 if False:
     num = 5000000  # The size of the array we are going to play with
@@ -522,6 +538,7 @@ if False:
     # there is at least one NaN in the array.
     print('np.max(b):', np.max(b))
 
+# Block 19
 # Because we will work with time series data let's learn about Python datetime objects.
 # This is so we understand how the native time works with Python. We will then
 # learn about Numpy dates and times.
@@ -593,7 +610,7 @@ if False:
     datetime_utc = datetime.datetime.utcnow()
     print("utcnow():", datetime_utc.strftime("%m/%d/%Y, %H:%M:%S"))
 
-
+# Block 20
 # Because we will work with time series data let's learn about Numpy datetime objects.
 # Initially all datetimes were in UTC. Now the datatime is timezone naive. You can use
 # a timezone offset from UTC but that feature is being phased out.
@@ -633,6 +650,7 @@ if False:
     print("np.datetime64('now'):", np.datetime64('now'))
     print("np.datetime64('now'):", np.datetime64('now', 'ns'))
 
+# Block 21
 # How do we convert from python datetime to numpy datetime64 and vice a versa?
 if False:
 
