@@ -24,6 +24,7 @@ import xarray as xr
 # import warnings
 import pint
 
+# Block 1
 # Let's look at a simple instance of a Xarray object.
 if True:
     # Here we create some data
@@ -33,6 +34,7 @@ if True:
     xr_da = xr.DataArray(data)
     print("\nxr_da:\n", xr_da)
 
+# Block 2
 if False:
     # Create some data
     data = np.arange(10000, dtype=float)
@@ -53,6 +55,7 @@ if False:
     xr_da.attrs['valid_max'] = 10000.
     print("\nxr_da:", xr_da, "\n")
 
+# Block 3
 # The full power of Xarry comes from using Datasets. A Dataset is a collection of
 # DataArrays. The beauty of Datasets is holding all the corresoponding data together
 # and performing functions on multiple DataArrays in the Datasets all at once.
@@ -99,6 +102,7 @@ if False:
 
     print("\nxr_da:", xr_ds, "\n")
 
+# Block 4
 # Let's look at an example of using the organization of Datasets to fix a problem with
 # differeing units.
 if False:

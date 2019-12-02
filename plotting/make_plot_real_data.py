@@ -10,6 +10,7 @@ from pandas.plotting import register_matplotlib_converters
 from pathlib import Path
 register_matplotlib_converters()
 
+# Block 1
 # Read in one netCDF data file. Look at the default vs. optional for
 # scalar variables.
 if True:
@@ -49,6 +50,7 @@ if True:
 
     print(extraction)
 
+# Block 2
 # Read in netCDF data file and exclude some variables.
 if False:
     # This is a list of names to not attempt to read. Notice there is one name
@@ -75,7 +77,7 @@ if False:
 
     print(met_ds)
 
-
+# Block 3
 # Read in netCDF data files using command line syntax for regular expression.
 if False:
     # Here we construct the pathlib using standard glob syntax. This allows
@@ -103,7 +105,7 @@ if False:
         # # ncdump -ht our_written_file.nc | less
         met_ds.to_netcdf(path='our_written_file.nc', mode='w', format='NETCDF4')
 
-
+# Block 4
 # Hey look Xarray can plot too.
 if False:
     # Read some data from one file.
@@ -125,7 +127,7 @@ if False:
 
     plt.show()
 
-
+# Block 5
 # Let' read in some 2-D data and make a plot
 if False:
     filename = str(Path('..', 'data', 'sgpceilC1.b1', 'sgpceilC1.b1.20191103.000012.nc'))
@@ -139,7 +141,7 @@ if False:
     ceil_ds['backscatter'].plot()
     plt.show()
 
-
+# Block 6
 # Lets pause with Xarray plotting and start with the true library that is making
 # the plot, matplotlib. Once we understand what is going on underneath we can
 # make the plots we want with the same/similar calls with Xarray.
@@ -235,7 +237,8 @@ if False:
         axes_right = axes.twinx()  # Create a new y-axis but share same x-axis.
         line2_color = 'red'  # Set a variable to the string name RH line color
         # Plot the RH data on the new right axis, using the line2_color.
-        line2 = axes_right.plot(met_ds['time'], met_ds[var_name2], color=line2_color, label='RH')
+        line2 = axes_right.plot(met_ds['time'], met_ds[var_name2],
+                                color=line2_color, label='RH')
 
     # ---- if time, return to False ---- #
     if False:

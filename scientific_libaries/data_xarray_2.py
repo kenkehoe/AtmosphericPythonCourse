@@ -14,8 +14,9 @@ import matplotlib.pyplot as plt
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
-if True:
 
+# Block 1
+if True:
     # Create some data
     num = 100
     data1 = np.arange(0, num, dtype=int)
@@ -151,6 +152,7 @@ if True:
         diff = result_align[0]['data1'].values - result_align[1]['data3'].values
         print(np.nanmean(diff))
 
+# Block 2
 # If we use some of the functions of other libraries we can pull them into
 # Xarray to make it easier to initialize the Dataset.
 if False:
@@ -170,6 +172,7 @@ if False:
     print("time == np_time:", (time == np_time).all())
     print("\nds == ds_np_time:\n", (ds == ds_np_time).all())
 
+# Block 3
 # Lest start changing the values to meet our needs.
 if False:
 
@@ -186,8 +189,8 @@ if False:
     ds1_mean = xr_ds1.resample(time='8min').reduce(np.mean)
     print("time='8min\n': ", ds1_mean)
 
+# Block 4
 if True:
-
     # The bet way to understand what is going on is to plot the data.
     xr_ds2['data3'].plot(label='data3')
     xr_ds2['data4'].plot(label='data4')

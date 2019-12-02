@@ -9,6 +9,8 @@ import time
 #                n_workers=1, memory_limit='2GB')
 # client
 
+
+# Block 1
 if True:
 
     # Create a data array with dask module, similar to Numpy.
@@ -47,6 +49,7 @@ if True:
     if b.compute():
         print('  Passed if statement as dask array converted to Numpy array.')
 
+# Block 2
 if False:
     a = da.random.random(1000, chunks=100)
 #    x = da.arange(1000, chunks=100)
@@ -58,6 +61,7 @@ if False:
     print(c)
     print(c.compute())
 
+# Block 3
 # How much faster is dask than Numpy at some calculations?
 if False:
 

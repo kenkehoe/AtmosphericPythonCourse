@@ -7,6 +7,7 @@ from pathlib import Path
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
+# Block 1
 if True:
     # Create some data in a dictionary.
     data = {'apples': [3, 2, 0, 1],
@@ -31,6 +32,7 @@ if True:
     print(purchases.loc['June'])
     print()
 
+# Block 2
 if False:
     # Create a Pandas series using a list
     # Notice how the index is created automatically starting at 0.
@@ -68,6 +70,7 @@ if False:
     print('\nS + S2:')
     print(S + S2)
 
+# Block 3
 if False:
     # Create a dictionary to use for making the Series
     cities = {"London":    8615246,
@@ -94,6 +97,7 @@ if False:
     # We can apply a math function to all values in the Series using .apply()
     print(city_series.apply(np.log))
 
+# Block 4
 if False:
     # Make a Seris of data by using the range function to make a list of values.
     # Then we add a value to every data in the Series.
@@ -122,6 +126,7 @@ if False:
     # a value of our choosing.
     print(data.fillna(0))
 
+# Block 5
 # Now we can start doing some real stuff!
 if False:
     # Create a pathlib file path to some ASCII data. It's actually real data!!!
@@ -165,6 +170,7 @@ if False:
         data.plot(x='TIMESTAMP', y='Temp_C_Std', ax=axes)
         plt.show()
 
+# Block 6
 if False:
     # Read data from data file.
     filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.00.20191105.150801.raw.dat')
@@ -194,6 +200,7 @@ if False:
         # Calculate the covariance coefficients of the DataSet on each Series
         print(data.cov())
 
+# Block 7
 if False:
     # Read data
     filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.00.20191105.150801.raw.dat')

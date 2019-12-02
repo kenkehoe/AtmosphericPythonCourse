@@ -5,6 +5,7 @@ from matplotlib.colors import BoundaryNorm
 from matplotlib.ticker import MaxNLocator
 import numpy as np
 
+# Block 1
 # The simplest of simplest plots.
 if True:
     # Here is the simplest call we can make. Things to notice.
@@ -20,7 +21,7 @@ if True:
         plt.plot(np.ones(50))  # What about a second plot of all zeros, but fewer?
     plt.show()
 
-
+# Block 2
 # The simplest of plots.
 if False:
     # x axis values
@@ -47,7 +48,7 @@ if False:
          plt.plot(x, y, linestyle='', marker='*', markersize=10, color='red')
          plt.show()
 
-
+# Block 3
 # Let's get a littl more complicated with plots.
 if False:
     # numpy.linspace returns evenly spaced numbers over a specified interval.
@@ -102,6 +103,7 @@ if False:
     # the latest settings will be used. By default a new window will appear.
     plt.show()
 
+# Block 4
 if False:
     # Set the seed for random value. This means we get the same result every time.
     np.random.seed(19680801)
@@ -138,7 +140,7 @@ if False:
     fig.tight_layout()  # This adjusts the spaceing at ends of plot ranges.
     plt.show()
 
-
+# Block 5
 if False:
     # this is to make some data to plot
     np.random.seed(19680801)
@@ -164,6 +166,7 @@ if False:
 
     plt.show()
 
+# Block 6
 if False:
     # Some constants. Make these smaller to increase the resolution.
     dx, dy = 0.05, 0.05
