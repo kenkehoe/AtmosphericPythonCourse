@@ -67,7 +67,7 @@ def read_site_data(filename, retained):
 
                 # Set label if needed
                 if not label:
-                    label = "Retained " if filter else ""
+                    label = "Retained " if retained else ""
                     label += "CO2 data from "+site
 
         return (label, sample_dates, values)
