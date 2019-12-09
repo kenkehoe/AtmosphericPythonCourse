@@ -86,7 +86,8 @@ if False:
     # The filename glob is understood by open_mfdataset() and correctly grabs all
     # the files that match the file glob. We also tell it what dimention we want to
     # concatinate along.
-    met_ds = xr.open_mfdataset(str(filename), combine='nested', concat_dim='time')#, parallel=True)
+    met_ds = xr.open_mfdataset(str(filename), combine='by_coords',
+                               concat_dim='time')#, parallel=True)
 
     # Notice how many time samples we have in the Xarray Dataset. A single
     # data file only has 1440 values.
@@ -101,9 +102,18 @@ if False:
 
         # Now that we have done somethign to the Xarray object lets write it to disk.
         # When you look at the file notice the number of time samples and missing
-        # variables.
-        # # ncdump -ht our_written_file.nc | less
+        # variables. Also notice that it is slightly different with _FillValue attribute
+        # used instead of missing_value and the use of NaNs for missing values.
+        # # ncdump -t our_written_file.nc | less
         met_ds.to_netcdf(path='our_written_file.nc', mode='w', format='NETCDF4')
+
+        # This is an example of passing encoding to the write method to set how some variables
+        # are written to the file. In this example the variable logger_temp is a float
+        # but we will write as int32 and change the _FillValue from current NaN
+        # to -9999. This is also how to apply scale_factor and add_offset.
+        #met_ds.to_netcdf(path='our_written_file.nc', mode='w', format='NETCDF4',
+        #                 encoding={'logger_temp': {'dtype':'int32', '_FillValue':-9999,
+        #                           'scale_factor':0.01}})
 
 # Block 4
 # Hey look Xarray can plot too.

@@ -45,8 +45,8 @@ if False:
 
     # What if make a second plot right after making the first?
     if False:
-         plt.plot(x, y, linestyle='', marker='*', markersize=10, color='red')
-         plt.show()
+        plt.plot(x, y, linestyle='', marker='*', markersize=10, color='red')
+        plt.show()
 
 # Block 3
 # Let's get a littl more complicated with plots.
@@ -125,8 +125,7 @@ if False:
     n, bins, patches = axes.hist(x, num_bins, density=1)
 
     # add a 'best fit' line
-    y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *
-         np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
+    y = (1 / (np.sqrt(2 * np.pi) * sigma)) * np.exp(-0.5 * (1 / sigma * (bins - mu)) ** 2)
     axes.plot(bins, y, '--')
     axes.set_xlabel('Smarts')
     axes.set_ylabel('Probability density')
@@ -173,10 +172,9 @@ if False:
 
     # generate two 2-D grids for the x & y bounds. Don't worry much about this
     # it is just to make some data to plot.
-    y, x = np.mgrid[slice(1, 5 + dy, dy),
-                    slice(1, 5 + dx, dx)]
+    y, x = np.mgrid[slice(1, 5 + dy, dy), slice(1, 5 + dx, dx)]
 
-    z = np.sin(x)**10 + np.cos(10 + y*x) * np.cos(x)
+    z = np.sin(x) ** 10 + np.cos(10 + y * x) * np.cos(x)
 
     # x and y are bounds, so z should be the value *inside* those bounds.
     # Therefore, remove the last value from the z array. Again don't worry too
@@ -213,9 +211,8 @@ if False:
     # centers.
     # This is the second plot. Notice how we have called using ax1 from
     # previous plt.subplots call.
-    cf = ax1.contourf(x[:-1, :-1] + dx/2.,
-                      y[:-1, :-1] + dy/2., z, levels=levels,
-                      cmap=cmap)
+    cf = ax1.contourf(x[:-1, :-1] + dx / 2.0, y[:-1, :-1] + dy / 2.0,
+                      z, levels=levels, cmap=cmap)
     fig.colorbar(cf, ax=ax1)  # Add a colorbar to the plot
     ax1.set_title('contourf with levels')
 

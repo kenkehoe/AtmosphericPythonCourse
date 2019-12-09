@@ -2,6 +2,42 @@
 
 import re
 
+if True:
+    string = "The rain in Spain"
+    result = re.search("rain", string)
+    print(result)
+    print(result.start())
+    result = re.search("snow", string)
+    print(result)
+
+
+    text = 'those THAT tilt that That 8'
+    print(re.findall(r"that", text))
+    print(re.findall(r"that", text, flags=re.IGNORECASE))
+    print(re.findall(r"[tT]",text))
+
+    pattern = re.compile(r"t", flags=re.IGNORECASE)
+    print(re.findall(pattern, text))
+
+    print(re.findall(r"[\w]",text))
+
+    string = "The rain in Spain"
+    print(re.split("\s", string))
+    print(re.split("\s", string, 1))
+
+    string = "The rain in Spain"
+    print(re.sub("\s", "_", string))
+    print(re.sub("\s", "_", string, 2))
+
+    str = "The rain in Spain"
+    x = re.search(r"\bS\w+", str)
+    print(x)
+    print(x.span())
+    print(x.string)
+    print(x.group())
+
+
+
 
 if False:
     text = 'sometext_with_lots_of_STUFF in it'
@@ -126,7 +162,7 @@ if False:
     search_result = re.match(pattern, text)
     print(search_result)
 
-if True:
+if False:
     text = 'abcdeABC123aB'
 
     pattern = r"^\w{2}"

@@ -1,9 +1,9 @@
 #! /usr/bin/env python3
 
-with open('requirements.txt') as requirements_file:
+with open("requirements.txt") as requirements_file:
     # Parse requirements.txt, ignoring any commented-out lines.
     requirements = [line for line in requirements_file.read().splitlines()
-                    if not line.startswith('#')]
+                    if not line.startswith("#")]
 
 modules = []
 missing_modules = []
@@ -16,9 +16,8 @@ for x in requirements:
 #        print("Error importing ", x, '.')
 
 if len(missing_modules) > 0:
-    print('\nYou are missing some needed software. Pleas import these modules:')
+    print("\nYou are missing some needed software. Pleas import these modules:")
     for mod in missing_modules:
         print(mod)
 
     print()
-
