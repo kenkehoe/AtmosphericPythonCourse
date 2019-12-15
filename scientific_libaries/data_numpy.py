@@ -11,7 +11,7 @@ print()
 
 # Block 1
 # What is the difference between regular Python and Numpy?
-if True:
+if False:
     print(type(1))
     print(type(1.))
     print(type('Hello World'))
@@ -150,16 +150,16 @@ if False:
 
 # Block 8
 # Let's get metadata about our arrays.
-if False:
+if True:
     a = np.arange(10)
-    print('a:\n', a)
+    print('a', a, sep=": ", end="\n\n")
     print('a.shape:', a.shape)
     print('a.size:', a.size)
     print('len(a):', len(a))
     print()
 
     b = np.array([[1, 2, 3], [4, 5, 6]])
-    print('b:\n', b)
+    print('b', b, sep=":\n")
     print('b.shape:', b.shape)
     print('b.size:', b.size)
     print('len(b):', len(b))  # Wait what is going on? Not true?
