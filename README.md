@@ -56,7 +56,13 @@ Enjoy and happy coding.
 You should start with the *intro_pyton/* folder for the PDF presentation that explains some of the basics of Python. After going through the introl PDF you should go through the three python example files (files ending in \*.py) in the *intro_python/* folder.
 
 ## Advanced Section
-Once you have a basic start to Python you can start working through the advanced libraries. Here is a suggestion for which files to review and the order. This part of the Git repo contains some example python3 files. It is designed to work by calling the python script from the command line. Each example file has blocks of code to process controld by an if statement. Just change "False" to "True" to execute those bits of code. It is suggested to also change the previous "True" to "False" to limit the amount of information printed to the screen.
+Once you have a basic start to Python you can start working through the advanced libraries. Here is a suggestion for which files to review and the order. The files are designed to work by calling the python script from the command line (exampel = *> python data_numpy.py*). Each example file has blocks of code to process controld by an if statement. Just change "False" to "True" to execute those blocks of code. It is suggested to also change the previous "True" to "False" to limit the amount of information printed to the screen.
+
+If you want to revert any of these codes back to orginal state just use the git command
+```
+> git checkout <name of file to revert back>
+```
+This will overwrite your current file with any changes to the one stored in the Git repo. If you have a file that is no longer working and you can't figure out why, you can copy that file to a different name and then checkout the orginal. This will allow comparing to see how they differ to find the error.
 
 * [Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = **scientific_libaries/data_numpy.py**
 * Plotting with [matplotlib](https://matplotlib.org/)  = **plotting/make_plot.py**
