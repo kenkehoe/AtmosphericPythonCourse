@@ -58,7 +58,7 @@ You should start with the *intro_pyton/* folder for the PDF presentation that ex
 ## Advanced Section
 Once you have a basic start to Python you can start working through the advanced libraries. Here is a suggestion for which files to review and the order. This part of the Git repo contains some example python3 files. It is designed to work by calling the python script from the command line. Each example file has blocks of code to process controld by an if statement. Just change "False" to "True" to execute those bits of code. It is suggested to also change the previous "True" to "False" to limit the amount of information printed to the screen.
 
-* [Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = **scientific_libaries/data_np.py**
+* [Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = **scientific_libaries/data_numpy.py**
 * Plotting with [matplotlib](https://matplotlib.org/)  = **plotting/make_plot.py**
 * [Pandas](https://pandas.pydata.org/pandas-docs/stable/) - To store/read data and use some powerful tools with the data = **scientific_libaries/data_pandas.py**
 * [Xarray](http://xarray.pydata.org/en/stable/) - To store/read data and use some powerful tools with the data over 1-D dimensionality = **scientific_libaries/data_xarray.py**
