@@ -67,6 +67,7 @@ Once you have a basic start to Python you can start working through the advanced
 * Metadata with [JSON](https://developers.squarespace.com/what-is-json) and [YAML](https://blog.stackpath.com/yaml/) = **metadata/use_json.py** & **metadata/use_yaml.py**
 * Advanced [pathlib.Path](https://realpython.com/python-pathlib/) = **cool_stuff/path_stuff.py**
 * [Saving data with Numpy](https://www.geeksforgeeks.org/numpy-save/) = **cool_stuff/data_save.py**
+* Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libraries/data_data.py**
 
 ## Standard Style
 It is not required but we will encourage using a standard syntax for our code. All the example codes will use [pep8](https://www.python.org/dev/peps/pep-0008/). Your code will run without following this formatting standard, but for sharing the code with others getting used to a standard format will make everyone’s life better.
