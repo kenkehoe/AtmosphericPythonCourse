@@ -5,10 +5,10 @@
 
 "d_list_name": 
     {"one": 1,
-     "two": 2,
-     "three'": 3.0,
+     "two": 2.0,
+     "three'": 3.00000000000,
      "four": "four",
-     "five": "a big long string"
+     "five": "a big long string \nwith returns\n"
      },
 
     "site": {
