@@ -16,12 +16,22 @@ Enjoy and happy coding.
 
 
 # Class Notes
+## Intro Section
+You should start with the intro_pyton folder for the PDF presentation that explains some of the basics of Python. After going through the introl PDF you should go through the three python example files (files ending in \*.py) in the intro_python file.
+
+## Advanced Section
+Once you have a basic start to Python you can start working through the advanced libraries. Here is a suggestion for which files to review and the order.
+
+[Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = scientific_libaries/data_np.py
+* Maybe skip masked arrays and Python datetime object for time?
+
+
 
 
 ## Standard Style
-It is not required but we will encourage using a standard syntax for our code. All the example codes will use pep8 (https://www.python.org/dev/peps/pep-0008/). Your code will run without following this formatting standard, but for sharing the code with others getting used to a standard format will make everyone’s life better.
+It is not required but we will encourage using a standard syntax for our code. All the example codes will use [pep8](https://www.python.org/dev/peps/pep-0008/). Your code will run without following this formatting standard, but for sharing the code with others getting used to a standard format will make everyone’s life better.
 
-A nice way to see if your code is following the standard style is to use the flake8 (https://pypi.org/project/flake8/) command line tool. 
+A nice way to see if your code is following the standard style is to use the [flake8](https://pypi.org/project/flake8/) command line tool. 
 ```
 > flake8 --max-line-length=115 my_python_program.py
 ```
