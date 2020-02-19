@@ -22,8 +22,16 @@ You should start with the intro_pyton folder for the PDF presentation that expla
 ## Advanced Section
 Once you have a basic start to Python you can start working through the advanced libraries. Here is a suggestion for which files to review and the order.
 
-[Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = scientific_libaries/data_np.py
-* Maybe skip masked arrays and Python datetime object for time?
+* [Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = scientific_libaries/data_np.py
+  * Maybe skip masked arrays and Python datetime object for time?
+* Plotting with matplotlib  = plotting/make_plot.py
+* Pandas - To store/read data and use some powerful tools with the data = scientific_libaries/data_pandas.py
+* Xarray - To store/read data and use some powerful tools with the data over 1-D dimensionality = scientific_libaries/data_xarray.py
+* Advanced plotting with matplotlib (also use Pandas and Xarray wrapper around matplotlib) = scientific_libaries/make_plot_real_data.py
+* Advanced Xarray to start working with data and perform analysis = scientific_libaries/data_xarray_2.py
+* Metadata with JSON and YAML = metadata/use_json.py & use_yaml.py
+* Advanced pathlib.Path = cool_stuff/path_stuff.py
+* Saving data with Numpy = cool_stuff/data_save.py
 
 
 
