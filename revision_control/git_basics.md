@@ -239,5 +239,5 @@ Some changes to new_file.py
 > git add new_file.py
 > git commit -m 'A big update that fixes the too many cats problem'
 ```
-
+This is just an example, it's actually not the best way to solve this problem. That is with branching but we will discuss that next as it is a bit more complicated.
 
