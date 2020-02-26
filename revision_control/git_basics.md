@@ -135,7 +135,7 @@ To commit the file to Git with the change we perform the same steps as initially
 To understand why using Git will help with your software development (or really any text file development) we need some use cases
 
 ### Reverting changes to the version in the Git repository
-We can make some quick changes to a file to do some testing for debugging some code. For example we can make a bunch of changes and run the code looking for print statements or changes. But during the process we discover the error is not in the file _new_file.py_ so we need that file to go back to the orginal state that we know works. We can select undo with our text editor until we get the start of the editing but that may not always work. Or we can can try to get things back to where we remember them, but let's be honest how good is your memory? The better thing is to let software do it for you.
+We can make some quick changes to a file to do some testing for debugging some code. For example we can make a bunch of changes and run the code looking for print statements or changes. But during the process we discover the error is not in the file _new_file.py_ so we need that file to go back to the orginal state that we know works. We can select undo with our text editor until we get the start of the editing but that may not always work. Or we can try to get things back to where we remember them, but let's be honest how good is your memory? The better thing is to let software do it for you.
 ```
 > echo "Making some changes to new_file.py" > new_file.py
 > echo "And more changes" >> new_file.py
@@ -172,5 +172,61 @@ A line in the file
 ```
 We can now see the file is back to the orginal state.
 
+### Seeing the metadata about the file changes to see who and when a file changes
+What if we see something is no longer working and don't understand why things stopped working at Wed Feb 26 15:00:0 2020
+```
+> git log
+commit f88c322506cf19b03665bb90c9e8e333e934f05d (HEAD -> master)
+Author: Kenneth Kehoe <kkehoe@ou.edu>
+Date:   Wed Feb 26 14:42:01 2020 -0700
+
+    Adding some changes to the file.
+
+commit cff57450877744b5bc195ef68cbda9138c1d58c0
+Author: Kenneth Kehoe <kkehoe@ou.edu>
+Date:   Wed Feb 26 14:29:28 2020 -0700
+
+    Adding a new file to repository.
+```
+According to the log the file was updated by Kenneth Kehoe at Wed Feb 26 14:42:01 2020 -0700. So the next time the file was run from a scheduler at 15:00:00 it failed because of the change. For a single file this is a funny example but when there are 10's or 100's of files this can be a life saver.
+
+### What if we need to make a quick change to a file to fix a problem when we are in the middle of a big overhaul of the code!
+It happens. We decided we needed to make a lot of changes to the code and then something breaks and we need to get one line of code fixed fast. But we have all these changes to the code. Do we throw them all away with a checkout command and make the small change to get that fixed now because the gov. agency is freeking out! No, we can store our current changes and get back to the orginal quickly.
+```
+> echo 'Some changes to new_file.py' >> new_file.py
+> echo "Stuff in a second file" > second_file.py
+> echo "Stuff in a thrid file" > third_file.py
+> git add second_file.py add third_file.py new_file.py
+> git status
+> git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   new_file.py
+	new file:   second_file.py
+	new file:   third_file.py
+```
+Now if we needed to revert the changes to new_file.py we will loose all our changes and have to put them back in later, in addition to the fast fix we need to do right away. Instead we can use _stash_ to hid our currnt changes.
+```
+> git stash
+Saved working directory and index state WIP on master: f88c322 Adding some changes to the file.
+Mac@kehoe:/testing> git status
+On branch master
+nothing to commit, working tree clean
+
+> echo 'Our fast update to new_file.py' >> new_file.py
+> cat new_file.py 
+A line in the file
+Our fast update to new_file.py
+
+> git commit new_file.py -m 'Fast fix for issue.'
+```
+
+Then we can pull back our other changes with the _stash_ command again.
+```
+> git stash pop
+> get status
+```
 
 
