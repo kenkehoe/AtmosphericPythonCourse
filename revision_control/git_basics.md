@@ -228,5 +228,16 @@ Then we can pull back our other changes with the _stash_ command again.
 > git stash pop
 > get status
 ```
+You will see we have caused a conflict between the two versions of new_file.py. We will need to manualy edit that file to fix the conflict but Git will give us some hint on where the issue resides. So you can edit the file making it correct with the fast fix and the new code and then add it back into the workflow.
+```
+> vim new_file.py
+> git add new_file.py
+> cat new_file.py 
+A line in the file
+Our fast update to new_file.py
+Some changes to new_file.py
+> git add new_file.py
+> git commit -m 'A big update that fixes the too many cats problem'
+```
 
 
