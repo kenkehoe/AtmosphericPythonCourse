@@ -211,7 +211,7 @@ Now if we needed to revert the changes to new_file.py we will loose all our chan
 ```
 > git stash
 Saved working directory and index state WIP on master: f88c322 Adding some changes to the file.
-Mac@kehoe:/testing> git status
+> git status
 On branch master
 nothing to commit, working tree clean
 
