@@ -62,7 +62,7 @@ To create a new Git repository _cd_ into the top level directory and type
 Initialized empty Git repository in ~/testing/.git/
 ```
 
-This will add a new hidden folder called _.git_ . The existance of this folder and the subsequent files in that folder make the directory a Git repository (or project). If we wanted to remove the Git tracking of this folder we could delete the folder and the Git tracking is removed.
+This will add a new hidden folder called _.git_ . The existance of this folder and the subsequent files in that folder make the directory a Git repository (or project). If we wanted to remove the Git tracking of this folder we could delete the folder and the Git tracking is removed along with all the history of that Git repository.
 
 Now that we have a directory under SCM we can use Git to also retrieve informatoin about the repository.
 ```
@@ -124,3 +124,53 @@ Changes not staged for commit:
 
 	modified:   new_file.py
 ```
+To commit the file to Git with the change we perform the same steps as initially adding the file. This file now has two verisions, the inital commit when added to the Git repository and the current version with the changes. It is generlly agreed upon to make frequent commits to the fiels as you develope vs. one large commit. But style differ. There is no limit to the number of commits nor the size of the commit.
+```
+> git commit new_file.py -m 'Adding some changes to the file.'
+[master f88c322] Adding some changes to the file.
+ 1 file changed, 1 insertion(+)
+```
+
+## Why will using Git help?
+To understand why using Git will help with your software development (or really any text file development) we need some use cases
+
+### Reverting changes to the version in the Git repository
+We can make some quick changes to a file to do some testing for debugging some code. For example we can make a bunch of changes and run the code looking for print statements or changes. But during the process we discover the error is not in the file _new_file.py_ so we need that file to go back to the orginal state that we know works. We can select undo with our text editor until we get the start of the editing but that may not always work. Or we can can try to get things back to where we remember them, but let's be honest how good is your memory? The better thing is to let software do it for you.
+```
+> echo "Making some changes to new_file.py" > new_file.py
+> echo "And more changes" >> new_file.py
+> echo "And more changes..." >> new_file.py
+
+> git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   new_file.py
+```
+
+Git will tell us where the changes are in the file using the _diff_ command
+
+```
+> git diff new_file.py 
+diff --git a/new_file.py b/new_file.py
+index 16100d2..0b57a44 100644
+--- a/new_file.py
++++ b/new_file.py
+@@ -1 +1,3 @@
+-A line in the file
++Making some changes to new_file.py
++And more changes
++And more changes...
+```
+Git knows the file was changed, what characters and where in the file. Here we can see a line was removed (the - character means missing) and three new lines were added (the + character means added). To revert the file back to the orginal version we use the checkout command.
+```
+> git checkout new_file.py 
+> cat new_file.py
+A line in the file
+```
+We can now see the file is back to the orginal state.
+
+
+
