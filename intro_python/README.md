@@ -2,6 +2,7 @@
 
 A good online free tutorial is available at [datacamp.com](https://www.datacamp.com/courses/intro-to-python-for-data-science). This is a 4 hour course that should give you the basics of Python programming. It would also be good to review the PDF in this folder for some other detials the course may not teach.
 
+## Executing a Python script
 You are welcome to follow the instructions in the datacamp.com class for how to use Python, but we suggest using Python in the way you will do large processing. We suggest installing Python through Anaconda and using it on the command line by executing a file. This course is set up assuming you can call a Python script from a terminal window. You can call the script by
 ```
 python script_name.py
@@ -24,3 +25,10 @@ Now we can just call the script (assuming you have the shibang set correctly in 
 > python_script.py
 ```
 It is up to you which you prefer.
+
+## Running your first program
+You can test out your first program by running the script in /intro_python folder called wordcount.py
+```
+> python wordcount.py siteData.py
+```
+This is a simple (and somewhat silly) program to count the number of words in the file "siteData.py" Take a look at the output and then read through the code to see what it is doing. If you want you can change the code (maybe add a print() statement) and see what that does. Don't worry if you mess it up, you can always use *git checkout wordcount.py* to get back the orginal version.
