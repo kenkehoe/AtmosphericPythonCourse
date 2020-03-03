@@ -39,15 +39,6 @@ If nothing is printed after running this script then you are all set to go. If a
 ## Text Editing
 Finally you will need some way to edit the files. You can use your text editor of your choosing. Some options include VI (or [MacVIM](https://www.macupdate.com/app/mac/25988/macvim) for Mac), Emacs, TextEdit (Mac), [TextWrangler](https://apps.apple.com/us/app/textwrangler/id404010395?mt=12) (Mac), Notepad (Windows), [Notepad++](https://notepad-plus-plus.org/) (Windows), … It does not matter which one you choose but don’t use something like MicrosoftWord. It will not make you happy.
 
-
-
-
-There is also a test_requirements.py script that will ensure all the libraries listed
-in requirements.txt are installed. Run that script to check for missing libraries.
-If a missing library is detected insall using pip.
-```
-> pip install <missing library name>
-```
 Enjoy and happy coding.
 
 
