@@ -32,3 +32,35 @@ You can test out your first program by running the script in /intro_python folde
 > python wordcount.py siteData.py
 ```
 This is a simple (and somewhat silly) program to count the number of words in the file "siteData.py" Take a look at the output and then read through the code to see what it is doing. If you want you can change the code (maybe add a print() statement) and see what that does. Don't worry if you mess it up, you can always use *git checkout wordcount.py* to get back the orginal version.
+
+
+## Reading in a data file and making a plot
+Next we can do the most important thing in science, reading in a data file and making a plot. You will do this a lot in atmospheric science. We can use the already written program to do this for you.
+```
+> python siteData.py data/co2_alt_surface-flask_1_ccgg_event.txt
+```
+Notice how it opened up a new window and made a plot. You can point to a different file in the /data/ directory and get a different plot.
+```
+> python siteData.py data/co2_spo_surface-flask_1_ccgg_event.txt
+```
+
+Next change some things in the siteData.py program to see how the plot changes.
+
+You can also see how the program is written to be user friendly. If you didn't know how to use it you can get information from the script printed to the screen. This is a special module in the python file that will show a help menu.
+```
+> siteData.py -h
+usage: siteData.py [-h] [-r] filename
+
+A description for this script
+
+positional arguments:
+  filename
+
+optional arguments:
+  -h, --help          show this help message and exit
+  -r, --retainedData  Pass to filter results to non flagged data
+
+An epilog for the help
+```
+
+Can you add an option so the help menu changes. A good way to do this is to copy a section of code and make the variable name different.
