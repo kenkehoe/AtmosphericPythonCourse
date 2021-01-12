@@ -4,6 +4,9 @@ import yaml
 
 
 filename = 'example.yaml'
+# The with statement ensures the file handle is closed after the file
+# is read. This means we don't need to manage that part. A "with" works
+# with any context manager.
 with open(filename, "r") as fp:
     docs = yaml.load(fp, Loader=yaml.FullLoader)
 

@@ -5,11 +5,14 @@ import json
 filename = 'example.json'   # Filename of JSON file
 # If we needed to go to a different directory to get to the JSON
 # file we can use relative or full path to the file.
+# The with statement ensures the file handle is closed after the file
+# is read. This means we don't need to manage that part. A "with" works
+# with any context manager.
 with open(filename, "r") as read_file:
     docs = json.load(read_file)
 
-# The bes way to ust this part is to open the JSON file and see how it is
-# stuctured so you can see how the data types and nested data are preserved.
+# The best way to ust this part is to open the JSON file and see how it is
+# stuctured so you can see how the data types are nested and data are preserved.
 # Feel free to mess with the JSON file to see how things change.
 # You can alwasy get it back to orginal state with a "git checkout example.json"
 print()

@@ -3,12 +3,14 @@
 # to XML or JSON. Since we will read this into python as a dictionary, the same rules
 # apply to the names you can give to the keys.
 
-# A basic key: value pair
+# A basic "key-value" pair
 a_variable_name: "A value to list with the variable"
 b_variable_name: 1  # this is interpred as an int
 c_variable_name: 11.  # this is interpred as a float
 
-# We can also have a list of values not just one value
+# We can also have a list of values not just one value. A list is defined
+# by starting the rwo with a "- " character. A list element can contain any
+# python interpretable object, sting, int, float, dictionary, list.
 d_list_name:
     - 1  # this is an int
     - 2.  # this is a float
@@ -35,7 +37,8 @@ d_list_name:
 
 # When you have metadata that needs to be stored YAML is a great
 # format. Here is an example you may use. Notice how the different
-# levels are defined by spaces, just like python loops.
+# levels are defined by spaces, just like python loops. This is read
+# in as a dictionary of dictionaries.
 site:
     DEN:
         description: A very large airport  # This is a string
