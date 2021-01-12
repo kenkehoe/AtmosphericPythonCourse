@@ -16,11 +16,11 @@ if True:
     # Create a data array with dask module, similar to Numpy.
     # We define chunks to help manage multiprocessing and allow for smaller
     # RAM memory footprint. We could process data larger than the space of
-    # memory we have available to us.
+    # RAM memory we have available to us.
 
     # The chunks in this case are 100 (10x10) numpy arrays of size 1000x1000.
     x = da.random.random((10000, 10000), chunks=(1000, 1000))
-    print(x)
+    print('x:', x)
 
     # Perform math similar to Numpy.
     y = x + x.T  # .T means transpose the array
@@ -28,29 +28,29 @@ if True:
     # Here we calculate the mean along an axis.
     z = y[::2, 5000:].mean(axis=1)
     # But notice when we print z it does not show any values, just information
-    # about the dask object.
-    print(z)
+    # about the dask object. At this time no computation has occured, just the
+    # information about what we want to do.
+    print('z:', z)
 
-    # We will need to convert to Numpy before printing the values to the screen.
-    # .compute() on the object will return a Numpy array of the values.
-    print(z.compute())
+    # We will need to computer the values and convert to Numpy before printing
+    # the values to the screen. .compute() on the object will return a
+    # Numpy array of the values.
+    print('z.compute():', z.compute())
 
     # We can do normal Numpy comparisons to get boolean arrays for testing.
+    # Here we are doing two operations. Neither of the operations are done
+    # untile we tell it to perform the operations with a .compute() call.
     a = z > 0
     b = a.any()
-    # The results of a Numpy comparison is a dask array.
-    print(b)
-    # So to see the values we need to convert to Numpy array.
-    print(b.compute())
-
-    # But many functions will work on the dask array as if it is a numpy array.
-    if b:
-        print('  Passed if statement as dask array')
-    if b.compute():
-        print('  Passed if statement as dask array converted to Numpy array.')
+    # The request of a Numpy comparison is a dask array are stored as operations
+    # to perform, but the operations have not been perfoemd yet.
+    print('b:', b)
+    # So to see the values we need to perform operations and convert to Numpy array.
+    print('b.compute():', b.compute())
 
 # Block 2
 if False:
+    # Most of the Numpy operations are available in Dask computations.
     a = da.random.random(1000, chunks=100)
 #    x = da.arange(1000, chunks=100)
     b = da.ones(1000, chunks=100)
@@ -58,8 +58,8 @@ if False:
     c = b - a
     c = da.nanmean(c)
 
-    print(c)
-    print(c.compute())
+    print('c:', c)
+    print('c.compute():', c.compute())
 
 # Block 3
 # How much faster is dask than Numpy at some calculations?
@@ -67,17 +67,17 @@ if False:
 
     # Let's make a large array.
     num = 100000000
-    # What if that array is smaller?
+    # What if that array is smaller? Turns out the overhead of implementing Dask
+    # can make it slower for smaller datasets.
 #    num = 10000
     start_time = time.time()
     b = np.ones(num) - np.random.random(num)
     b[np.random.randint(0, num, int(num/10))] = np.nan
     b = np.nanmean(b)
     python_time_1 = time.time() - start_time
-    print('\nNumpy Elapsed Time: {}  seconds'.format(python_time_1))
-    print()
-
+    print(f'\nNumpy Elapsed Time: {python_time_1} seconds\n')
     del b
+
     start_time = time.time()
     # What if we need to convert Numpy array to dask array to get
     # data in dask space first. Does this change the performance?
@@ -90,7 +90,6 @@ if False:
     b = da.nanmean(b)
     b = b.compute()
     python_time_2 = time.time() - start_time
-    print('dask Elapsed Time: {}  seconds'.format(python_time_2))
-    print()
+    print(f'dask Elapsed Time: {python_time_2} seconds\n')
 
-    print('numpy/dask: ', python_time_1/python_time_2, '\n')
+    print(f'numpy/dask: {python_time_1/python_time_2}\n')
