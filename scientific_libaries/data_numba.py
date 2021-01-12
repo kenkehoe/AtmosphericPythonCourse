@@ -5,7 +5,7 @@ import numpy as np
 from numba import jit
 import time
 
-x = np.arange(10000000).reshape(1000, 10000)
+x = np.arange(10000000, dtype=float).reshape(1000, 10000)
 
 
 def go_fast(a):
@@ -24,7 +24,7 @@ print("Elapsed normal function call = %s" % (normal_diff))
 
 @jit(nopython=True, parallel=True, fastmath=True)
 def go_fast(a):  # Function is compiled and runs in machine code
-    trace = 0
+    trace = 0.
     for i in range(a.shape[0]):    # A regular loop in python works with numba
         trace += np.tanh(a[i, i])  # A numpy operation works with numba
     return a + trace               # A numpy broadcast works with numba
