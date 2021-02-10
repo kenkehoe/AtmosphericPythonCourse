@@ -5,8 +5,8 @@ import sys
 import os
 import subprocess
 ####
-from dask.distributed import Client, progress, SSHCluster
-from dask import delayed
+#from dask.distributed import Client, progress, SSHCluster
+#from dask import delayed
 
 def main():
     #Loop through obspack output directory and create a map file for each dataset
@@ -20,17 +20,17 @@ def main():
 
     for fn in file_list:
         c=cmd+" filename="+fn
-#        output+=run_shell_cmd(c)
+        output+=run_shell_cmd(c)
         
 ####Call shell cmd using delayed/compute to parallelize   
-        t+=delayed(run_shell_cmd)(c)
-    output=t.compute()
+#        t+=delayed(run_shell_cmd)(c)
+#    output=t.compute()
 
     print(output)
         
         
 ####
-    client.shutdown()
+#    client.shutdown()
 
     
     
@@ -53,10 +53,10 @@ def run_shell_cmd(cmd,printOutput=True,quitOnError=True,stdin=None):
 
 if __name__ == '__main__':
 ####Create the worker cluster to perform work
-    cluster = SSHCluster(['nimbus4','nimbus','nimbus2','nimbus3','nimbus4'],
-                         scheduler_options={"dashboard_address": ":8884"},
-                         worker_options={'nprocs': 2,'nthreads': 2})
-    client = Client(cluster)
+#    cluster = SSHCluster(['nimbus4','nimbus','nimbus2','nimbus3','nimbus4'],
+#                         scheduler_options={"dashboard_address": ":8884"},
+#                         worker_options={'nprocs': 2,'nthreads': 2})
+#    client = Client(cluster)
     
     main()
     
