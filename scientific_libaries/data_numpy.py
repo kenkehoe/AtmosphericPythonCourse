@@ -11,28 +11,28 @@ print()
 
 # Block 1
 # What is the difference between regular Python and Numpy?
-if False:
-    print(type(1))
-    print(type(1.))
-    print(type('Hello World'))
+if True:
+    print(type(1))  # Python integer
+    print(type(1.))  # Python float
+    print(type('Hello World'))  # Python string
     print()
-    print(np.array(1, dtype=np.int8).dtype)
-    print(np.array(1, dtype=np.int16).dtype)
-    print(np.array(1, dtype=np.int32).dtype)
-    print(np.array(1, dtype=np.int64).dtype)
-    print(np.array(1, dtype=int).dtype)
+    print('np.int8:', np.array(1, dtype=np.int8).dtype)  # Numpy integer of size 8 bytes
+    print('np.int16:', np.array(1, dtype=np.int16).dtype)  # Numpy integer of size 16 bytes
+    print('np.int32:', np.array(1, dtype=np.int32).dtype)  # Numpy integer of size 32 bytes
+    print('np.int64:', np.array(1, dtype=np.int64).dtype)  # Numpy integer of size 64 bytes
+    print('np.int:', np.array(1, dtype=int).dtype)  # Default Numpy integer of size 64 bytes
     print()
-    print(np.array(1, dtype=np.float16).dtype)
-    print(np.array(1, dtype=np.float32).dtype)
-    print(np.array(1, dtype=np.float64).dtype)
-    print(np.array(1, dtype=float).dtype)
+    print('np.float16:', np.array(1, dtype=np.float16).dtype)
+    print('np.float32:',np.array(1, dtype=np.float32).dtype)
+    print('np.float64:',np.array(1, dtype=np.float64).dtype)
+    print('np.float:',np.array(1, dtype=float).dtype)
     print()
-    print(np.array(1, dtype=np.bool_).dtype)
-    print(np.array(1, dtype=np.int_).dtype)
-    print(np.array(1, dtype=np.float_).dtype)
-    print(np.array(1, dtype=np.uint).dtype)
-    print(np.array(1, dtype=np.complex).dtype)
-    print(np.array('Hello World').dtype)  # <U11 means 11 charater Unicode String.
+    print('np.bool:',np.array(1, dtype=np.bool_).dtype)
+    print('np.int:',np.array(1, dtype=np.int_).dtype)
+    print('np.foat:',np.array(1, dtype=np.float_).dtype)
+    print('np.uint:',np.array(1, dtype=np.uint).dtype)
+    print('np.complex:',np.array(1, dtype=complex).dtype)
+    print('Hello World:', np.array('Hello World').dtype)  # <U11 means 11 charater Unicode String.
     print()
 
 # Block 2
@@ -150,7 +150,7 @@ if False:
 
 # Block 8
 # Let's get metadata about our arrays.
-if True:
+if False:
     a = np.arange(10)
     print('a', a, sep=": ", end="\n\n")
     print('a.shape:', a.shape)
