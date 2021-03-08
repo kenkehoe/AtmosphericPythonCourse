@@ -1,7 +1,7 @@
 # AtmosphericPythonCourse
 This is a simple and evolving class for learning Python 3.\* for use with data analysis, plotting and some other more scientific processing.
 
-To use Python for this class you will need to use Python3.7 or greater and some additional libraries. Getting these libraries installed can be trivial or sometimes can be confusing. We suggest installing Anaconda python on your computer and use Anaconda python. This will also set you up to use Python on your personal machine right away after class to start doing work.
+To use Python for this class you will need to use Python3.7 or greater and some additional libraries. Getting these libraries installed can be trivial or sometimes can be confusing. We suggest installing Anaconda python on your computer and use Anaconda python or to use the slimmed down versin Conda. This will also set you up to use Python on your personal machine right away after class to start doing work.
 
 ## Computer Setup
 We suggest you install Anaconda python on your machine. This is software that installs the latest version of Python (currently 3.7) and includes the most used additional libraries in the install so you don’t need to install them. 
