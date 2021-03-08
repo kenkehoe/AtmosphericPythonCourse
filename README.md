@@ -51,7 +51,7 @@ Enjoy and happy coding.
 You should start with the *intro_pyton/* folder, specifically the [README](https://github.com/kenkehoe/AtmosphericPythonCourse/blob/master/intro_python/README.md) page. After going through the introl PDF you should go through the three python example files (files ending in \*.py) in the *intro_python/* folder.
 
 ## Advanced Section
-Once you have a basic start to Python you can start working through the advanced libraries. Here is a suggestion for which files to review and the order. The files are designed to work by calling the python script from the command line (exampel = *> python data_numpy.py*). Each example file has blocks of code to process controld by an if statement. Just change "False" to "True" to execute those blocks of code. It is suggested to also change the previous "True" to "False" to limit the amount of information printed to the screen.
+Once you have a basic start to Python you can start working through the advanced libraries. Here is a suggestion for which files to review and the order. The files are designed to work by calling the python script from the command line (example = *> python data_numpy.py*). Each example file has blocks of code to process controld by an if statement. Just change "False" to "True" to execute those blocks of code. It is suggested to also change the previous "True" to "False" to limit the amount of information printed to the screen.
 
 If you want to revert any of these codes back to orginal state just use the git command
 ```
