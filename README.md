@@ -10,7 +10,7 @@ We suggest you install Anaconda python on your machine. This is software that in
 Go to [Anaconda](https://www.anaconda.com/distribution/) and download the latest version. Follow your normal install steps to install Anaconda on your laptop. If you have an option to also install Git please select that as well.
 
 ### Conda
-Conda is the trimmed down version of Anaconda that does not automatically install the additional libraries. This is sometimes better as only the libraries you desire are installed. It will correctly handle the library versioning. Using Conda correctly is a little more advanced, but worth the effort in the end.
+Conda is the trimmed down version of Anaconda that does not automatically install the additional libraries. This is sometimes better as only the libraries you desire are installed. It will correctly handle the library versioning. Using Conda correctly is a little more advanced, but worth the effort in the end. Some notes on using Conda are in **conda/README.md**.
 
 ## Clone the repo
 You will need to use the revision control software Git to download the class materials. This should be an optional install as part of Anaconda or you may need to install it separately. 
