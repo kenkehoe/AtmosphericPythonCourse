@@ -1,5 +1,3 @@
-# This basic conda environment 
-
 # Name of the environment. We can also enter on command line during creation process, buy
 # why require more typing?
 name: AtmPyCourse
@@ -23,6 +21,7 @@ dependencies:
   - pint
   - scipy
   - numpy
+  - numba
 # This part allows install using pip. Since we can get all the libraries from conda-forge we need
 # it is currently commented out.
 #- pip:
