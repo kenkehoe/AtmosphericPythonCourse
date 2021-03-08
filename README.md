@@ -4,9 +4,13 @@ This is a simple and evolving class for learning Python 3.\* for use with data a
 To use Python for this class you will need to use Python3.7 or greater and some additional libraries. Getting these libraries installed can be trivial or sometimes can be confusing. We suggest installing Anaconda python on your computer and use Anaconda python or to use the slimmed down versin Conda. This will also set you up to use Python on your personal machine right away after class to start doing work.
 
 ## Computer Setup
-We suggest you install Anaconda python on your machine. This is software that installs the latest version of Python (currently 3.7) and includes the most used additional libraries in the install so you don’t need to install them. 
+### Anaconda
+We suggest you install Anaconda python on your machine. This is software that installs the latest version of Python (currently 3.8) and includes the most used additional libraries in the install so you don’t need to install them. 
 
 Go to [Anaconda](https://www.anaconda.com/distribution/) and download the latest version. Follow your normal install steps to install Anaconda on your laptop. If you have an option to also install Git please select that as well.
+
+### Conda
+Conda is the trimmed down version of Anaconda that does not automatically install the additional libraries. This is sometimes better as only the libraries you desire are installed. It will correctly handle the library versioning. Using Conda correctly is a little more advanced, but worth the effort in the end.
 
 ## Clone the repo
 You will need to use the revision control software Git to download the class materials. This should be an optional install as part of Anaconda or you may need to install it separately. 
