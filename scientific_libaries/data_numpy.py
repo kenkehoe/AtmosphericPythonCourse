@@ -44,7 +44,8 @@ if False:
     print('type(b):', type(b))  # Get type of b
     print('type(b[0]):', type(b[0]))  # Get type of index 0 of b
     print('b.dtype:', b.dtype)
-#    print('a.dtype:', a.dtype)  # a.dtype will not work. dtype is numpy only.
+    if False:
+        print('a.dtype:', a.dtype)  # a.dtype will not work. dtype is numpy only.
     print('a:', a)
     print('b:', b)
 
@@ -60,26 +61,29 @@ if False:
     a = list(range(0, num))
     for ii in a:
         a[ii] = a[ii] + 1
+    python_time = time.time() - start_time
+    print(f"Elapsed Time with for loop: {python_time} seconds\n")
+    del a
 
     # We can do the same thing with list comprehension to be a little
     # faster but it's still no match for speed of Numpy.
-#    a = [a[ii] + 1 for ii in a]
+    start_time = time.time()  # This is to get the time of execution
+    a = list(range(0, num))
+    a = [a[ii] + 1 for ii in a]
 
     python_time = time.time() - start_time
-    print(f"Elapsed Time: {python_time}  seconds")
-    print()
+    print(f"Elapsed Time with list comprehension: {python_time} seconds\n")
     del a
 
-    print(f"Using numpy to do same operation using Numpy arrays with {num} values.")
     start_time = time.time()  # This is to get the time of execution
 
     # Here we create a new array and add 1 to each element
     a = np.arange(num, dtype=np.int16) + 1
 
     numpy_time = time.time() - start_time
-    print(f'Elapsed Time: {numpy_time}  seconds')
+    print(f'Elapsed Time with numpy: {numpy_time} seconds')
 
-    print(f"\nRation of native python/numpy: {python_time/numpy_time}")
+    print(f"\nRatio of native python/numpy: {python_time/numpy_time}")
 
 # Block 4
 # Can you swith between regular Python and numpy?
@@ -123,7 +127,9 @@ if False:
     print()
 
 # Block 6
-# Let's start making larger arrays without needing to type all the values
+# Let's start making larger arrays without needing to type all the values.
+# All of this is also possible with python lists, but here we are doing this
+# in numpy space not native python space.
 if False:
     a = np.array(range(10))  # Converts the list range function to numpy array
     b = np.arange(10)  # Creates the numpy array directly and faster
@@ -138,6 +144,7 @@ if False:
 
 # Block 7
 # Let's select values from our arrays
+# All arrays are zero based. So first index is 0
 if False:
     a = np.arange(10)
     print('a:', a)
@@ -145,14 +152,14 @@ if False:
     print('a[0:]:', a[3:])  # selects everthing from 3 to end of array
     print('a[:5]:', a[:5])  # selects to upto but not including index 5
     print('a[3:5]:', a[3:5])  # selects from 3 upto but not including index 5
-    print('a[0:-1]:', a[:-1])  # selects upto but not including index 5
+    print('a[0:-1]:', a[:-1])  # selects upto but not including index 9
     print('a[0:100]:', a[0:100])  # index is past end of array?!?
 
 # Block 8
 # Let's get metadata about our arrays.
 if False:
     a = np.arange(10)
-    print('a', a, sep=": ", end="\n\n")
+    print('a:', a)
     print('a.shape:', a.shape)
     print('a.size:', a.size)
     print('len(a):', len(a))
@@ -181,13 +188,13 @@ if False:
 # Block 9
 # Let's create some more complicated arrays
 if False:
-    a = np.zeros((2, 2))    # Create an array of all zeros
+    a = np.zeros((2, 2))    # Create an array of all zeros. Notice defaults to type float
     print('a:\n', a)
 
-    b = np.ones((2, 2))    # Create an array of all ones
+    b = np.ones((2, 2), dtype=int)    # Create an array of all ones
     print('\nb:\n', b)
 
-    c = np.full((2, 2), 7, dtype=int)   # Create a constant array
+    c = np.full((2, 2), 7, dtype=np.int16)   # Create a constant array
     print('\nc:\n', c)
 
     d = np.eye(3)           # Create a 3x3 identity matrix
@@ -205,15 +212,20 @@ if False:
     a = a + 1.0  # Note how it upconverted from int to float
     print('\na:', a)
 
+    # Here we change the data type of the entire array from float to int
     a = a.astype(int)
     print('\na:', a)
 
+    # Here we add a value to a subset of the array
     a[3:8] = a[3:8] + 10
     print('\na:', a)
 
+    # Here we determine the size of the a array and use that as a constant
+    # to add to all values in the array.
     a = a + np.arange(a.size)
     print('\na:', a)
 
+    # here we use shorthand notiation to add a constant to every value in the array
     a += 1000
     print('\na:', a)
 
@@ -221,8 +233,8 @@ if False:
 # Let's start to work with booleans
 if False:
 
-    a = [False, True]
-    b = np.array([False, True])
+    a = [False, True]  # A list of two booleans
+    b = np.array([False, True])  # A vector of two numpy booleans
     print('a:', a, type(a))
     print('b:', b, type(b))
     print()
@@ -235,8 +247,8 @@ if False:
     print('bool_idx:', bool_idx)
     print('type(bool_idx):', type(bool_idx))
     print('bool_idx.dtype:', bool_idx.dtype)
-    print('c[bool_idx]: ', c[bool_idx])
-    print('c[c > 4]:    ', c[c > 4])
+    print('c[bool_idx]: ', c[bool_idx])  # Can use the bool vector to subset
+    print('c[c > 4]:    ', c[c > 4])  # Can use the index array right in the brackets
     print()
 
     # Finde where c is great than 6 and set to -1
@@ -247,16 +259,17 @@ if False:
 
     d = np.arange(c.size, dtype=int) + 10
     print('d:', d)
-    d[c > 3] = -2
+    d[c > 3] = -2  # Where a different vector is greater than 3 set to -2
     print('d:', d)
     print()
 
     # Find index numbers where c is great than or equal to 2
     e = np.where(c >= 2)
     print('e:', e)
+    print('type(e):', type(e))  # Notice this is a tuple of numpy arrays
     print('c >= 2:', c >= 2)
-    print('type(e):', type(e))
     print('e[0]:', e[0])
+    print('type(e[0]:', type(e[0]))
     print('c[e]:', c[e])
     print()
 
@@ -273,8 +286,8 @@ if False:
 if False:
 
     print(np.nan)
-    print(type(np.nan))
-    print(10.0 * np.nan)
+    print(type(np.nan))  # Python type says is of type float
+    print(10.0 * np.nan)  # Anything times NaN is NaN
     print(11 + np.nan, 12 - np.nan, 13 * np.nan, 14 / np.nan)
 
     # Initially create an integer array. But we will see that it needs to be a float.
@@ -446,7 +459,7 @@ if False:
         print('b.shape:', b.shape)
         print('b:\n', b)
 
-    c = a + b  # Add v to each row of x using broadcasting
+    c = a + b  # Add b to each row of a using broadcasting
     print('\nc:\n', c)
 
 # Block 17
@@ -454,6 +467,8 @@ if False:
 if False:
     # First create a numpy array
     a = np.array([0, 1, 2, 3, 4, 5])
+    print('a:', a)
+    print('np.mean(a):', np.mean(a))
     # Next create a numpy masked array and set the mask values.
     # A 0 = False and 1 = True
     masked_a = ma.masked_array(a, mask=[False, False, True, False, True, True])
@@ -570,6 +585,9 @@ if False:
 # Because we will work with time series data let's learn about Python datetime objects.
 # This is so we understand how the native time works with Python. We will then
 # learn about Numpy dates and times.
+#
+# Python datetime is timezone unaware as default but does have the ability to work
+# with timezones. Numpy datetime64 can not use timezones.
 if False:
     a = datetime.datetime.now()
     print('datetime.datetime.now():', a)
@@ -666,6 +684,7 @@ if False:
     # as difference in days not a datetime64 value.
     dt_diff1 = np.datetime64('2009-01-01') - np.datetime64('2008-01-01')
     print('\ndt_diff1:', dt_diff1)
+    print('type(dt_diff1):', type(dt_diff1))
 
     # I can add to a value with a timedelta64
     dt_diff2 = np.datetime64('2011-06-15T00:00') + np.timedelta64(12, 'h')
@@ -681,10 +700,8 @@ if False:
     # precions I want to make the range step how I want.
     dt4 = np.arange('2005-02-01T00:00:00', '2005-02-05T00', dtype='datetime64[D]')
     print('\ndt4:', dt4)
-    print("\ndt4 + 23:", dt4 + 23)
 
     # Since dt4 is in Day precision adding an int to it adds a that in Days
-    print("\ndt4:", dt4)
     dt4 = dt4 + 23
     print("\ndt4 + 23:", dt4)
 
