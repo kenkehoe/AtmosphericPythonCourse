@@ -18,7 +18,7 @@ We can now start using the envornment we created
 
 `> conda activate AtmPyCourse`
 
-If we search to see what installment of Python we will use from the command line we will see it's the one we just downloaded and installed.
+If we search to see what installment of Python we will use from the command line we will see it's the one we just downloaded and installed. It is in the base Conda area and self contained in a directory with the name we gave in environment.yml file _AtmPyCourse_. There is no limit to the number of different Conda environments we can create and install. If we have a second environment using the same Python, Conda will reuse the Python code on the computer to save space but the environments will be separate instances that can not interfere with each other.
 
 ```
 > which python
