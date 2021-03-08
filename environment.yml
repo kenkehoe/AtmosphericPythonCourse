@@ -1,0 +1,29 @@
+# This basic conda environment 
+
+# Name of the environment. We can also enter on command line during creation process, buy
+# why require more typing?
+name: AtmPyCourse
+
+# This is a list of channels that conda will search for the libraries. Will start at the 
+# top and if does not find will check next listing. Here we list conda-forge first and then
+# it will check the Conda default next, most likely PyPi
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - pip  # We install pip because some libraries are not at conda-forge
+  - python=3.8  # Here we specify the major and micro version but not minor.
+  - matplotlib=3  # Here we speicify just the major level
+  - pandas
+  - numpy
+  - scipy
+  - xarray
+  - dask
+  - pint
+  - scipy
+   - numpy
+# This part allows install using pip. Since we can get all the libraries from conda-forge we need
+# it is currently commented out.
+#- pip:
+#    - astral==2.2
