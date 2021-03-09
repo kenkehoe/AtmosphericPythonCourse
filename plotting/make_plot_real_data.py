@@ -214,7 +214,7 @@ if True:
 
     # Format the x-axis to show hour and minutes only.
     # ---- (1) ---- #
-    if True:
+    if False:
         myFmt = mdates.DateFormatter('%H:%M')
         axes.xaxis.set_major_formatter(myFmt)
 
