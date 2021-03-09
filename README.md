@@ -69,7 +69,7 @@ This will overwrite your current file with any changes to the one stored in the 
 * Advanced [pathlib.Path](https://realpython.com/python-pathlib/) = **cool_stuff/path_stuff.py**
 * [Saving data with Numpy](https://www.geeksforgeeks.org/numpy-save/) = **cool_stuff/data_save.py**
 * Using Python Collections extension for basic data structures = **cool_stuff/collections.py**
-* Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libraries/data_data.py**
+* Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libaries/data_dask.py**
 * Creating multiprocessing child processes for faster concurrentcy = **cool_stuff/data_multiprocessing.py**
 * Tip of the iceberg with regular expressions = **cool_stuff/regular_expression.py**
 
