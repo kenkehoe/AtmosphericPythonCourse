@@ -9,27 +9,29 @@ register_matplotlib_converters()
 
 # Block 1
 if True:
-    # Create some data in a dictionary.
+    # Create some data in a python dictionary.
     data = {'apples': [3, 2, 0, 1],
             'oranges': [0, 3, 7, 2]}
     # Use the dictionary to populate the new pandas data frame
     purchases = pd.DataFrame(data)
 
-    print(type(purchases))  # Pandas DataFrame consisting of Series
-    print(type(purchases.apples))  # Pandas Series
+    print('type(purchases):', type(purchases))  # Pandas DataFrame consisting of Series
+    print('type(purchases.apples):', type(purchases.apples))  # Pandas Series
     print()
 
-    print(purchases)
+    print('purchases:\n', purchases)
     print()
 
     # Add an index to label the rows of the DataFrame
     purchases = pd.DataFrame(data, index=['June', 'Robert', 'Lily', 'David'])
 
-    print(purchases)
+    print('purchases:\n', purchases)
+    print()
+    print('purchases.apples:\n', purchases.apples)
     print()
 
     # Extract a row using the index name
-    print(purchases.loc['June'])
+    print("purchases.loc['June']:\n", purchases.loc['June'])
     print()
 
 # Block 2
@@ -42,25 +44,26 @@ if False:
     print('a.index:', a.index)
     print('a.values:', a.values)
     print('type(a.values):', type(a.values))
-    print()
 
     # Using two lists create a pandas Series
     fruits = ['apples', 'oranges', 'cherries', 'pears']
     quantities = [20, 33, 52, 10]
     b = pd.Series(quantities, index=fruits)
-    print('b:')
+    print('\nb:')
     print(b)
 
     # Using one list create a new series but reuse the fruits list for the index.
     c = pd.Series([17, 13, 31, 32], index=fruits)
+    print('\nc:')
+    print(c)
+
     d = b + c
     print('\nd:')
     print(d)
 
+    # Create two new series with new data and different indexes.
     fruits = ['peaches', 'oranges', 'cherries', 'pears']
     fruits2 = ['raspberries', 'oranges', 'cherries', 'pears']
-
-    # Create two new series with new data and different indexes.
     S = pd.Series([20, 33, 52, 10], index=fruits)
     S2 = pd.Series([17, 13, 31, 32], index=fruits2)
 
@@ -113,7 +116,7 @@ if False:
 
     # We can use methods to return a boolean array indicating where that condition
     # is true/false.
-    print(data.isnull())  
+    print(data.isnull())
     # print(data.notnull())  # Same idea but get revers of the values.
     print()
 
@@ -152,20 +155,22 @@ if False:
         # method called .plot but on the data object. This is very common in Python.
         # It's a wrapper around matplotlib using Pandas.
         data.plot(x='TIMESTAMP', y='Temp_C_Avg')
+        plt.show()
 
         # We can make two different plots with another call to plot. But notice how
         # this creats a whole new plot, not adding to the existing plot. This is how
         # using the same call is different when called from matplotlib vs. pandas.
         if False:
             data.plot(x='TIMESTAMP', y='Temp_C_Std')
-        plt.show()
+            plt.show()
 
     if False:
         # To get the two data seris plotted on the same plot we need to follow
         # the pandas plotting rules.
         axes = plt.gca()  # Set up the plottin axes
         # Now plot the data and tell pandas to put the plot on the existing axes.
-        # Also notice how there is a legend, but we did't say make a legend.
+        # Also notice how there is a legend, but we did't say make a legend. Panda's
+        # defaults may be different than matplotlib defaults.
         data.plot(x='TIMESTAMP', y='Temp_C_Avg', ax=axes)
         data.plot(x='TIMESTAMP', y='Temp_C_Std', ax=axes)
         plt.show()
@@ -209,7 +214,7 @@ if False:
     # Extract the RH series from the DataFrame. This is a copy of the Series in the 
     # DataFrame so changing the values will not change the values in the DataFrame.
     rh = data['RH_Avg']
-    # print(type(rh))
+    print(type(rh))
 
     # Calculate a rolling mean over the Series using 10 points.
     # Notice the first 8 values are NaN. There is a default number of values to use
@@ -217,6 +222,7 @@ if False:
     if False:
         rh_rolling_mean = rh.rolling(10).mean()
         print(rh_rolling_mean)
+
     if False:
         # By specifically stating the minimum number of points to use when calculating
         # the mean we force it to not fill in so many NaNs. There is at least one value
@@ -226,16 +232,16 @@ if False:
         print(rh_rolling_mean)
 
     if False:
-        # Set a range of values in our extracted to NaN to represent missing data.
+        # Set a range of values in our extracted data to NaN to represent missing data.
         rh[20:30] = np.nan
         # Calculate a rolling mean.
         rh_rolling_mean = rh.rolling(10, min_periods=2).mean()
         print(rh_rolling_mean)
 
         # And once again we can make a plot but this time we can use matplotlib
-        # directory but extracting the time and data from the Pandas DataFrame.
+        # directly by extracting the time and data from the Pandas DataFrame.
         # Notice that the two data we are plotting are Pandas Datasets. Matplotlib
-        # handles those just fine.
+        # handles those just fine. Alos notice there is no legend by default.
         if False:
             plt.plot(data['TIMESTAMP'], rh)
             plt.plot(data['TIMESTAMP'], rh_rolling_mean, color='red')
