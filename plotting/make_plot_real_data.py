@@ -13,7 +13,7 @@ register_matplotlib_converters()
 # Block 1
 # Read in one netCDF data file. Look at the default vs. optional for
 # scalar variables.
-if True:
+if False:
     # Just setting a default value to be careful
     extraction = None
 
@@ -33,9 +33,9 @@ if True:
 #    extraction = list(met_ds.data_vars)  # Returns just a list of names. Automagic stuff.
 #    extraction = met_ds['atmos_pressure']  # just one variable from Dataset
 ##    np.set_printoptions(threshold=sys.maxsize)  # This will allow us to see all the values.
-#    extraction = met_ds['atmos_pressure'].data  # Get the numpy data array
+#    extraction = met_ds['atmos_pressure'].values  # Get the numpy data array
 #    extraction = type(met_ds['atmos_pressure'].values)
-#    extraction = met_ds['atmos_pressure'].values  # This is getting the Dask array.
+#    extraction = met_ds['atmos_pressure'].data  # This is getting the Dask array.
 #    extraction = met_ds['atmos_pressure'].attrs  # This gets the variable attributes
 #    extraction = met_ds['atmos_pressure'].attrs['long_name']  # This gets the value of one attribute.
 
@@ -47,6 +47,7 @@ if True:
 #    except KeyError:
 #        print(('\nCaught the error for "{var_name}" and am now executing the print statement'
 #              ' under the except.\n').format(var_name='atmos_pressure'))
+#        exit()
 
     print(extraction)
 
@@ -85,7 +86,8 @@ if False:
     filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.*.cdf')
     # The filename glob is understood by open_mfdataset() and correctly grabs all
     # the files that match the file glob. We also tell it what dimention we want to
-    # concatinate along.
+    # concatinate along. Using parallel=True allows it to use multiple cores for
+    # reading the data. This may depend on your machine and number of cores available.
     met_ds = xr.open_mfdataset(str(filename), combine='by_coords',
                                concat_dim='time')#, parallel=True)
 
@@ -103,7 +105,8 @@ if False:
         # Now that we have done somethign to the Xarray object lets write it to disk.
         # When you look at the file notice the number of time samples and missing
         # variables. Also notice that it is slightly different with _FillValue attribute
-        # used instead of missing_value and the use of NaNs for missing values.
+        # used instead of missing_value and the use of NaNs for missing values. Xarray
+        # has some defaults that may be different than the data files you initially read.
         # # ncdump -t our_written_file.nc | less
         met_ds.to_netcdf(path='our_written_file.nc', mode='w', format='NETCDF4')
 
@@ -155,7 +158,7 @@ if False:
 # Lets pause with Xarray plotting and start with the true library that is making
 # the plot, matplotlib. Once we understand what is going on underneath we can
 # make the plots we want with the same/similar calls with Xarray.
-if False:
+if True:
     # Read data file
     filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191104.000000.cdf'))
     met_ds = xr.open_dataset(filename)
@@ -204,14 +207,14 @@ if False:
     fig, axes = plt.subplots()
 
     # Now make the plot by extracting the time and data from object.
-    # matplotlib is smart enough to extract what it needs if you pass it the dataarray
+    # matplotlib is smart enough to extract what it needs if you pass it the Xarray DataArray
     # instead of a numpy array.
     line1_color = 'blue'
     line1 = axes.plot(met_ds['time'], met_ds[var_name], label='Temperature', color=line1_color)
 
     # Format the x-axis to show hour and minutes only.
     # ---- (1) ---- #
-    if True:
+    if False:
         myFmt = mdates.DateFormatter('%H:%M')
         axes.xaxis.set_major_formatter(myFmt)
 
