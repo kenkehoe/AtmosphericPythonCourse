@@ -13,7 +13,7 @@ register_matplotlib_converters()
 # Block 1
 # Read in one netCDF data file. Look at the default vs. optional for
 # scalar variables.
-if False:
+if True:
     # Just setting a default value to be careful
     extraction = None
 
@@ -158,7 +158,7 @@ if False:
 # Lets pause with Xarray plotting and start with the true library that is making
 # the plot, matplotlib. Once we understand what is going on underneath we can
 # make the plots we want with the same/similar calls with Xarray.
-if True:
+if False:
     # Read data file
     filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191104.000000.cdf'))
     met_ds = xr.open_dataset(filename)
@@ -291,8 +291,7 @@ if True:
     # ---- (8) ---- #
     # And the most important part of all, a title.
     if False:
-        axes.set_title(('An amazing plot of Temp. and RH. '
-                        'on {}').format(first_time.astype('datetime64[D]')))
+        axes.set_title((f"An amazing plot of Temp. and RH. on {first_time.astype('datetime64[D]')}"))
 
     # ---- (9) ---- #
     if False:
