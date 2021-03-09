@@ -91,8 +91,8 @@ if False:
     # directories all at once.
     new_dirs.mkdir(parents=True, exist_ok=True)
 
-    # Add a thrid level directory. Both use exist_ok to do nothing if the
-    # directory already exists. Else there will be an error.
+    # Add a thrid level directory. Use exist_ok to do nothing if the
+    # directory already exists. Otherwise there will be an error.
     add_dir = new_dirs.joinpath("three")
     add_dir.mkdir(exist_ok=True)
 
@@ -123,7 +123,7 @@ if False:
         new_file2.replace(new_file3)
 
     if False:
-        # Delete a file. Not it will not ask if you are sure so be careful.
+        # Delete a file. Note, it will not ask if you are sure, so be careful.
         new_file.unlink()
 
         # Delete a directory. The directory needs to be empty. It will not ask
