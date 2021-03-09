@@ -63,7 +63,7 @@ This will overwrite your current file with any changes to the one stored in the 
 * Plotting with [matplotlib](https://matplotlib.org/)  = **plotting/make_plot.py**
 * [Pandas](https://pandas.pydata.org/pandas-docs/stable/) - To store/read data and use some powerful tools with the data = **scientific_libaries/data_pandas.py**
 * [Xarray](http://xarray.pydata.org/en/stable/) - To store/read data and use some powerful tools with the data over 1-D dimensionality = **scientific_libaries/data_xarray.py**
-* Advanced plotting with matplotlib (also use Pandas and Xarray wrapper around matplotlib) = **scientific_libaries/make_plot_real_data.py**
+* Advanced plotting with matplotlib (also use Pandas and Xarray wrapper around matplotlib) = **plotting/make_plot_real_data.py**
 * Advanced Xarray to start working with data and perform analysis = **scientific_libaries/data_xarray_2.py**
 * Metadata with [JSON](https://developers.squarespace.com/what-is-json) and [YAML](https://blog.stackpath.com/yaml/) = **metadata/use_json.py** & **metadata/use_yaml.py**
 * Advanced [pathlib.Path](https://realpython.com/python-pathlib/) = **cool_stuff/path_stuff.py**
