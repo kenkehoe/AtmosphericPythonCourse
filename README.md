@@ -48,7 +48,7 @@ Enjoy and happy coding.
 
 # Class Notes
 ## Intro Section
-You should start with the *intro_pyton/* folder, specifically the [README](https://github.com/kenkehoe/AtmosphericPythonCourse/blob/master/intro_python/README.md) page. After going through the introl PDF you should go through the three python example files (files ending in \*.py) in the *intro_python/* folder.
+You should start with the *intro_pyton/* folder, specifically the [README](https://github.com/kenkehoe/AtmosphericPythonCourse/blob/master/intro_python/README.md) page. After going through the intro PDF you should go through the three python example files (files ending in \*.py) in the *intro_python/* folder.
 
 ## Advanced Section
 Once you have a basic start to Python you can start working through the advanced libraries. Here is a suggestion for which files to review and the order. The files are designed to work by calling the python script from the command line (example = *> python data_numpy.py*). Each example file has blocks of code to process controld by an if statement. Just change "False" to "True" to execute those blocks of code. It is suggested to also change the previous "True" to "False" to limit the amount of information printed to the screen.
@@ -66,7 +66,7 @@ This will overwrite your current file with any changes to the one stored in the 
 * Advanced plotting with matplotlib (also use Pandas and Xarray wrapper around matplotlib) = **plotting/make_plot_real_data.py**
 * Advanced Xarray to start working with data and perform analysis = **scientific_libaries/data_xarray_2.py**
 * Metadata with [JSON](https://developers.squarespace.com/what-is-json) and [YAML](https://blog.stackpath.com/yaml/) = **metadata/use_json.py** & **metadata/use_yaml.py**
-* Advanced [pathlib.Path](https://realpython.com/python-pathlib/) = **cool_stuff/path_stuff.py**
+* Handling paths and filepaths [pathlib.Path](https://realpython.com/python-pathlib/) = **cool_stuff/path_stuff.py**
 * [Saving data with Numpy](https://www.geeksforgeeks.org/numpy-save/) = **cool_stuff/data_save.py**
 * Using Python Collections extension for basic data structures = **cool_stuff/collections.py**
 * Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libaries/data_dask.py**
