@@ -68,7 +68,9 @@ if False:
     # You will not see all possible arguments in the function defintion because
     # the the kwargs are passed to sub-routines as well. So you may need to
     # dig a bit to get the argument you need.
-    plt.subplot(2, 1, 1)  # subplot(nrows, ncols, index, **kwargs)
+    nrows = 2
+    ncols = 1
+    plt.subplot(nrows, ncols, 1)  # subplot(nrows, ncols, index, **kwargs)
 
     # Plot the data using large plotting symbol and a line connecting
     # the symbols. It will default to use black for axes and blue for
@@ -76,14 +78,14 @@ if False:
     plt.plot(x1, y1, 'o-')
 
     # Now we add a title to the plot.
-    plt.title('A tale of 2 subplots')
+    plt.title('A tale of two subplots')
 
     # And add a y-axis because we are scientists! But no x-lable, yet.
     plt.ylabel('Damped oscillation')
 
     # Now we switch to the second plot. So all following calls go to
     # second plotting area.
-    plt.subplot(2, 1, 2)
+    plt.subplot(nrows, ncols, 2)
 
     # Make a plot using small symbols and dashed line. Also we choose to
     # use green for plot
@@ -121,17 +123,17 @@ if False:
     # have tick marks and lables.
     fig, axes = plt.subplots()
 
-    # the histogram of the data
+    # Plot the histogram of the data
     n, bins, patches = axes.hist(x, num_bins, density=1)
 
-    # add a 'best fit' line
+    # add a 'best fit' line to the plot
     y = (1 / (np.sqrt(2 * np.pi) * sigma)) * np.exp(-0.5 * (1 / sigma * (bins - mu)) ** 2)
     axes.plot(bins, y, '--')
     axes.set_xlabel('Smarts')
     axes.set_ylabel('Probability density')
 
     # The 'r' at the start of a string means regular expression. This forces
-    # the string to be exactly as it is listed in memory.' The specail
+    # the string to be exactly as it is listed in memory. The specail
     # characters are used as escape sequences to set Greek letters.'
     axes.set_title(r'Histogram of IQ: $\mu=100$, $\sigma=15$')
 
@@ -156,16 +158,19 @@ if False:
     # with each element being a list of lenght two. This means we can make
     # each plot or update each plot by referencing the axes. Start at upper
     # left. [row, column] Axes is the plot, axis is the x and y axis.
+    print('fig:', fig)
     print('axes:\n', axes)
     print('type(axes):', type(axes))
     axes[0, 0].hist(data[0])  # Histogram of one slice of the 2-D array.
-    axes[1, 0].scatter(data[0], data[1])  # Scatter of 1 slice vs. other slice
-    axes[0, 1].plot(data[0], data[1])  # Plot of 1 slice with other as axis
+    axes[1, 0].scatter(data[0], data[1], color='green')  # Scatter of 1 slice vs. other slice
+    axes[0, 1].plot(data[0], data[1], color='purple')  # Plot of 1 slice with other as axis
     axes[1, 1].hist2d(data[0], data[1])  # 2 dimentional histogram
 
     plt.show()
 
 # Block 6
+# This is complicated so don't worry about details. Just look at the big
+# picture of this plot.
 if False:
     # Some constants. Make these smaller to increase the resolution.
     dx, dy = 0.05, 0.05
@@ -173,7 +178,6 @@ if False:
     # generate two 2-D grids for the x & y bounds. Don't worry much about this
     # it is just to make some data to plot.
     y, x = np.mgrid[slice(1, 5 + dy, dy), slice(1, 5 + dx, dx)]
-
     z = np.sin(x) ** 10 + np.cos(10 + y * x) * np.cos(x)
 
     # x and y are bounds, so z should be the value *inside* those bounds.
