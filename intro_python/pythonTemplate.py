@@ -9,12 +9,26 @@ import argparse
 
 
 def main():
-    """[docstring/purpose of this script]"""
-    print("Spam & eggs")
-
+    """[docstring/purpose 
+    of this script]"""
     args=parse_arguments()
-    print(args.optionalArg)
-    if args.secondOptionalArg : print(args.secondOptionalArg*2)
+    print("Required arg: ",args.requiredArg)
+
+    if args.optionalArg : 
+        print("Optional: ",args.optionalArg)
+        
+    if args.secondOptionalArg : 
+        print("2nd Optional: ",args.secondOptionalArg)
+        increment_number(args.secondOptionalArg)
+  
+
+
+def increment_number(n):
+    try:
+        n=n+1
+        print("Incremented: ",n)
+    except TypeError:
+        print("Can't add to %s" % (type(n)))
 
 
 def parse_arguments():
@@ -26,7 +40,7 @@ def parse_arguments():
 
     parser.add_argument("requiredArg")
     parser.add_argument("-o", "--optionalArg",
-                        default='spam',
+                        default='',
                         help='This is an optional argument'
                         )
     parser.add_argument("-s", "--secondOptionalArg",

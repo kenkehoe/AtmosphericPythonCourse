@@ -69,7 +69,8 @@ def read_site_data(filename, retained):
                 if not label:
                     label = "Retained " if retained else ""
                     label += "CO2 data from "+site
-
+        
+        #Return a tuple of label, dates and values
         return (label, sample_dates, values)
 
     except FileNotFoundError:
@@ -81,8 +82,8 @@ def read_site_data(filename, retained):
 def parse_arguments():
     """Configure and return command line arguments"""
     parser = argparse.ArgumentParser(
-            description="A description for this script",
-            epilog="An epilog for the help"
+            description="Plot data in passed file",
+            epilog="Ex: ./siteData.py -r data/co2_alt_surface-flask_1_ccgg_event.txt"
             )
 
     parser.add_argument("filename")
