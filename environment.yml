@@ -22,6 +22,7 @@ dependencies:
   - scipy
   - numpy
   - numba
+  - act-atmos
 # This part allows install using pip. Since we can get all the libraries from conda-forge we need
 # it is currently commented out.
 #- pip:
