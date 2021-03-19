@@ -1,0 +1,3 @@
+One of the great aspects of Python is the large code base already available by other developers. For more specific software taylored to scientific diciplins we can use some thrid party libraries availble from PyPi or conda-forge. These are librareis built and maintainted with open-source practices and available for use through the same installation process as the regular scientific libraries.
+
+For example [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) is a library designed to make reading, quality control, and plotting much more simple with atmospheric science data. Radar data analysis and plotting is made more simple with the [PyART](https://arm-doe.github.io/pyart/) library.
