@@ -13,13 +13,14 @@ if True:
     # Make a file path to data file to read. Notice how we create the path using
     # pathlib but need to convert it to a standard string using str(). Xarray
     # does not currently work with pathlib.
-    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf'))
+    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.*.cdf'))
 
     if True:
         # Using Xarray we can read one file using .open_dataset() method or if there are
         # more than one file to read the .open_mfdataset() method. Instead of needing to
         # know the details of xarray reading methods, we can just use the ACT method which
-        # is a wrapper arround .open_mcdataset()
+        # is a wrapper arround .open_mcdataset(). Notice how the filename uses a * character
+        # to allow us to read all files matching in the directory.
         met_ds = act.io.armfiles.read_netcdf(filename)
         print(met_ds)
 
@@ -52,14 +53,12 @@ if True:
         print(met_ds)
 
 
-# ARM uses an older format for quality control. We can convert the embedded QC to follow
+# ARM uses an older format for embedded quality control. We can convert the embedded QC to follow
 # CF format for use with other tools.
 if False:
-    # Make a file path to data file to read. Notice how we create the path using
-    # pathlib but need to convert it to a standard string using str(). Xarray
-    # does not currently work with pathlib.
-    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf'))
-    met_ds = act.io.armfiles.read_netcdf(filename)
+    # Make a file path to data file to read.
+    filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf')
+    met_ds = act.io.armfiles.read_netcdf(str(filename), drop_variables=['base_time', 'time_offset'])
     print(met_ds['qc_atmos_pressure'])
 
     # Call the cleanup method to go through each quality control variable and update
@@ -68,6 +67,13 @@ if False:
     # from the data variable to the quality control varible using CF standard linking.
     met_ds.clean.cleanup()
     print("\n", met_ds['qc_atmos_pressure'])
+
+    # After cleaning up the quality control variables we can write the file to a
+    # netCDF file. We can call the Xarray to_netcdf() method directly, or use the ACT
+    # method which will cleanup a few things to make the file match CF and add the
+    # CF-1.8 string to the Conventions global attribute.
+    print(f"Writing file: {filename.name}")
+    met_ds.write.write_netcdf(path=str(filename.name))
 
 
 if False:
