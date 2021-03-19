@@ -72,6 +72,7 @@ This will overwrite your current file with any changes to the one stored in the 
 * Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libaries/data_dask.py**
 * Creating multiprocessing child processes for faster concurrentcy = **cool_stuff/data_multiprocessing.py**
 * Tip of the iceberg with regular expressions = **cool_stuff/regular_expression.py**
+* Reading, QC, formatting, plotting with [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) = **third_part_libraries/ACT.py**
 
 ## Standard Style
 It is not required but we will encourage using a standard syntax for our code. All the example codes will use [pep8](https://www.python.org/dev/peps/pep-0008/). Your code will run without following this formatting standard, but for sharing the code with others getting used to a standard format will make everyone’s life better.
