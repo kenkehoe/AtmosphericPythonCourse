@@ -1,0 +1,104 @@
+#! /usr/bin/env python3
+
+import numpy as np
+import xarray as xr
+from pathlib import Path
+import act
+import matplotlib.pyplot as plt
+import matplotlib
+
+
+# First things first. Let's read some data
+if True:
+    # Make a file path to data file to read. Notice how we create the path using
+    # pathlib but need to convert it to a standard string using str(). Xarray
+    # does not currently work with pathlib.
+    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf'))
+
+    if True:
+        # Using Xarray we can read one file using .open_dataset() method or if there are
+        # more than one file to read the .open_mfdataset() method. Instead of needing to
+        # know the details of xarray reading methods, we can just use the ACT method which
+        # is a wrapper arround .open_mcdataset()
+        met_ds = act.io.armfiles.read_netcdf(filename)
+        print(met_ds)
+
+    if False:
+        # If the file does not exist xarray will through an error. But ACT can be told to
+        # not throw an error but return none instead.
+        filename2 = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.cdf'))
+        met_ds = act.io.armfiles.read_netcdf(filename2, return_None=True)
+        print(met_ds)
+
+    if False:
+        # All the keywords accepted by .open_mfdataset() can be passed into the ACT
+        # reader.
+        drop_vars = ['base_time', 'time_offset', 'temp_mean', 'qc_temp_mean',
+                     'temp_std', 'rh_mean', 'qc_rh_mean', 'rh_std', 'vapor_pressure_mean',
+                     'qc_vapor_pressure_mean', 'vapor_pressure_std', 'wspd_arith_mean',
+                     'qc_wspd_arith_mean', 'wspd_vec_mean', 'qc_wspd_vec_mean', 'wdir_vec_mean',
+                     'qc_wdir_vec_mean', 'wdir_vec_std', 'tbrg_precip_total',
+                     'qc_tbrg_precip_total', 'tbrg_precip_total_corr',
+                     'qc_tbrg_precip_total_corr', 'org_precip_rate_mean',
+                     'qc_org_precip_rate_mean', 'pwd_err_code', 'pwd_mean_vis_1min',
+                     'qc_pwd_mean_vis_1min', 'pwd_mean_vis_10min', 'qc_pwd_mean_vis_10min',
+                     'pwd_pw_code_inst', 'qc_pwd_pw_code_inst', 'pwd_pw_code_15min',
+                     'qc_pwd_pw_code_15min', 'pwd_pw_code_1hr', 'qc_pwd_pw_code_1hr',
+                     'pwd_precip_rate_mean_1min', 'qc_pwd_precip_rate_mean_1min',
+                     'pwd_cumul_rain', 'qc_pwd_cumul_rain', 'pwd_cumul_snow',
+                     'qc_pwd_cumul_snow', 'logger_volt', 'qc_logger_volt', 'logger_temp',
+                     'qc_logger_temp']
+        met_ds = act.io.armfiles.read_netcdf(filename, drop_variables=drop_vars)
+        print(met_ds)
+
+
+# ARM uses an older format for quality control. We can convert the embedded QC to follow
+# CF format for use with other tools.
+if False:
+    # Make a file path to data file to read. Notice how we create the path using
+    # pathlib but need to convert it to a standard string using str(). Xarray
+    # does not currently work with pathlib.
+    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf'))
+    met_ds = act.io.armfiles.read_netcdf(filename)
+    print(met_ds['qc_atmos_pressure'])
+
+    # Call the cleanup method to go through each quality control variable and update
+    # to CF standards. Other datasets can be added in the future. This also fixes the units
+    # since uduints does not recognize "unitless" as a unit. Will also create a linkage
+    # from the data variable to the quality control varible using CF standard linking.
+    met_ds.clean.cleanup()
+    print("\n", met_ds['qc_atmos_pressure'])
+
+
+if False:
+    # One of the drivers for ACT is making plotting easier. It has methods to work with
+    # matplotlib to plot the data stored in the xarray dataset to correctly plot the data
+    # based on data shape. From our plotting examples we needed to know what matplotlib
+    # function to call for 1-D or 2-D data. ACT will guess what you want and make the
+    # plot for you, including axes labels, units, coordinate variable and a day/night
+    # background with local solar noon.
+    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf'))
+    met_ds = act.io.armfiles.read_netcdf(filename)
+    display = act.plotting.TimeSeriesDisplay(met_ds, figsize=(15, 10))
+    display.plot('temp_mean', linestyle='solid', day_night_background=True)
+    plt.show()
+
+
+if False:
+    # 2D plots can be a bit more difficult so ACT has done much of the heavy work
+    # for you. The set up is the same to create the display object and the timeseries
+    # method to plot is the same .plot(). This will also allow for passing pcolormesh
+    # specific keywords to plot in log values. The x and y axis show units in correct
+    # format and a colorbar is added.
+    filename = str(Path('..', 'data', 'sgpceilC1.b1', 'sgpceilC1.b1.20191103.000012.nc'))
+    ceil_ds = act.io.armfiles.read_netcdf(filename)
+
+    # We can change the data to a log scale for better plotting.
+    var_name = 'backscatter'
+    display = act.plotting.TimeSeriesDisplay(ceil_ds, figsize=(15, 10))
+    title = (r"Plot of $\log_{10}$ " f"{var_name} from {ceil_ds.attrs['datastream']} on "
+             f"{ceil_ds.attrs['_file_dates'][0]}")
+    colorbar_label = r"$\log_{10}$" + ceil_ds[var_name].attrs['units']
+    display.plot(var_name, norm=matplotlib.colors.LogNorm(), set_title=title,
+                 cbar_label=colorbar_label)
+    plt.show()
