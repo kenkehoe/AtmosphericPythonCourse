@@ -59,17 +59,17 @@ If you want to revert any of these codes back to orginal state just use the git 
 ```
 This will overwrite your current file with any changes to the one stored in the Git repo. If you have a file that is no longer working and you can't figure out why, you can copy that file to a different name and then checkout the orginal. This will allow comparing to see how they differ to find the error.
 
-* [Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = **scientific_libaries/data_numpy.py**
+* [Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = **scientific_libraries/data_numpy.py**
 * Plotting with [matplotlib](https://matplotlib.org/)  = **plotting/make_plot.py**
-* [Pandas](https://pandas.pydata.org/pandas-docs/stable/) - To store/read data and use some powerful tools with the data = **scientific_libaries/data_pandas.py**
-* [Xarray](http://xarray.pydata.org/en/stable/) - To store/read data and use some powerful tools with the data over 1-D dimensionality = **scientific_libaries/data_xarray.py**
+* [Pandas](https://pandas.pydata.org/pandas-docs/stable/) - To store/read data and use some powerful tools with the data = **scientific_libraries/data_pandas.py**
+* [Xarray](http://xarray.pydata.org/en/stable/) - To store/read data and use some powerful tools with the data over 1-D dimensionality = **scientific_libraries/data_xarray.py**
 * Advanced plotting with matplotlib (also use Pandas and Xarray wrapper around matplotlib) = **plotting/make_plot_real_data.py**
-* Advanced Xarray to start working with data and perform analysis = **scientific_libaries/data_xarray_2.py**
+* Advanced Xarray to start working with data and perform analysis = **scientific_libraries/data_xarray_2.py**
 * Metadata with [JSON](https://developers.squarespace.com/what-is-json) and [YAML](https://blog.stackpath.com/yaml/) = **metadata/use_json.py** & **metadata/use_yaml.py**
 * Handling paths and filepaths [pathlib.Path](https://realpython.com/python-pathlib/) = **cool_stuff/path_stuff.py**
 * [Saving data with Numpy](https://www.geeksforgeeks.org/numpy-save/) = **cool_stuff/data_save.py**
 * Using Python Collections extension for basic data structures = **cool_stuff/collections.py**
-* Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libaries/data_dask.py**
+* Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libraries/data_dask.py**
 * Creating multiprocessing child processes for faster concurrentcy = **cool_stuff/data_multiprocessing.py**
 * Tip of the iceberg with regular expressions = **cool_stuff/regular_expression.py**
 * Reading, QC, formatting, plotting with [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) = **third_party_libraries/ACT.py**
