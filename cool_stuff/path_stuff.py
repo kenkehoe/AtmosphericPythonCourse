@@ -10,6 +10,8 @@ if True:
     full_path = Path("/one", "two", "three", "four")
     print("\nfull_path:", full_path)
     print("type(full_path):", type(full_path))
+    # Some libraries will work with a pathlib.PosixPath, some require strings.
+    # Convert if the library needs strings.
     print("type(str(full_path)):", type(str(full_path)))
 
     # Get the current work directory
@@ -74,12 +76,12 @@ if False:
     print("\nlist:", all_py_files)
 
     # If we wanted to convert all individual pathlib objects to strings we can use
-    # a for loop or even better a list comprehension
+    # a for loop or even better a list comprehension.
     conv_files = [str(x) for x in all_py_files]
     print("\nstr:", conv_files)
 
     # Print the first file from the pathlib list without the full path directory list.
-    print("\nall_py_files[0].name", all_py_files[0].name)
+    print("\nall_py_files[0].name:", all_py_files[0].name)
 
 # Let's play with making directories and files then renaming, deleting files and directories.
 if False:
@@ -88,38 +90,49 @@ if False:
     new_dirs = current_dir.joinpath("one", "two")
 
     # Actually create the new directory. Using the parents keyword to make multiple
-    # directories all at once.
+    # directories all at once. The exists_ok keyword allows the directory to exist,
+    # be ignored and not throw an exception.
     new_dirs.mkdir(parents=True, exist_ok=True)
 
     # Add a thrid level directory. Use exist_ok to do nothing if the
     # directory already exists. Otherwise there will be an error.
-    add_dir = new_dirs.joinpath("three")
-    add_dir.mkdir(exist_ok=True)
+    new_dirs = new_dirs.joinpath("three")
+    new_dirs.mkdir(exist_ok=True)
 
     # Create a new pathlib with a filename.
     new_file = new_dirs.joinpath("file.txt")
     # Use this new pathlib to write text to a file.
+    # > ls -R one
+    # > cat ./one/two/three/file.txt
     new_file.write_text("Hello world")
 
-    # Change the suffix from .txt to .text_name
-    print("\nwith_suffix:", new_file.with_suffix(".text_name"))
-    # Change the full file name from file.text_name to a_new_file.txt
-    print("\nwith_name:", new_file.with_name("a_new_file.txt"))
-    # Read the file and print.
-    print("\nread_text:", new_file.read_text())
+    if True:
+        # Read the file and print.
+        print("\nread_text:", new_file.read_text())
+
+        # Change the pathlib suffix from .txt to .text_name. This changes the filename
+        # in Python memory but not the actual filename on disk.
+        print("\nwith_suffix:", new_file.with_suffix(".text_name"))
+
+        # Change the full file name from file.text_name to a_new_file.txt
+        print("\nwith_name:", new_file.with_name("a_new_file.txt"))
 
     if False:
         # Create a new pathlib path one directory down from previous
         # made directory pathlib.
         new_dirs2 = new_dirs.parent
-        print(new_dirs2)
+        print('new_dirs2:', new_dirs2)
         new_file2 = new_dirs2.joinpath("greatest_file_ever.csv")
+
         # Create the file, with nothing inside.
         new_file2.touch()
+
         # Use the pathlib path to extract the directory path and create
         # a new full path filename.
         new_file3 = new_file2.parent.joinpath("good_not_great_file.csv")
+
         # Use this with a new name to rename the file.
+        # > ls -lh one/two/good_not_great_file.csv
         new_file2.replace(new_file3)
 
     if False:
@@ -128,7 +141,8 @@ if False:
 
         # Delete a directory. The directory needs to be empty. It will not ask
         # if correct directroy so be careful.
-        add_dir.rmdir()
+        # ls -R one
+        new_dirs.rmdir()
 
     if False:
         # Use the current directory to get path to base of our new directory tree.
@@ -137,6 +151,8 @@ if False:
 
         # Use a different library to delete a directory with something in it.
         # Be VERY CAREFUL with this!!!!!
+        # This will remove the directory even if it contains files and other directories,
+        # and it will not ask. You had better know what you are doing to use this.
         shutil.rmtree(rm_dir)
 
 # Let's play with metadata about the file.
@@ -172,7 +188,7 @@ if False:
     # Use glob method to search the directory for files ending in '.cdf'
     files = data_path.glob("*.cdf")
 
-    # loop over all the returned files and check if the data is in that pathlib object.
+    # Loop over all the returned files and check if the data is in that pathlib object.
     # Need to perform match on a single pathlib object entry, hence the loop.
     for fl in files:
         print(fl, fl.match("*.20191101.*"))
@@ -181,11 +197,15 @@ if False:
 if False:
     # Make a relative path pathlib to base of data directory
     data_path = Path("..", "data")
-    # Initiallize an emptch list
+
+    # Initiallize an empty list
     files = []
-    # Recursively search for a file ending in old netCDF extension. Extend the exising
+
+    # Recursively search for a file ending in the old netCDF extension. Extend the exising
     # list by adding on the list of returned matched files.
-    files.extend(data_path.rglob("*.cdf"))
+    files_found = data_path.rglob("*.cdf")
+    files.extend(files_found)
+
     # Recursively search for a file ending in new netCDF extension. Extend the exising
     # list by adding on the list of returned matched files.
     files.extend(data_path.rglob("*.nc"))
@@ -194,9 +214,10 @@ if False:
     print("\nlen(files):", len(files))
     print()
 
-    # Loop over list printing each filename.
+    # Loop over list printing each filename. Notice how it prints the file path
+    # in a way that looks like a normal string. But remember it's actually
+    # a pathlib object.
     for fl in files:
         print(fl)
-
 
 print()

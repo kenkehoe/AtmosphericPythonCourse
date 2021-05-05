@@ -1,15 +1,16 @@
 # This is a comment in a YAML file. YAML stands for "YAML Ain't Markup Language"
 # or "Yet Another Markup Language". It is designed to be very human readable as compared
-# to XML or JSON. Since we will read this into python as a dictionary, the same rules
-# apply to the names you can give to the keys.
+# to XML or JSON but still ASCII type text. Since we will read this into python as a
+# dictionary, the same rules apply to the names you can give to the keys.
 
 # A basic "key-value" pair
 a_variable_name: "A value to list with the variable"
-b_variable_name: 1  # this is interpred as an int
-c_variable_name: 11.  # this is interpred as a float
+b_variable_name: A value to list with the variable but no quotes. Some assumptions are made.
+c_variable_name: 1  # this is interpred as an int
+d_variable_name: 11.  # this is interpred as a float
 
 # We can also have a list of values not just one value. A list is defined
-# by starting the rwo with a "- " character. A list element can contain any
+# by starting the row with "- " characters. A list element can contain any
 # python interpretable object, sting, int, float, dictionary, list.
 d_list_name:
     - 1  # this is an int
@@ -33,7 +34,7 @@ d_list_name:
     - ['or', 'a', 'list', 'of', 'something']
     - True  # Note how this is not being stored as a string. It's being stored as boolean
     - 'False'  # but this is stored as a string
-    - use: True  # this is a way to set configuration to do something or not
+    - use: True  # this is a way to set configuration to do something or not. It's a dictionary.
 
 # When you have metadata that needs to be stored YAML is a great
 # format. Here is an example you may use. Notice how the different
