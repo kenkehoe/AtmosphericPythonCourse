@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 
 # Save data to a normal ASCII file
-if False:
+if True:
     # define data
     data = np.arange(10)
 
@@ -106,7 +106,7 @@ if False:
     for var_name in read_data.files:
         print(var_name, ":", read_data[var_name])
 
-if True:
+if False:
     # What if we want to save object that are not Numpy? Then we can use a different
     # method called Pickel. This will write the object as an object to the binary
     # file and return it as the Python object.
@@ -132,7 +132,7 @@ if True:
         print("favorite_color:", favorite_color)
 
     # We can also pickel multiple variables and return them to multiple variables.
-    if True:
+    if False:
         # Create a dictionary with information
         favorite_color = {"lion": "yellow", "kitty": "red"}
         favorite_season = 'winter'
