@@ -20,9 +20,8 @@ if True:
     # ncdump -ht ../data/sgpmetE13.b1/sgpmetE13.b1.20191101.000000.cdf | less
     #
     # Make a file path to data file to read. Notice how we create the path using
-    # pathlib but need to convert it to a standard string using str(). Xarray
-    # does not currently work with pathlib.
-    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf'))
+    # pathlib.
+    filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf')
 
     # Using Xarray we can read one file using .open_dataset() method.
     met_ds = xr.open_dataset(filename)
@@ -34,8 +33,9 @@ if True:
 #    extraction = met_ds['atmos_pressure']  # just one variable from Dataset
 ##    np.set_printoptions(threshold=sys.maxsize)  # This will allow us to see all the values.
 #    extraction = met_ds['atmos_pressure'].values  # Get the numpy data array
-#    extraction = type(met_ds['atmos_pressure'].values)
+#    extraction = type(extraction)  # Show the object type
 #    extraction = met_ds['atmos_pressure'].data  # This is getting the Dask array.
+#    extraction = type(extraction)  # Notice how it says numpy array. But not the same as .values
 #    extraction = met_ds['atmos_pressure'].attrs  # This gets the variable attributes
 #    extraction = met_ds['atmos_pressure'].attrs['long_name']  # This gets the value of one attribute.
 
@@ -43,7 +43,7 @@ if True:
 #    extraction = met_ds['atmos_pressure'].attrs['does_not_exist']
 
 #    try:
-#        print(met_ds['atmos_pressure'].attrs['does_not_exist'])
+#        extraction = met_ds['atmos_pressure'].attrs['does_not_exist']
 #    except KeyError:
 #        print(('\nCaught the error for "{var_name}" and am now executing the print statement'
 #              ' under the except.\n').format(var_name='atmos_pressure'))
@@ -52,7 +52,7 @@ if True:
     print(extraction)
 
 # Block 2
-# Read in netCDF data file and exclude some variables.
+# Read in netCDF data file with multi-file open dataset from Xarray and exclude some variables.
 if False:
     # This is a list of names to not attempt to read. Notice there is one name
     # listed in the array that does not exist in the netCDF file. Xarray is cool with that.
@@ -72,9 +72,10 @@ if False:
                  'a_very_long_name_that_is_not_in_the_data_file']
 
     filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf')
-    # Notice how we change the pathlib to a string in the call. This may be better
-    # depending on how you use filename later on?
-    met_ds = xr.open_mfdataset(str(filename), drop_variables=drop_vars)
+#    filename = str(filename)
+    # Notice how we change the pathlib to a string in the call. This is required because
+    # we are using .open_mfdataset() instead of .open_dataset(). 
+    met_ds = xr.open_mfdataset(filename, drop_variables=drop_vars)
 
     print(met_ds)
 
@@ -82,13 +83,16 @@ if False:
 # Read in netCDF data files using command line syntax for regular expression.
 if False:
     # Here we construct the pathlib using standard glob syntax. This allows
-    # us to select multiple files to read instead of just one.
-    filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.*.cdf')
+    # us to select multiple files to read instead of just one and is the reason
+    # why .open_mfdataset() requires string not pathlib.Path() object.
+    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.*.cdf'))
+
     # The filename glob is understood by open_mfdataset() and correctly grabs all
     # the files that match the file glob. We also tell it what dimention we want to
     # concatinate along. Using parallel=True allows it to use multiple cores for
-    # reading the data. This may depend on your machine and number of cores available.
-    met_ds = xr.open_mfdataset(str(filename), combine='by_coords',
+    # reading the data. This may depend on your machine and number of cores available,
+    # and may be faster or may not...
+    met_ds = xr.open_mfdataset(filename, combine='by_coords',
                                concat_dim='time')#, parallel=True)
 
     # Notice how many time samples we have in the Xarray Dataset. A single
@@ -107,22 +111,25 @@ if False:
         # variables. Also notice that it is slightly different with _FillValue attribute
         # used instead of missing_value and the use of NaNs for missing values. Xarray
         # has some defaults that may be different than the data files you initially read.
-        # # ncdump -t our_written_file.nc | less
+        # > ncdump -t our_written_file.nc | less
         met_ds.to_netcdf(path='our_written_file.nc', mode='w', format='NETCDF4')
 
-        # This is an example of passing encoding to the write method to set how some variables
-        # are written to the file. In this example the variable logger_temp is a float
-        # but we will write as int32 and change the _FillValue from current NaN
-        # to -9999. This is also how to apply scale_factor and add_offset.
-        #met_ds.to_netcdf(path='our_written_file.nc', mode='w', format='NETCDF4',
-        #                 encoding={'logger_temp': {'dtype':'int32', '_FillValue':-9999,
-        #                           'scale_factor':0.01}})
+        if False:
+            # This is an example of passing encoding to the write method to set how some variables
+            # are written to the file. In this example the variable logger_temp is a float
+            # but we will write as int32 and change the _FillValue from current NaN
+            # to -9999. This is also how to apply scale_factor and add_offset.
+            met_ds.to_netcdf(path='our_written_file.nc', mode='w', format='NETCDF4',
+                             encoding={'logger_temp': {'dtype':'int32', '_FillValue':-9999,
+                                       'scale_factor':0.01}})
+
+    print("Number of variables:", len(met_ds.data_vars))
 
 # Block 4
 # Hey look Xarray can plot too.
 if False:
     # Read some data from one file.
-    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf'))
+    filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf')
     met_ds = xr.open_dataset(filename)
 
     if True:
@@ -133,7 +140,8 @@ if False:
         plt.show()
 
     else:
-        # Here we make two plots
+        # Here we make two plots. Syntax is slightly different than calling
+        # matplotlib directly.
         fig, axes = plt.subplots(nrows=2)
         met_ds['temp_mean'].plot(ax=axes[0])
         met_ds['rh_mean'].plot(ax=axes[1])
@@ -149,18 +157,21 @@ if False:
     # Make a plot.
     # Things are not quite what you want!?!?
     # Where do we begin?
-    # The plot is actually being made by pclormesh() call. But we don't know that so
-    # finding all the right keywords could be hard. Is there a different way?
+    # The plot is actually being made by the matplotlibe pclormesh() call.
+    # But we don't know that so finding all the right keywords could be hard.
+    # Is there a different way? Yes, look into documentation.
     ceil_ds['backscatter'].plot()
     plt.show()
 
 # Block 6
 # Lets pause with Xarray plotting and start with the true library that is making
 # the plot, matplotlib. Once we understand what is going on underneath we can
-# make the plots we want with the same/similar calls with Xarray.
+# make the plots we want with the same/similar calls with Xarray. There are many
+# if statements in this one call to add more calls and features. Follow the numbers
+# for best method of which order to include.
 if False:
     # Read data file
-    filename = str(Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191104.000000.cdf'))
+    filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191104.000000.cdf')
     met_ds = xr.open_dataset(filename)
 
     # It will always save you time in the future if you can reduce the number
@@ -177,7 +188,9 @@ if False:
         data = met_ds[var_name].values  # Get the data from Xarray object.
 
         # Now we use the units registry with the units in the Xarray objct
-        # to tell Pint what units is the data are set with.
+        # to tell Pint what current units the data are set with. Notice
+        # that data is no longer just a numpy array. It is now appended with
+        # a units object.
         xarry_units = met_ds[var_name].attrs['units']
         data = data * ureg.parse_expression(xarry_units)
 
@@ -204,7 +217,7 @@ if False:
 
     # Create the figure (the blank white space) and the axes (the box where plotted
     # data goes and set variabls to call later.
-    fig, axes = plt.subplots()
+    fig, axes = plt.subplots()  # figsize=(8, 6)
 
     # Now make the plot by extracting the time and data from object.
     # matplotlib is smart enough to extract what it needs if you pass it the Xarray DataArray
@@ -225,26 +238,32 @@ if False:
         first_time = met_ds['time'].values[0]
 
         # Change the precision of the time value from sub-second to day.
-        # Then add one to that value to set the end of the range value.
+        # Then add one day to that value to set the end of the range value.
         xrng = [first_time.astype('datetime64[D]'),
                 first_time.astype('datetime64[D]') + 1]
         print(xrng)
-        axes.set_xlim(xrng)  # Set the xrange for plot window
+        # Set the xrange for plot window. Notice how there is a gap in data at
+        # end of day now.
+        axes.set_xlim(xrng)
 
     # ---- (3) ---- #
     # Now lets be a real scientist and add some axis labels
+    # Got to (4) above next
     if False:
-        # Using the data from the DataArray get the axis label text
-        y_label = met_ds[var_name].attrs['long_name']
-        y_label = y_label + ' (' + met_ds[var_name].attrs['units'] + ')'
+        # Using the metadata from the DataArray get the axis label text
+        # Create the lable by combining long name with units
+        # Learn how to use Python f-strings. They are awesome.
+        y_label = f"{met_ds[var_name].attrs['long_name']} ({met_ds[var_name].attrs['units']})"
+
         # Now set the text for the y-axis. Notice we set the color to match the line plotted.
         axes.set_ylabel(y_label, color=line1_color)
 
-        # Set the x-axis label
+        # Set the x-axis label. The attributes of 'time' don't have what I want
+        # to put on the plot so I create the label how I want to see it.
         axes.set_xlabel('Time (UTC)')
 
     # ---- (5) ---- #
-    # But when you plot temperature you typically want to plot RH next.
+    # But when you plot temperature you typically want to plot RH too.
     # How about on the same plot? (Wow mind blown!)
     if False:
         axes_right = axes.twinx()  # Create a new y-axis but share same x-axis.
@@ -277,21 +296,21 @@ if False:
     # Why does the second yaxis not get a label?
     # Also can I make that label match the line color?
     if False:
-        y_label2 = met_ds[var_name2].attrs['long_name']
-        y_label2 = y_label2 + ' (' + met_ds[var_name2].attrs['units'] + ')'
-        axes_right.set_ylabel(y_label2, color=line2_color)
+        y_label2 = f"{met_ds[var_name2].attrs['long_name']} ({met_ds[var_name2].attrs['units']})"
+        axes_right.set_ylabel(y_label2, color=line2_color)#, rotation=-90)#, va='bottom')
 
     # ---- (7) ---- #
     # The xaxis shares the same values but we updated to the orginal format
     # of the axis when we made the second plot. The right plot did not update the plot
-    # for the xaxis for us. To get the axis to look correct just update the xaxis again.
+    # for the xaxis for us. To get the axis to look correct just update the xaxis again,
+    # or set the axis formatter after plotting both.
     if False:
         axes.xaxis.set_major_formatter(myFmt)
 
     # ---- (8) ---- #
     # And the most important part of all, a title.
     if False:
-        axes.set_title((f"An amazing plot of Temp. and RH. on {first_time.astype('datetime64[D]')}"))
+        axes.set_title((f"An amazing plot of Temperature and RH on {first_time.astype('datetime64[D]')}"))
 
     # ---- (9) ---- #
     if False:
@@ -299,3 +318,6 @@ if False:
         plt.savefig('temperature_plot.jpg')
     else:
         plt.show()  # Show the plot in a new window
+
+    # Wouldn't it be nice if there was a function to do all this for you already?
+    # Well there is, but we'll get there another day...
