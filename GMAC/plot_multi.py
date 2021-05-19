@@ -51,18 +51,18 @@ my_disp.plot('upwelling_global_solar', dsname='rad', subplot_index=(0, ), label=
 # Add second plot of Ozone. Use variable long name for plot axes title
 # and add background color to indicate when sun is shining and solar noon.
 var_name = 'ozone'
-title = f"NOAA GML {location} {ozone_obj[var_name].attrs['long_name']}"
-my_disp.plot(var_name,  dsname='ozone', subplot_index=(1, ),
-             set_title=title, day_night_background=True)
+my_disp.plot(var_name, dsname='ozone', subplot_index=(1, ),
+             set_title=f"NOAA GML {location} {ozone_obj[var_name].attrs['long_name']}",
+             day_night_background=True)
 
 # Add a wind barb plot from Met datastream. Because the wind speeds are low modify
 # the barb thresholds. Currently there is no legend for barbs, that is something
 # that will be added in the future.
-title = f"NOAA GML {location} Wind Barbs"
-axes = my_disp.plot_barbs_from_spd_dir('wind_direction', 'wind_speed',  dsname='met',
-                                subplot_index=(2, ), set_title=title,
-                                day_night_background=True,
-                                barb_increments={'half': 1, 'full': 2, 'flag': 3})
+axes = my_disp.plot_barbs_from_spd_dir('wind_direction', 'wind_speed', dsname='met',
+                                       subplot_index=(2, ),
+                                       set_title=f"NOAA GML {location} Wind Barbs",
+                                       day_night_background=True,
+                                       barb_increments={'half': 1, 'full': 2, 'flag': 3})
 axes.set_ylim(0, 2)
 
 plt.subplots_adjust(hspace=0.4)
