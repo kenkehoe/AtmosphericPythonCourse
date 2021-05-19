@@ -32,6 +32,11 @@ files.sort()
 # control variables.
 ds_obj = read_gml(files)
 
+# Change variable units from degree C to degree F. Can specify specific variables.
+# Or list no variables and will attempt to change all variables to the desired
+# unit if the units are conicially matching.
+ds_obj = ds_obj.utils.change_units(variables='air_temperature_10m', desired_unit='degF')
+
 # Set up plotting ACT object to contain data to plot and other configurations
 my_disp = TimeSeriesDisplay({'noaa_gml_brw': ds_obj}, subplot_shape=(2, ), figsize=(15, 10))
 
