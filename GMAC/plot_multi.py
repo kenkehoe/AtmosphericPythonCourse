@@ -40,7 +40,7 @@ for var_name in ['lat', 'lon', 'alt']:
 # Xarray Datasets.
 location = "Barrow"
 plot_obj = {'met': met_obj, 'rad': rad_obj, 'ozone': ozone_obj}
-my_disp = TimeSeriesDisplay(plot_obj, subplot_shape=(3, ), figsize=(10, 12))
+my_disp = TimeSeriesDisplay(plot_obj, subplot_shape=(3, ), figsize=(10, 8))
 
 # Create first plot of two variables from Radiation file.
 my_disp.plot('downwelling_global_solar', dsname='rad', subplot_index=(0, ), label='Downwelling')
@@ -65,4 +65,5 @@ axes = my_disp.plot_barbs_from_spd_dir('wind_direction', 'wind_speed',  dsname='
                                 barb_increments={'half': 1, 'full': 2, 'flag': 3})
 axes.set_ylim(0, 2)
 
+plt.subplots_adjust(hspace=0.4)
 plt.show()
