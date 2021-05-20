@@ -17,15 +17,7 @@ ozone_obj = read_gml(Path('data', 'brw_2021_04_hour.dat'), datatype='OZONE')
 rad_obj = read_gml(Path('data', 'brw21120.dat'), datatype='RADIATION')
 
 # Average data from 1 minute to 1 hour using Xarray modifier.
-rad_obj_new = rad_obj.resample(time='60min').mean()
-
-# After Xarray averages all the variables in the object the variables attribute
-# values are dropped. We can add them back with a simple loop and reassign the
-# object name. Most likely a "feature" Xarray introduced. It may be fixed in the future.
-for var_name in rad_obj_new:
-    rad_obj_new[var_name].attrs = rad_obj[var_name].attrs
-
-rad_obj = rad_obj_new
+rad_obj = rad_obj.resample(time='60min', keep_attrs=True).mean()
 
 # Reduce met data from full month to one day
 met_obj = met_obj.sel(time=slice(rad_obj['time'].values[0], rad_obj['time'].values[-1]))
