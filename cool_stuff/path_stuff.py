@@ -23,7 +23,8 @@ if True:
 
     # Create a new path with an additional directory and a filename
     fl = current_dir.joinpath("new_dir", "my_awesome_file.py")
-    print("\nparent:", fl.parent)  # Return just the path
+    print("\nfl:", fl)  # Print the new filename
+    print("parent:", fl.parent)  # Return just the path
     print("name:", fl.name)  # Return just the filename
     print("suffix:", fl.suffix)  # return the filename suffix
     print("stem:", fl.stem)  # return the filename without path or suffix
