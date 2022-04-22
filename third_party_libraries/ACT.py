@@ -19,13 +19,13 @@ if True:
         # Using Xarray we can read one file using .open_dataset() method or if there is
         # more than one file to read the .open_mfdataset() method. Instead of needing to
         # know the details of xarray reading methods, we can just use the ACT method which
-        # is a wrapper arround .open_mcdataset(). Notice how the filename uses a * character
+        # is a wrapper arround .open_mfdataset(). Notice how the filename uses a * character
         # to allow us to read all files matching in the directory. This is a feature of xarray
         # open_mfdataset().
 
-        # Notice that this met_ds object is just an Xarray object with a few extra global
-        # attributes added. These are used for plotting lables and titles. All the Xarray
-        # methods will work on this object.
+        # Notice that this met_ds object is just an Xarray Dataset with a few extra global
+        # attributes added. These are used by ACT methods for plotting lables and titles. 
+        # All the Xarray methods will work on this object.
         met_ds = act.io.armfiles.read_netcdf(filename)
         print(met_ds)
 
@@ -105,7 +105,7 @@ if False:
 
 
 # ARM uses an older format for embedded quality control. We can convert the embedded QC to follow
-# CF format for use with other tools.
+# the extened CF format for use with other tools.
 if False:
     # Make a file path to data file to read.
     filename = Path('..', 'data', 'sgpmetE13.b1', 'sgpmetE13.b1.20191101.000000.cdf')
@@ -129,7 +129,7 @@ if False:
 
 if False:
     # One of the drivers for ACT is making plotting easier. It has methods to work with
-    # matplotlib to plot the data stored in the xarray dataset to correctly plot the data
+    # matplotlib to plot the data stored in the Xarray Dataset to correctly plot the data
     # based on data shape. From our plotting examples we needed to know what matplotlib
     # function to call for 1-D or 2-D data. ACT will guess what you want and make the
     # plot for you, including axes labels, units, coordinate variable and a day/night
