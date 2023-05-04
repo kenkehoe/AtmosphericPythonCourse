@@ -8,4 +8,4 @@ dask
 pint
 scipy
 numpy
-act-atmos
+act
