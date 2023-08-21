@@ -39,7 +39,7 @@ if True:
 
     # We can do normal Numpy comparisons to get boolean arrays for testing.
     # Here we are doing two operations. Neither of the operations are done
-    # untile we tell it to perform the operations with a .compute() call.
+    # until we tell it to perform the operations with a .compute() call.
     a = z > 0
     b = a.any()
     # The request of a Numpy comparison is a dask array are stored as operations
