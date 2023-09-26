@@ -1,0 +1,17 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__,
+    *.in,
+    *.rst,
+    *.cfg,
+    *.yml,
+    *.yaml,
+    *.sh,
+    *.txt,
+    *.json,
+    versioneer.py,  # From second party library
+    inventory_db.py,  # From Sherman
+    inv_db_utils.py,  # From Sherman, same as inventory_db.py
+    conf-dqo,  # Need to exclude because the repo is cloned before test are run.
+max-line-length=115
