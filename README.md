@@ -55,6 +55,7 @@ This will overwrite your current file with any changes to the one stored in the 
 * Creating multiprocessing child processes for faster concurrentcy = **cool_stuff/data_multiprocessing.ipynb**
 * Tip of the iceberg with regular expressions = **cool_stuff/regular_expressions.ipynb**
 * Reading, QC, formatting, plotting with [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) = **third_party_libraries/ACT.py**
+* How to set up a working program with a command line script and library functions = **workflow/main_example.py**
 * Testing you code = **testing/python_testing.ipynb**
 
 ## Standard Style
