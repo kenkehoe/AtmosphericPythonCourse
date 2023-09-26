@@ -12,6 +12,9 @@
 # also suggest we put the second party libraries first then the thrid part libraries.
 import argparse
 
+# This is importing a function from a file in this directory. This is how you can better
+# organize your code into different files and functions. Takes a little more effort
+# but the clarity and ability to see where your code is failing is worth it.
 from library_example import argument_function
 
 
