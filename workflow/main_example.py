@@ -15,20 +15,38 @@ import argparse
 # This is importing a function from a file in this directory. This is how you can better
 # organize your code into different files and functions. Takes a little more effort
 # but the clarity and ability to see where your code is failing is worth it.
-from library_example import argument_function
+# You can import more than one function from a file.
+from library_example import argument_function, more_complicated_function
 
 
 # Here is the main processing routine. It looks strange to have so many different functions
 # but it allows for more modularity and easier debugging. So I suggest you go through
 # the effort to add a few more lines of code. It will make your life better in the end.
 def main():
+    """
+    Typically we will document what a function does and how to use it right after the
+    def command. We can use the tripple quotes to allow multiple lines of documentation.
+    There are some conventions for how to document the code. Does not really matter which
+    one you choose, choose one and document.
+
+    Example
+    -------
+    Using the -h keyword will print the help menu. It is abbreviated below for simplicity.
+
+    > ./main_example.py -h
+    usage:
+    This is where you can add a description of the program...
+
+    """
+
+    # Call the function that parses the argumetns and keywords provided by command line.
+    # This is called by a funciton written below. Python will read the entire file and compile
+    # functions before executing them so the functions can be declared after they are called.
     args = parse_commandline()
     print('args:', args)
 
     # Now that we have the command line arguments we can go do something. Most likely the
     # logic of what to do next is based on the command line arguments and keywords.
-
-    argument_function(args.argument, 'spam and eggs', value2=args.true_false_keyword)
 
     print(f"This is the keyword 'keyword' = '{args.keyword}'. It has a value even when not set.\n")
 
@@ -42,6 +60,16 @@ def main():
     if args.keyword_list is not None:
         print(f"You set --keyword_list to {args.keyword_list}. "
               "Notice how it prints as a list even when you provide only one vale. It expects and makes a list.")
+
+    # Here we will pass values into a function and retrieve something. This will be the
+    # typical programing flow.
+    result, value1, value2 = argument_function(args.argument, 'spam and eggs', value2=args.true_false_keyword)
+    print(result)
+    if value2:
+        print(value1, value2)
+
+    # more_complicated_function()
+    # more_complicated_function('one', 2, 5-2, dogs=10, cats=99)
 
 
 def parse_commandline():
