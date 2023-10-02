@@ -12,7 +12,9 @@ knows where to look for the file named _library_file.py_ and that a function is 
 
 So if we have the libary file in a different directory than the one the main level code is running (and you should do this), then we need to tell the Python intepreter where to look. There are a few ways to do this. The simplest way is to modify the PYTHONPATH environment variable. We can do that from the command line (this example is in bash)
 
-```> export PYTHONPATH="$PYTHONPATH:/full/path/to/directory/containing/library/name"```
+```
+export PYTHONPATH="$PYTHONPATH:/full/path/to/directory/containing/library/name"
+```
 
 This will need to be done every time the shell is started. I suggest you place this in your starup file (~/.bash_profile file for bash shell) so it is done automatically each time you start the shell.
 
