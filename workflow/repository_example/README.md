@@ -25,5 +25,6 @@ import sys
 from pathlib import Path
 
 path_to_library = Path(Path.cwd(), 'repository_example')
-sys.path.append(path_to_library)```
+sys.path.append(path_to_library)
+```
 
