@@ -40,7 +40,7 @@ Once you have a basic start to Python you can start working through the advanced
 > git checkout <name of file to revert back>
 ```
 This will overwrite your current file with any changes to the one stored in the Git repo. If you have a file that is no longer working and you can't figure out why, you can copy that file to a different name and then checkout the orginal. This will allow comparing to see how they differ to find the error.
-* Introduction to Python - intro_python/Intro to Python.pdf, intro_python/interactiveDemos_01.ipynb, intro_python/interactiveDemos_02.ipynb
+* Introduction to Python - **intro_python/Intro to Python.pdf, intro_python/interactiveDemos_01.ipynb, intro_python/interactiveDemos_02.ipynb**
 * [Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = **scientific_libraries/Scientific_Libraries_Numpy.ipynb**
 * Plotting with [matplotlib](https://matplotlib.org/)  = **plotting/make_plot.ipynb**
 * [Pandas](https://pandas.pydata.org/pandas-docs/stable/) - To store/read data and use some powerful tools with the data = **scientific_libraries/Scientific_Libraries_Pandas.ipynb**
@@ -55,7 +55,7 @@ This will overwrite your current file with any changes to the one stored in the 
 * Creating multiprocessing child processes for faster concurrentcy = **cool_stuff/data_multiprocessing.ipynb**
 * Tip of the iceberg with regular expressions = **cool_stuff/regular_expressions.ipynb**
 * Reading, QC, formatting, plotting with [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) = **third_party_libraries/ACT.py**
-* How to set up a working program with a command line script and library functions = **workflow/main_example.py**
+* How to set up a working program with a command line script and library functions = **workflow/main_example.py**, **workflow/exception_handling.ipynb**
 * Testing you code = **testing/python_testing.ipynb**
 
 ## Standard Style
