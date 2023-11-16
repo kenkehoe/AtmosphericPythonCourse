@@ -51,6 +51,8 @@ This will overwrite your current file with any changes to the one stored in the 
 * Handling paths and filepaths [pathlib.Path](https://realpython.com/python-pathlib/) = **cool_stuff/path_stuff.ipynb**
 * [Saving data with Numpy](https://www.geeksforgeeks.org/numpy-save/) = **cool_stuff/data_save.ipynb**
 * Reading, QC, formatting, plotting with [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) = **third_party_libraries/ACT.py**
+* [ACT Examples](https://github.com/ARM-DOE/ACT/tree/main/examples)
+* [ARM Tutorials](https://github.com/ARM-Development/ARM-Notebooks/tree/main/Tutorials)
 * Using Python Collections extension for basic data structures = **cool_stuff/collections.ipynb**
 * Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libraries/Scientific_Libraries_Dask.ipynb**
 * Creating multiprocessing child processes for faster concurrentcy = **cool_stuff/data_multiprocessing.ipynb**
