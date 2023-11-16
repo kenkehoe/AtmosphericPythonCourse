@@ -50,11 +50,12 @@ This will overwrite your current file with any changes to the one stored in the 
 * Metadata with [JSON](https://developers.squarespace.com/what-is-json) and [YAML](https://blog.stackpath.com/yaml/) = **metadata/use_json.ipynb** & **metadata/use_yaml.ipynb**
 * Handling paths and filepaths [pathlib.Path](https://realpython.com/python-pathlib/) = **cool_stuff/path_stuff.ipynb**
 * [Saving data with Numpy](https://www.geeksforgeeks.org/numpy-save/) = **cool_stuff/data_save.ipynb**
+* Reading, QC, formatting, plotting with [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) = **third_party_libraries/ACT.py**
 * Using Python Collections extension for basic data structures = **cool_stuff/collections.ipynb**
 * Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libraries/Scientific_Libraries_Dask.ipynb**
 * Creating multiprocessing child processes for faster concurrentcy = **cool_stuff/data_multiprocessing.ipynb**
 * Tip of the iceberg with regular expressions = **cool_stuff/regular_expressions.ipynb**
-* Reading, QC, formatting, plotting with [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) = **third_party_libraries/ACT.py**
+* Logging = **cool_stuff/loggin.ipynb**
 * How to set up a working program with a command line script and library functions = **workflow/main_example.py**, **workflow/exception_handling.ipynb**
 * Testing you code = **testing/python_testing.ipynb**
 
