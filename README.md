@@ -52,6 +52,9 @@ This will overwrite your current file with any changes to the one stored in the 
 * [Saving data with Numpy](https://www.geeksforgeeks.org/numpy-save/) = **cool_stuff/data_save.ipynb**
 * Reading, QC, formatting, plotting with [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) = **third_party_libraries/ACT.py**
 * [ACT Examples](https://github.com/ARM-DOE/ACT/tree/main/examples)
+  * [Download data and plot: plot_multiple_dataset.py](https://github.com/ARM-DOE/ACT/blob/main/examples/workflows/plot_multiple_dataset.py)
+  * [Understanding ARM QC: plot_qc_example.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_qc_example.py)
+  * [Work with and Plot QC: plot_arm_qc.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_arm_qc.py)
 * [ARM Tutorials](https://github.com/ARM-Development/ARM-Notebooks/tree/main/Tutorials)
 * Using Python Collections extension for basic data structures = **cool_stuff/collections.ipynb**
 * Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libraries/Scientific_Libraries_Dask.ipynb**
