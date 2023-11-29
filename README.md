@@ -53,6 +53,7 @@ This will overwrite your current file with any changes to the one stored in the 
 * Reading, QC, formatting, plotting with [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) = **third_party_libraries/ACT.py**
 * [ACT Examples](https://github.com/ARM-DOE/ACT/tree/main/examples)
   * [Download data and plot: plot_multiple_dataset.py](https://github.com/ARM-DOE/ACT/blob/main/examples/workflows/plot_multiple_dataset.py)
+  * Intro to QC and ACT = **third_party_libraries/ACT_QC.ipynb**
   * [Work with and Plot QC: plot_arm_qc.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_arm_qc.py)
   * [Building your own QC: plot_qc_example.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_qc_example.py)
 * [ARM Tutorials](https://github.com/ARM-Development/ARM-Notebooks/tree/main/Tutorials)
