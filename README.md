@@ -58,7 +58,7 @@ This will overwrite your current file with any changes to the one stored in the 
   * Intro to QC and ACT = **third_party_libraries/ACT_QC.ipynb**
   * [Work with and Plot QC: plot_arm_qc.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_arm_qc.py)
   * [Building your own QC: plot_qc_example.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_qc_example.py)
-* [ARM Tutorials](https://github.com/ARM-Development/ARM-Notebooks/tree/main/Tutorials)
+  * [ARM Tutorials](https://github.com/ARM-Development/ARM-Notebooks/tree/main/Tutorials/arm-asr-pi-meeting-2023/ACT_tutorial)
 * Using Python Collections extension for basic data structures = **cool_stuff/collections.ipynb**
 * Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libraries/Scientific_Libraries_Dask.ipynb**
 * Creating multiprocessing child processes for faster concurrentcy = **cool_stuff/data_multiprocessing.ipynb**
