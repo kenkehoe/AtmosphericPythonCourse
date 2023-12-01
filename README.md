@@ -50,10 +50,11 @@ This will overwrite your current file with any changes to the one stored in the 
 * Metadata with [JSON](https://developers.squarespace.com/what-is-json) and [YAML](https://blog.stackpath.com/yaml/) = **metadata/use_json.ipynb** & **metadata/use_yaml.ipynb**
 * Handling paths and filepaths [pathlib.Path](https://realpython.com/python-pathlib/) = **cool_stuff/path_stuff.ipynb**
 * [Saving data with Numpy](https://www.geeksforgeeks.org/numpy-save/) = **cool_stuff/data_save.ipynb**
-* Reading, QC, formatting, plotting with [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT) = **third_party_libraries/ACT.py**
-* [ACT Examples](https://github.com/ARM-DOE/ACT/tree/main/examples)
+* [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT)
+  * [ACT Examples](https://github.com/ARM-DOE/ACT/tree/main/examples)
   * Download data = **third_party_libraries/ACT_download_data.ipynb**
   * [Plot Data](https://github.com/ARM-DOE/ACT/blob/main/examples/plotting/plot_ceil.py)
+  * Reading, QC, formatting, plotting with ACT = **third_party_libraries/ACT.py**
   * [Plot with preprocessing](https://github.com/ARM-DOE/ACT/blob/main/examples/plotting/plot_daytime_averages.py)
   * Intro to QC and ACT = **third_party_libraries/ACT_QC.ipynb**
   * [Work with and Plot QC: plot_arm_qc.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_arm_qc.py)
