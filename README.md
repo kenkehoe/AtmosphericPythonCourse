@@ -59,6 +59,10 @@ There is no required order to go throgh this class but this list is pretty good 
   * Intro to QC and ACT = [ACT_QC.ipynb](third_party_libraries/ACT_QC.ipynb)
   * Work with and Plot QC = [plot_arm_qc.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_arm_qc.py)
   * Building your own QC = [plot_qc_example.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_qc_example.py)
+  * Download, read and plot NOAA SurfRad data = [plot_surfrad.py](https://github.com/ARM-DOE/ACT/blob/main/examples/io/plot_surfrad.py)
+  * Download, read and plot ANL Sodar data - [plot_sodar.py](https://github.com/ARM-DOE/ACT/blob/main/examples/io/plot_sodar.py)
+  * [Retrieve stability indicies from a sounding](https://github.com/ARM-DOE/ACT/blob/main/examples/retrievals/plot_get_stability_indices_example.py)
+  * [Cloud Base Height Retrievals](https://github.com/ARM-DOE/ACT/blob/main/examples/retrievals/plot_cbh_sobel.py)
   * [ARM Tutorials](https://github.com/ARM-Development/ARM-Notebooks/tree/main/Tutorials/arm-asr-pi-meeting-2023/ACT_tutorial)
 * Requested Examples
   * [CSV to netCDF](examples/csv_to_netcdf.ipynb)
