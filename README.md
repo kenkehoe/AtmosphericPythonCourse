@@ -40,6 +40,10 @@ Once you have a basic start to Python you can start working through the advanced
 > git checkout <name of file to revert back>
 ```
 This will overwrite your current file with any changes to the one stored in the Git repo. If you have a file that is no longer working and you can't figure out why, you can copy that file to a different name and then checkout the orginal. This will allow comparing to see how they differ to find the error.
+
+# Class syllabus
+There is no required order to go throgh this class but this list is pretty good order. You are free to skip over the sections that do not pertain right now, but you should be exposed to all thse topics at some point so you understand the suggested Python solutions. 
+
 * Introduction to Python
   * [Intro to Python.pdf](/intro_python/Intro%20to%20Python.pdf)
   * [interactiveDemos_01.ipynb](intro_python/interactiveDemos_01.ipynb)
