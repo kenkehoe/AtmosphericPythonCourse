@@ -1,12 +1,9 @@
-# Viewing this page correctly
-This page is written in a format called Markdown. If this page formatting does not look strange to you ignore this paragraph. To see the better view of this information from the Jupyter Notebook right-click anywhere on this page and select "Show Markdown Preview". A new panel will open to the right. You can move the slider to the left to hide this panel and just show the pretty version. 
-
 # AtmosphericPythonCourse
 This is a simple and evolving class for learning Python 3.\* for use with data analysis, plotting and some other more scientific processing.
 
 To use Python for this class you will need to use Python3.7 or greater and some additional libraries. Getting these libraries installed can be trivial or sometimes can be confusing. Hopefully we can walk though getting you set up with little effort.
 
-This course is designed to work with Jupyter Notbooks. You can run a jupter notbook locally or through a JupyterHub website.
+This course is designed to work with Jupyter Notbooks. You can run a Jupter notebook locally or through a JupyterHub website. But the Jupyter Notebook is stored in the repo with the cells executed. This will let you use this repo as a reference as well as a training tool. There is no need to memorize the specific syntax. Just come back here an look it up. It will come eventually with use.
 
 ## Computer Setup
 ### Jupyter Notebooks
@@ -28,14 +25,10 @@ All the teaching Notebooks are in a GitHub repo. To get them enter the following
 As a last check to ensure everything is ready, run one Notebook from the GitHub repo you just cloned. This will check if all the libraries you need for the class are installed. Open _test_requirements.ipynb_ and execute the code block to check if you have all the necessary libraries installed. If not follow the instructions.
   
 ## Text Editing
-Eventually you will want some way to edit the Python files you develop. For now you can ignore this section and come back to this when you want to write a Python script file and execute from the command line. You can use your text editor of your choosing. Some options include VI (or [MacVIM](https://www.macupdate.com/app/mac/25988/macvim) for Mac), Emacs, TextEdit (Mac), [TextWrangler](https://apps.apple.com/us/app/textwrangler/id404010395?mt=12) (Mac), Notepad (Windows), [Notepad++](https://notepad-plus-plus.org/) (Windows), … It does not matter which one you choose but don’t use something like MicrosoftWord. It will not make you happy.
+Eventually you will want some way to edit the Python files you develop. For now you can ignore this section and come back to this when you want to write a Python script file and execute from the command line. You can use your text editor of your choosing. Some options include VI (or [MacVIM](https://www.macupdate.com/app/mac/25988/macvim) for Mac), Emacs, TextEdit (Mac), [TextWrangler](https://apps.apple.com/us/app/textwrangler/id404010395?mt=12) (Mac), Notepad (Windows), [Notepad++](https://notepad-plus-plus.org/) (Windows), [Sublime Text](https://www.sublimetext.com/), … It does not matter which one you choose but don’t use something like MicrosoftWord. It will not make you happy.
 
 # Class Notes
-## Intro Section
-You should start with the *intro_pyton/* folder, specifically the [README](https://github.com/kenkehoe/AtmosphericPythonCourse/blob/master/intro_python/README.md) page. After going through the intro PDF you should go through the python example files (files ending in \*.ipynb) in the *intro_python/* folder.
-
-## Advanced Section
-Once you have a basic start to Python you can start working through the advanced libraries. Here is a suggestion for which files to review and the order. You should not save the files after editing, or if you do want to save a change save to a different name. If you do make a change and accidentally save the Notebook files you can revert any of the files back to orginal state by using the git command
+Once you have a basic start to Python you can start working through the advanced libraries. Below is a suggestion for which files to review and the order. You should not save the files after editing, or if you do want to save a change save to a different name. If you do make a change and accidentally save the Notebook files you can revert any of the files back to orginal state by using the git command
 ```
 > git checkout <name of file to revert back>
 ```
