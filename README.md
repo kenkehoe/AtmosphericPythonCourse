@@ -72,7 +72,7 @@ There is no required order to go throgh this class but this list is pretty good 
 * Testing you code = [python_testing.ipynb](testing/python_testing.ipynb)
 
 ## Standard Style
-It is not required but we will encourage using a standard syntax for our code. All the example codes will use [pep8](https://www.python.org/dev/peps/pep-0008/). Your code will run without following this formatting standard, but for sharing the code with others getting used to a standard format will make everyone’s life better.
+It is not required but we will encourage using a standard syntax for our Python files. All the Python example codes use [pep8](https://www.python.org/dev/peps/pep-0008/). Your code will run without following this formatting standard, but for sharing the code with others getting used to a standard format will make everyone’s life better.
 
 A nice way to see if your code is following the standard style is to use the [flake8](https://pypi.org/project/flake8/) command line tool. 
 ```
