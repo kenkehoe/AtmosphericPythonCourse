@@ -63,6 +63,7 @@ There is no required order to go throgh this class but this list is pretty good 
   * Download, read and plot ANL Sodar data - [plot_sodar.py](https://github.com/ARM-DOE/ACT/blob/main/examples/io/plot_sodar.py)
   * [Retrieve stability indicies from a sounding](https://github.com/ARM-DOE/ACT/blob/main/examples/retrievals/plot_get_stability_indices_example.py)
   * [Cloud Base Height Retrievals](https://github.com/ARM-DOE/ACT/blob/main/examples/retrievals/plot_cbh_sobel.py)
+  * [Example to merge multiple data products into one using ACT.](https://github.com/ARM-DOE/ACT/blob/main/examples/workflows/plot_merged_product.py)
   * [ARM Tutorials](https://github.com/ARM-Development/ARM-Notebooks/tree/main/Tutorials/arm-asr-pi-meeting-2023/ACT_tutorial)
 * Requested Examples
   * [CSV to netCDF](examples/csv_to_netcdf.ipynb)
