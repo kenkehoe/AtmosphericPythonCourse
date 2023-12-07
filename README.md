@@ -40,7 +40,10 @@ Once you have a basic start to Python you can start working through the advanced
 > git checkout <name of file to revert back>
 ```
 This will overwrite your current file with any changes to the one stored in the Git repo. If you have a file that is no longer working and you can't figure out why, you can copy that file to a different name and then checkout the orginal. This will allow comparing to see how they differ to find the error.
-* Introduction to Python - **intro_python/Intro to Python.pdf, intro_python/interactiveDemos_01.ipynb, intro_python/interactiveDemos_02.ipynb**
+* Introduction to Python
+  * [Intro to Python.pdf](/intro_python/Intro%20to%20Python.pdf)
+  * [interactiveDemos_01.ipynb](intro_python/interactiveDemos_01.ipynb)
+  * [interactiveDemos_02.ipynb](intro_python/interactiveDemos_02.ipynb)
 * [Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = **scientific_libraries/Scientific_Libraries_Numpy.ipynb**
 * Plotting with [matplotlib](https://matplotlib.org/)  = **plotting/make_plot.ipynb**
 * [Pandas](https://pandas.pydata.org/pandas-docs/stable/) - To store/read data and use some powerful tools with the data = **scientific_libraries/Scientific_Libraries_Pandas.ipynb**
