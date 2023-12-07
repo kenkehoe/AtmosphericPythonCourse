@@ -60,6 +60,9 @@ This will overwrite your current file with any changes to the one stored in the 
   * [Work with and Plot QC: plot_arm_qc.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_arm_qc.py)
   * [Building your own QC: plot_qc_example.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_qc_example.py)
   * [ARM Tutorials](https://github.com/ARM-Development/ARM-Notebooks/tree/main/Tutorials/arm-asr-pi-meeting-2023/ACT_tutorial)
+* Requested Examples
+  * [CSV to netCDF](examples/csv_to_netcdf.ipynb)
+  * [Xarray time matching Examples](examples/Examples.ipynb)
 * Using Python Collections extension for basic data structures = **cool_stuff/collections.ipynb**
 * Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libraries/Scientific_Libraries_Dask.ipynb**
 * Creating multiprocessing child processes for faster concurrentcy = **cool_stuff/data_multiprocessing.ipynb**
