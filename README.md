@@ -44,35 +44,35 @@ This will overwrite your current file with any changes to the one stored in the 
   * [Intro to Python.pdf](/intro_python/Intro%20to%20Python.pdf)
   * [interactiveDemos_01.ipynb](intro_python/interactiveDemos_01.ipynb)
   * [interactiveDemos_02.ipynb](intro_python/interactiveDemos_02.ipynb)
-* [Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = **scientific_libraries/Scientific_Libraries_Numpy.ipynb**
-* Plotting with [matplotlib](https://matplotlib.org/)  = **plotting/make_plot.ipynb**
-* [Pandas](https://pandas.pydata.org/pandas-docs/stable/) - To store/read data and use some powerful tools with the data = **scientific_libraries/Scientific_Libraries_Pandas.ipynb**
-* [Xarray](http://xarray.pydata.org/en/stable/) - To store/read data and use some powerful tools with the data over 1-D dimensionality = **scientific_libraries/Scientific_Libraries_Xarray.ipynb**
-* Advanced plotting with matplotlib (also use Pandas and Xarray wrapper around matplotlib) = **plotting/make_plot_real_data.ipynb**
-* Advanced Xarray to start working with data and perform analysis = **scientific_libraries/Scientific_Libraries_Xarray_2.ipynb**
-* Metadata with [JSON](https://developers.squarespace.com/what-is-json) and [YAML](https://blog.stackpath.com/yaml/) = **metadata/use_json.ipynb** & **metadata/use_yaml.ipynb**
-* Handling paths and filepaths [pathlib.Path](https://realpython.com/python-pathlib/) = **cool_stuff/path_stuff.ipynb**
-* [Saving data with Numpy](https://www.geeksforgeeks.org/numpy-save/) = **cool_stuff/data_save.ipynb**
+* [Numpy](https://docs.scipy.org/doc/numpy/reference/), (which is a subset of [SciPy](https://www.quora.com/What-is-the-difference-between-NumPy-and-SciPy)) - To work with arrays of data efficiently = [Scientific_Libraries_Numpy.ipynb](scientific_libraries/Scientific_Libraries_Numpy.ipynb)
+* Plotting with [matplotlib](https://matplotlib.org/)  = [make_plot.ipynb](plotting/make_plot.ipynb)
+* [Pandas](https://pandas.pydata.org/pandas-docs/stable/) - To store/read data and use some powerful tools with the data = [scientific_libraries/Scientific_Libraries_Pandas.ipynb](Scientific_Libraries_Pandas.ipynb)
+* [Xarray](http://xarray.pydata.org/en/stable/) - To store/read data and use some powerful tools with the data over 1-D dimensionality = [Scientific_Libraries_Xarray.ipynb](scientific_libraries/Scientific_Libraries_Xarray.ipynb)
+* Advanced plotting with matplotlib (also use Pandas and Xarray wrapper around matplotlib) = [make_plot_real_data.ipynb](plotting/make_plot_real_data.ipynb)
+* Advanced Xarray to start working with data and perform analysis = [Scientific_Libraries_Xarray_2.ipynb](scientific_libraries/Scientific_Libraries_Xarray_2.ipynb)
+* Metadata with [JSON](https://developers.squarespace.com/what-is-json) and [YAML](https://blog.stackpath.com/yaml/) = [use_json.ipynb](metadata/use_json.ipynb) & [use_yaml.ipynb](metadata/use_yaml.ipynb)
+* Handling paths and filepaths [pathlib.Path](https://realpython.com/python-pathlib/) = [path_stuff.ipynb](cool_stuff/path_stuff.ipynb)
+* [Saving data with Numpy](https://www.geeksforgeeks.org/numpy-save/) = [data_save.ipynb](cool_stuff/data_save.ipynb)
 * [Atmospheric data Community Toolkit (ACT)](https://github.com/ARM-DOE/ACT)
   * [ACT Examples](https://github.com/ARM-DOE/ACT/tree/main/examples)
-  * Download data = **third_party_libraries/ACT_download_data.ipynb**
+  * [Download data](third_party_libraries/ACT_download_data.ipynb)
   * [Plot Data](https://github.com/ARM-DOE/ACT/blob/main/examples/plotting/plot_ceil.py)
-  * Reading, QC, formatting, plotting with ACT = **third_party_libraries/ACT.py**
+  * Reading, QC, formatting, plotting with [ACT](third_party_libraries/ACT.py)
   * [Plot with preprocessing](https://github.com/ARM-DOE/ACT/blob/main/examples/plotting/plot_daytime_averages.py)
-  * Intro to QC and ACT = **third_party_libraries/ACT_QC.ipynb**
+  * Intro to QC and ACT = [ACT_QC.ipynb](third_party_libraries/ACT_QC.ipynb)
   * [Work with and Plot QC: plot_arm_qc.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_arm_qc.py)
   * [Building your own QC: plot_qc_example.py](https://github.com/ARM-DOE/ACT/blob/main/examples/qc/plot_qc_example.py)
   * [ARM Tutorials](https://github.com/ARM-Development/ARM-Notebooks/tree/main/Tutorials/arm-asr-pi-meeting-2023/ACT_tutorial)
 * Requested Examples
   * [CSV to netCDF](examples/csv_to_netcdf.ipynb)
   * [Xarray time matching Examples](examples/Examples.ipynb)
-* Using Python Collections extension for basic data structures = **cool_stuff/collections.ipynb**
-* Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = **scientific_libraries/Scientific_Libraries_Dask.ipynb**
-* Creating multiprocessing child processes for faster concurrentcy = **cool_stuff/data_multiprocessing.ipynb**
-* Tip of the iceberg with regular expressions = **cool_stuff/regular_expressions.ipynb**
-* Logging = **cool_stuff/loggin.ipynb**
-* How to set up a working program with a command line script and library functions = **workflow/main_example.py**, **workflow/exception_handling.ipynb**
-* Testing you code = **testing/python_testing.ipynb**
+* Using Python Collections extension for basic data structures = [collections.ipynb](cool_stuff/collections.ipynb)
+* Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = [Scientific_Libraries_Dask.ipynb](scientific_libraries/Scientific_Libraries_Dask.ipynb)
+* Creating multiprocessing child processes for faster concurrentcy = [data_multiprocessing.ipynb](cool_stuff/data_multiprocessing.ipynb)
+* Tip of the iceberg with regular expressions = [regular_expressions.ipynb](cool_stuff/regular_expressions.ipynb)
+* Logging = [loggin.ipynb](cool_stuff/loggin.ipynb)
+* How to set up a working program with a command line script and library functions = [main_example.py](workflow/main_example.py), [exception_handling.ipynb](workflow/exception_handling.ipynb)
+* Testing you code = [python_testing.ipynb](testing/python_testing.ipynb)
 
 ## Standard Style
 It is not required but we will encourage using a standard syntax for our code. All the example codes will use [pep8](https://www.python.org/dev/peps/pep-0008/). Your code will run without following this formatting standard, but for sharing the code with others getting used to a standard format will make everyone’s life better.
