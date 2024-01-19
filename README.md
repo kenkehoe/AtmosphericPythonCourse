@@ -72,7 +72,7 @@ There is no required order to go throgh this class but this list is pretty good 
 * Multiprocessing larger data blocks with [dask](https://docs.dask.org/en/latest/) = [Scientific_Libraries_Dask.ipynb](scientific_libraries/Scientific_Libraries_Dask.ipynb)
 * Creating multiprocessing child processes for faster concurrentcy = [data_multiprocessing.ipynb](cool_stuff/data_multiprocessing.ipynb)
 * Tip of the iceberg with regular expressions = [regular_expressions.ipynb](cool_stuff/regular_expressions.ipynb)
-* Logging = [loggin.ipynb](cool_stuff/loggin.ipynb)
+* Logging = [logging.ipynb](cool_stuff/loggin.ipynb)
 * How to set up a working program with a command line script and library functions = [main_example.py](workflow/main_example.py), [exception_handling.ipynb](workflow/exception_handling.ipynb)
 * Testing you code = [python_testing.ipynb](testing/python_testing.ipynb)
 
