@@ -63,10 +63,10 @@ def main():
 
     # Here we will pass values into a function and retrieve something. This will be the
     # typical programing flow.
-    result, value1, value2 = argument_function(args.argument, 'spam and eggs', value2=args.true_false_keyword)
-    print(result)
-    if value2:
-        print(value1, value2)
+    # result, value1, value2 = argument_function(args.argument, 'spam and eggs', value2=args.true_false_keyword)
+    # print(result)
+    # if value2:
+    #     print(value1, value2)
 
     # more_complicated_function()
     # more_complicated_function('one', 2, 5-2, dogs=10, cats=99)
@@ -89,7 +89,7 @@ Example for running;
     parser = argparse.ArgumentParser(usage=usage)
 
     parser.add_argument(
-        "argument", type=str,
+        "argument", type=str, nargs='?', default=None,
         help='''Here we pull in the positional arguments.
                 An argument does not take a keyword and it is required.
                 Notice how the spaces and returns in this help menu differ from the usage above.''')
