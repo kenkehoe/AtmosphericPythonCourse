@@ -63,4 +63,46 @@ Look in the _sub_directory_. You will see the Python file we called to perform t
 Other than _argparse_ everything in _main_example.py_ is code written by us and imported for execution. As the program becomes more complicated we will import libraries that are distributed with Python (like argparse) or some that need to be installed (like numpy, scipy, Xarray, Pandas). For a single project that does not share code, this example will be similar to what you build.
 
 ## Making shared library functions
+If you have a function that gets used often among multiple different projects, it may be best to separate it out into its own repository. Overall this is not much more difficult, but does require thinking about how Python knows what to read and from where.
+
+So what does Python do to know where to look for programs? There are multiple places that set where Python will look for a file. The first is which Python is installed. Python comes with some libraries already intalled (re, math, glob, copy, ...). You can see where those files are installed using the doubleunder syntax.
+
+<pre>
+python
+>>> import copy
+>>> copy.__file__
+  '/Users/kehoe/miniconda3/envs/dqo-base/lib/python3.11/copy.py'
+</pre>
+
+This will show the full path to the file imported when _import copy_ is executed. In this instance you can see the version of Python used is installed in the miniconda area and is in python version 3.11. This came preinstalled.
+
+<pre>
+python
+>>> import pandas
+>>> pandas.__file__
+  '/Users/kehoe/miniconda3/envs/dqo-base/lib/python3.11/site-packages/pandas/__init__.py'
+</pre>
+
+Pandas does not come preinstalled with the Python version so I had to install it with pip. The install put it in the _site-packages_ area which is where the packages I install are located.
+
+The reason this directory path is available is that the path is on my _$PATH_ environment variable. The _$PATH_ environment variable is how the system knows where to look. Python will look for a file that can be imported matching the module you request starting at the first path in $PATH (left side) and continues through each path (separated with :) until it finds the module. When found it quits looking. That means we can have the same module "installed" in multiple locations but *Python will always use the first one found*.
+
+<pre>
+echo $PATH
+/opt/local/bin:/opt/local/sbin:/Users/kehoe/miniconda3/envs/dqo-base/bin:/Users/kehoe/miniconda3/condabin:/Users/kehoe/.local/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin: ...
+</pre>
+
+We can see this by looking at the list of paths Python has ready to search. Python has used the $PATH environment varible to search for locations that contain Python packages/files. Paths that do not have Python related files are ignored.
+
+<pre>
+python
+>>> import sys
+>>> sys.path
+['', '/Users/kehoe/miniconda3/envs/dqo-base/lib/python311.zip',
+  '/Users/kehoe/miniconda3/envs/dqo-base/lib/python3.11',
+  '/Users/kehoe/miniconda3/envs/dqo-base/lib/python3.11/lib-dynload',
+  '/Users/kehoe/.local/lib/python3.11/site-packages',
+  '/Users/kehoe/dev/dq/lib/python/dqlib',
+  '/Users/kehoe/miniconda3/envs/dqo-base/lib/python3.11/site-packages']
+</pre>
 
