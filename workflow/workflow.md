@@ -138,3 +138,5 @@ python
 </pre>
 
 Notice how the path is added to the end of the list. If there is a copy in one of the other paths it will use that version.
+
+So what does this mean? Well we can create a single locations to put our library module that contains functions that will be used by multiple projects. We can then set PYTHONPATH in our .bashrc or .bash_profile file to always point to that directory. Then no matter which project we are working on, the library functions are available to Python for import. And, since there is only one copy of the code in the libray area all our updates/fixes only need to be done once to be updated for all our projects. The general rule is copy/paste code as few times as possible. If you don't follow this rule you will spend hours trying to understand why.
