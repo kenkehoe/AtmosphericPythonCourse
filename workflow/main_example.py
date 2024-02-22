@@ -16,7 +16,9 @@ import argparse
 # organize your code into different files and functions. Takes a little more effort
 # but the clarity and ability to see where your code is failing is worth it.
 # You can import more than one function from a file.
-from library_example import argument_function, more_complicated_function
+from library_example import argument_function  # Import function
+from sub_directory.more_complicated import more_complicated_function  # Import function
+from sub_directory.more_complicated import IMPORTED_VARIABLE  # Import variable
 
 
 # Here is the main processing routine. It looks strange to have so many different functions
@@ -58,18 +60,23 @@ def main():
               "Did you provide the number with decimal precision or did it get upconverted?\n")
 
     if args.keyword_list is not None:
-        print(f"You set --keyword_list to {args.keyword_list}. "
-              "Notice how it prints as a list even when you provide only one vale. It expects and makes a list.")
+        print(f"""You set --keyword_list to {args.keyword_list}.
+Notice how it prints as a list even when you provide only one value. It expects and makes a list.""")
 
     # Here we will pass values into a function and retrieve something. This will be the
     # typical programing flow.
-    # result, value1, value2 = argument_function(args.argument, 'spam and eggs', value2=args.true_false_keyword)
-    # print(result)
-    # if value2:
-    #     print(value1, value2)
+    if args.true_false_keyword:
+        result, value1, value2 = argument_function(args.argument, 'spam and eggs', value2=args.true_false_keyword)
+        print(result)
 
-    # more_complicated_function()
-    # more_complicated_function('one', 2, 5-2, dogs=10, cats=99)
+        if value2:
+            print(value1, value2)
+
+        more_complicated_function()
+        more_complicated_function('one', 2, 5-2, dogs=10, cats=99)
+
+        print("\nThe variable IMPORTED_VARIABLE we imported from more_complicated.py "
+              f"is set to '{IMPORTED_VARIABLE}'.")
 
 
 def parse_commandline():
