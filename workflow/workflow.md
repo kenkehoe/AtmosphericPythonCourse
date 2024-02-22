@@ -24,7 +24,7 @@ You set --keyword_list to ['eggs', 'spam']. Notice how it prints as a list even 
 
 Looking at _main_example.py_ we can see the file permissions are set to allow executing the code
 
-`-rwxr-xr-x  1 kehoe  staff  6262 Feb 22 13:21 main_example.py`
+`-rwxr-xr-x  1 Galahad  staff  6262 Feb 22 13:21 main_example.py`
 
 and the first line of the file has a "shebang" line that tells the system this is a Python file and what Python executible to use to interpret the code. This is the Linux syntax but we can update for Windows if needed.
 
@@ -65,44 +65,76 @@ Other than _argparse_ everything in _main_example.py_ is code written by us and 
 ## Making shared library functions
 If you have a function that gets used often among multiple different projects, it may be best to separate it out into its own repository. Overall this is not much more difficult, but does require thinking about how Python knows what to read and from where.
 
-So what does Python do to know where to look for programs? There are multiple places that set where Python will look for a file. The first is which Python is installed. Python comes with some libraries already intalled (re, math, glob, copy, ...). You can see where those files are installed using the doubleunder syntax.
+So what does Python do to know where to look for programs? There are multiple places that set where Python will look for a file. The first is which Python is installed. Python comes with some libraries already installed (re, math, glob, copy, ...). You can see where those files are installed using the doubleunder syntax.
 
 <pre>
 python
 >>> import copy
 >>> copy.__file__
-  '/Users/kehoe/miniconda3/envs/dqo-base/lib/python3.11/copy.py'
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/copy.py'
 </pre>
 
-This will show the full path to the file imported when _import copy_ is executed. In this instance you can see the version of Python used is installed in the miniconda area and is in python version 3.11. This came preinstalled.
+This will show the full path to the file imported when _import copy_ is executed. In this instance you can see the version of Python used is installed in the miniconda area and is in python version 3.11. _copy_ came preinstalled.
 
 <pre>
 python
 >>> import pandas
 >>> pandas.__file__
-  '/Users/kehoe/miniconda3/envs/dqo-base/lib/python3.11/site-packages/pandas/__init__.py'
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/site-packages/pandas/__init__.py'
 </pre>
 
 Pandas does not come preinstalled with the Python version so I had to install it with pip. The install put it in the _site-packages_ area which is where the packages I install are located.
 
-The reason this directory path is available is that the path is on my _$PATH_ environment variable. The _$PATH_ environment variable is how the system knows where to look. Python will look for a file that can be imported matching the module you request starting at the first path in $PATH (left side) and continues through each path (separated with :) until it finds the module. When found it quits looking. That means we can have the same module "installed" in multiple locations but *Python will always use the first one found*.
+The reason this directory path is available is that the path is on my _PATH_ environment variable. The _PATH_ environment variable is how the system knows where to look. Python will look for a file that can be imported matching the module you request starting at the first path in PATH (left side) and continues through each path (separated with :) until it finds the module. When found it quits looking. That means we can have the same module "installed" in multiple locations but *Python will always use the first one found*.
 
 <pre>
 echo $PATH
-/opt/local/bin:/opt/local/sbin:/Users/kehoe/miniconda3/envs/dqo-base/bin:/Users/kehoe/miniconda3/condabin:/Users/kehoe/.local/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin: ...
+/opt/local/bin:/opt/local/sbin:/Users/Galahad/miniconda3/envs/dqo-base/bin:/Users/Galahad/miniconda3/condabin:/Users/Galahad/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin: ... and some more ...
 </pre>
 
-We can see this by looking at the list of paths Python has ready to search. Python has used the $PATH environment varible to search for locations that contain Python packages/files. Paths that do not have Python related files are ignored.
+We can see this by looking at the list of paths Python has ready to search. Python has used the PATH environment varible to search for locations that contain Python packages/files. Paths that do not have Python related files are ignored. We can use the sys Python module to see what paths are loaded and ready to use. The '' path is the current working directory.
 
 <pre>
 python
 >>> import sys
 >>> sys.path
-['', '/Users/kehoe/miniconda3/envs/dqo-base/lib/python311.zip',
-  '/Users/kehoe/miniconda3/envs/dqo-base/lib/python3.11',
-  '/Users/kehoe/miniconda3/envs/dqo-base/lib/python3.11/lib-dynload',
-  '/Users/kehoe/.local/lib/python3.11/site-packages',
-  '/Users/kehoe/dev/dq/lib/python/dqlib',
-  '/Users/kehoe/miniconda3/envs/dqo-base/lib/python3.11/site-packages']
+['',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/lib-dynload',
+  '/Users/Galahad/.local/lib/python3.11/site-packages',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/site-packages']
 </pre>
 
+We can add paths to files by appending them to PATH, but that's a little strange since we are adding a path to Python files in the system environment varible that is shared by all other programs. It would be better if we could add paths to Python stuff with just a Python thing. Well we can with PYTHONPATH environment variable. Here I will use Bash shell to create the PYTHONPATH environment varible and set it to two paths.
+
+<pre>
+export PYTHONPATH="/path/to/a/python/directory:/second/python/directory"
+python
+>>> import sys
+>>> sys.path
+['', '/path/to/a/python/directory',
+  '/second/python/directory',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/lib-dynload',
+  '/Users/Galahad/.local/lib/python3.11/site-packages',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/site-packages']
+</pre>
+
+Notice how the two paths set in PYTHONPATH are prepended to the Python path listings. It knows that if I set PYTHONPATH those are most likely to contain files I am interested in using and should be used first. So I could use multiple locations to better orgnaize my code.
+
+It's not recomended but for some projects you may want to add a path after the Python interpreter is started or in your Python program. You can edit the sys.path directly so the program knows where to search. It is not recomeneded because the added path is not global and will cause you to bang your head against the wall some day.
+
+<pre>
+python
+>>> import sys
+>>> sys.path.append("/home/me/mypy")
+>>> sys.path
+  ['', '/path/to/a/python/directory', '/second/python/directory',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/lib-dynload',
+  '/Users/Galahad/.local/lib/python3.11/site-packages',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/site-packages',
+  '/home/me/mypy']
+</pre>
+
+Notice how the path is added to the end of the list. If there is a copy in one of the other paths it will use that version.
