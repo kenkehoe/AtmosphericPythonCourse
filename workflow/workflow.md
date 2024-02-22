@@ -39,4 +39,16 @@ When called the _main_example.py_ file is read from top to bottom and parsed/com
     main()
 </pre>
 
-In _main()_ we call another predefined function that will handle command line input for arguments and keywords. The _parse_commandline()_ function defines the argument and keyword variable names, definitions and help menu. The function returns _arg_ which is an argparse Namespace object.
+In _main()_ we call another predefined function that will handle command line input for arguments and keywords. The _parse_commandline()_ function defines the argument and keyword variable names, definitions and help menu. The function returns _args_ which is an argparse Namespace object that we can access for variables provided from command line.
+
+The values from the _args_ are used to see what other code/functions will be executed. A good practice is to separate the code into small parts to make it more useable and manageable. The functions can be imported from someone else's repository or functinos you define in different files.
+
+We have a file in the same directory called _library_example.py_. This file is recognized to be a Python file since it has the .py file extension. This means we can import variables or functions from that file.
+
+`from library_example import argument_function, more_complicated_function`
+
+This line will read _library_example.py_ and import the argument_function, more_complicated_function functions. They are not executed just read into memory and made available for use. In the _main()_ function we call 
+
+`result, value1, value2 = argument_function(args.argument, 'spam and eggs', value2=args.true_false_keyword)`
+
+We can write as many python files in the current directoy as we want to organize the variables or functions. 
