@@ -51,4 +51,13 @@ This line will read _library_example.py_ and import the argument_function, more_
 
 `result, value1, value2 = argument_function(args.argument, 'spam and eggs', value2=args.true_false_keyword)`
 
-We can write as many python files in the current directoy as we want to organize the variables or functions. 
+We can write as many Python files in the current directoy as we want to organize the variables or functions. If we want to better organize the structure we can put Python files in sub directories. We just need to provide the full path including sub directories when we import the functins or varibles.
+
+<pre>
+from sub_directory.more_complicated import more_complicated_function
+from sub_directory.more_complicated import IMPORTED_VARIABLE
+</pre>
+
+While this example shows how a variable can be imported this is not the preferred method. There are other ways to import and manage variables.
+
+Other than _argparse_ everything in _main_example_ is code written by us and import for execution. As the program becomes more complicated we will import libraries that are distributed with Python (like argparse) or some that need to be installed (like numpy, scipy, Xarray, Pandas).
