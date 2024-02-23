@@ -128,7 +128,7 @@ Executing transaction: done
 
 
 ## Solving issues with conda
-Sometimes the package we want will not be available in the default location (channel). Then we need to do a little work to go find it and tell conda where to download from. For example _pint_ is not locagted in conda's default location. So when we try to install it will fail.
+Sometimes the package we want will not be available in the default location (channel). Then we need to do a little work to go find it and tell conda where to download from. For example _pint_ is not located in conda's default location. So when we try to install it will fail.
 
 <pre>
 conda install pint
@@ -204,7 +204,6 @@ name: my_env
 
 channels:
   - defaults
-  - conda-forge
 
 dependencies:
   - pip
