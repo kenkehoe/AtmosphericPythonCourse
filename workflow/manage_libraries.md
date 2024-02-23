@@ -89,3 +89,39 @@ python                    3.11.7               hb885b13_0
 
   ... more libraries
 </pre>
+
+It may become important to create environments on different systems, or it may be important to keep track of which libraries we need for each project. Conda makes this easy with the concept of an environment file. This is a YAML file that directs conda on how to create a new environment. The file can be used to direct the environment building or to document the current environment of an existing environment. Let's have conda create an environment file describing my_env.
+
+<pre>
+conda env export > environment.yaml
+</pre>
+
+If we look at this file we will see the name of the environment and all the installed libraries with the currently installed version. We can take this file and provide it to the conda create command to generate a new environment using all the libraries and the versions listed. But normally we do not need to list every package since many of the libraries installed are dependent and will be installed anyway. All we need to recreate this is to list the three packages we requested. And if we don't care about versions we can leave that off and let conda figure it out. Most of the time we can ignore versions. At some point we will need to fix an issue by manually listing what version we want installed, but we will cross that bridge another day.
+
+So we can take the file created by conda and edit it to only list what we need to reproduce the current environment to the specific level our needs. If we edit the file it will look something like this
+
+<pre>
+name: my_env
+
+channels:
+  - defaults
+
+dependencies:
+  - pandas
+  - python=3.11
+  - xarray
+</pre>
+
+We can now take this file and create a new environment from scratch by pointing to this environment.yaml file for all configuration needs. Since the environment my_env already exist we will need to add the --force keyword. If the environment did not exist we could ignore that keyword.
+
+<pre>
+conda env create -f environment.yaml --force
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+  ... stuff ...
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+</pre>
