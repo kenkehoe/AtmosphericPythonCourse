@@ -125,3 +125,94 @@ Preparing transaction: done
 Verifying transaction: done
 Executing transaction: done
 </pre>
+
+
+## Solving issues with conda
+Sometimes the package we want will not be available in the default location (channel). Then we need to do a little work to go find it and tell conda where to download from. For example _pint_ is not locagted in conda's default location. So when we try to install it will fail.
+
+<pre>
+conda install pint
+
+Collecting package metadata (current_repodata.json): done
+Solving environment: unsuccessful initial attempt using frozen solve. Retrying with flexible solve.
+Collecting package metadata (repodata.json): done
+Solving environment: unsuccessful initial attempt using frozen solve. Retrying with flexible solve.
+
+PackagesNotFoundError: The following packages are not available from current channels:
+
+  - pint
+
+Current channels:
+
+  - https://repo.anaconda.com/pkgs/main/osx-arm64
+  - https://repo.anaconda.com/pkgs/main/noarch
+  - https://repo.anaconda.com/pkgs/r/osx-arm64
+  - https://repo.anaconda.com/pkgs/r/noarch
+
+To search for alternate channels that may provide the conda package you're
+looking for, navigate to
+
+    https://anaconda.org
+
+and use the search bar at the top of the page.
+</pre>
+
+We need to do a little digging to see where the package exists. We can start by searching using conda defaults
+
+<pre>
+conda search pint
+  
+Loading channels: done
+No match found for: pint. Search: *pint*
+</pre>
+
+If we tell conda where to look we can find it at a different host.
+<pre>
+conda search -c conda-forge pint
+Loading channels: done
+# Name                       Version           Build  Channel             
+pint                           0.8.1            py_1  conda-forge         
+
+ ... more stuff ...
+  
+pint                            0.23    pyhd8ed1ab_0  conda-forge 
+</pre>
+
+This means if we tell conda to install _pint_ from a different channel (conda-forge) it will find the package and install. We perform this on the command line
+<pre>
+conda install -c conda-forge pint
+</pre>
+
+or we can update the environment.yaml file to have a list of places to look for packages. It will try to install the packge with the first channel and if that fails it will go down the list until it is successful. So if we update our environment.yaml file to look like this we can run the same command above and it will install _pint_ from conda-forge.
+<pre>
+name: my_env
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - pandas
+  - python=3.11
+  - xarray
+  - pint
+</pre>
+
+But what if the packge does not exist in any conda channels and is only installable through _pip_? We can tell conda to install some packages using _pip_ by editing the environment.yaml file to list _pip_ as a dependency and then use _pip_ to install _pint_.
+<pre>
+name: my_env
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - pip
+  - pandas
+  - python=3.11
+  - xarray
+  
+  # This part allows install using pip.
+  - pip:
+    - pint
+</pre>
