@@ -7,7 +7,7 @@
 
 
 # Managing librareis and versions <a name="introduction"></a>
-Python is just like all software, ever evolving and imporving. So how do we manage making updates? And if there are updates does everything else just work? Well, unfortunately no. Updating a library will often have requirements to update other libraries. And when your project becomes larger this can become quite difficult to manualy manage. This is where we stop trying to manually mangae and use some other software to do that for us. We can always install packages using _pip_ and we can set the version to install but this can become difficult.
+Python is just like all software, ever evolving and imporving. So how do we manage making updates? And if there are updates does everything else just work? Well, unfortunately no. Updating a library will often have requirements to update other libraries. And when your project becomes larger this can become quite difficult to manually manage. This is where we stop trying to manually mangae and use some other software to do that for us. We can always install packages using _pip_ and we can set the version to install but this can become difficult.
 
 A common software package manager is called _conda_. This is software that is used to install Python and libraries you choose. It has the ability to pull from different source locations of your choosing, but most importantly it performs the version compability search to give the best chance of all your code working correctly.
 
@@ -17,7 +17,7 @@ Chances are you have Python installed on your computer. The system actually uses
 The other reason we will use _conda_ is that we can have multiple Python instalations with different dependencies for different projects. This allows us to try out some new package or a new version without breaking other code we have running. The differnt Python installations will be in an _environment_ and we can switch to different environments at any time.
 
 ## Create a new environment <a name="create"></a>
-First we will use conda to create a new empty environment. The environment should have a name to make it easy to switch to different environment and know which environment you are currently using. There is another method that uses the path to the environment but we will talk about that later. This will create a new environment called _my_env_ and we will enter that environment.
+First we will use conda to create a new empty environment. The environment should have a name to make it easy to switch to a different environment and know which environment you are currently using. There is another method that uses the path to the environment, but we will talk about that later. This will create a new environment called _my_env_ and we will enter that environment.
 
 <pre>
 which python
@@ -120,7 +120,7 @@ dependencies:
   - xarray
 </pre>
 
-We can now take this file and create a new environment from scratch by pointing to this environment.yaml file for all configuration needs. Since the environment my_env already exist we will need to add the --force keyword. If the environment did not exist we could ignore that keyword.
+We can now take this file and create a new environment from scratch by pointing to this _environment.yaml_ file for all configuration needs. Since the environment _my_env_ already exist we will need to add the _--force_ keyword. If the environment did not exist we could ignore that keyword.
 
 <pre>
 conda env create -f environment.yaml --force
@@ -191,7 +191,7 @@ This means if we tell conda to install _pint_ from a different channel (conda-fo
 conda install -c conda-forge pint
 </pre>
 
-or we can update the environment.yaml file to have a list of places to look for packages. It will try to install the packge with the first channel and if that fails it will go down the list until it is successful. So if we update our environment.yaml file to look like this we can run the same command above and it will install _pint_ from conda-forge.
+or we can update the _environment.yaml_ file to have a list of places to look for packages. It will try to install the packge with the first channel and if that fails it will go _down the list until it is successful. So if we update our _environment.yaml_ file to look like this we can run the same command above and it will install _pint_ from _conda-forge.
 <pre>
 name: my_env
 
@@ -206,7 +206,7 @@ dependencies:
   - pint
 </pre>
 
-But what if the packge does not exist in any conda channels and is only installable through _pip_? We can tell conda to install some packages using _pip_ by editing the environment.yaml file to list _pip_ as a dependency and then use _pip_ to install _pint_.
+But what if the packge does not exist in any conda channels and is only installable through _pip_? We can tell conda to install some packages using _pip_ by editing the _environment.yaml_ file to list _pip_ as a dependency and then use _pip_ to install _pint_.
 <pre>
 name: my_env
 
@@ -219,7 +219,7 @@ dependencies:
   - python=3.11
   - xarray
   
-  # This part allows install using pip.
+  # This part allows install using pip
   - pip:
     - pint
 </pre>
