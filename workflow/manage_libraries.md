@@ -1,14 +1,22 @@
-# Managing librareis and versions
+# Table of contents
+* [Managing librareis and versions](#introduction)
+  * [Installing Python of your choosing](#install)
+  * [Create a new environment](#create)
+  * [Solving issues with conda](#solving)
+* [Summary](#summary) 
+
+
+# Managing librareis and versions <a name="introduction"></a>
 Python is just like all software, ever evolving and imporving. So how do we manage making updates? And if there are updates does everything else just work? Well, unfortunately no. Updating a library will often have requirements to update other libraries. And when your project becomes larger this can become quite difficult to manualy manage. This is where we stop trying to manually mangae and use some other software to do that for us. We can always install packages using _pip_ and we can set the version to install but this can become difficult.
 
 A common software package manager is called _conda_. This is software that is used to install Python and libraries you choose. It has the ability to pull from different source locations of your choosing, but most importantly it performs the version compability search to give the best chance of all your code working correctly.
 
-## Installing Python of your choosing.
+## Installing Python of your choosing <a name="install"></a>
 Chances are you have Python installed on your computer. The system actually uses Python for some of its processes. But you will not want to use that version. Updating will require root privlages and if you make a mistake it can cause major problems. It is best to install a different Python and manage that. I currently recomend _conda_ for installing Python and the dependencies.
 
 The other reason we will use _conda_ is that we can have multiple Python instalations with different dependencies for different projects. This allows us to try out some new package or a new version without breaking other code we have running. The differnt Python installations will be in an _environment_ and we can switch to different environments at any time.
 
-## Create a new environment
+## Create a new environment <a name="create"></a>
 First we will use conda to create a new empty environment. The environment should have a name to make it easy to switch to different environment and know which environment you are currently using. There is another method that uses the path to the environment but we will talk about that later. This will create a new environment called _my_env_ and we will enter that environment.
 
 <pre>
@@ -127,7 +135,7 @@ Executing transaction: done
 </pre>
 
 
-## Solving issues with conda
+## Solving issues with conda <a name="solving"></a>
 Sometimes the package we want will not be available in the default location (channel). Then we need to do a little work to go find it and tell conda where to download from. For example _pint_ is not located in conda's default location. So when we try to install it will fail.
 
 <pre>
@@ -215,3 +223,12 @@ dependencies:
   - pip:
     - pint
 </pre>
+
+# Summary <a name="summary"></a>
+Managing versions and dependencies for a small number of libraries is manageable by hand by as the project scales it is best to use something else to do the work for you.
+
+Conda can install Python and the libraries you want and put them into a separate environment so different projects do not interfeer with each other if they have conflicts.
+
+Using environment.yaml files to manage the libraries and dependencies can simplify your work. Typically it is best practice to erase an environment and start from new when making changes to more complex projects. There can be unknown issues that are resolved by starting from scratch. The environment.yaml file can be part of the project.
+
+If each project uses a different conda environment you will need to remember to activate that environment before running. If everything fits into a single environment you can set that to be a defualt in the startup file for your shell (e.g. .bashrc or .bash_profile file)
