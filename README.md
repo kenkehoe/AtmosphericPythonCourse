@@ -73,7 +73,9 @@ There is no required order to go throgh this class but this list is pretty good 
 * Creating multiprocessing child processes for faster concurrentcy = [data_multiprocessing.ipynb](cool_stuff/data_multiprocessing.ipynb)
 * Tip of the iceberg with regular expressions = [regular_expressions.ipynb](cool_stuff/regular_expressions.ipynb)
 * Logging = [logging.ipynb](cool_stuff/loggin.ipynb)
-* How to set up a working program with a command line script and library functions = [main_example.py](workflow/main_example.py), [exception_handling.ipynb](workflow/exception_handling.ipynb)
+* How to set up a working program with a command line script and library functions = [Python workflow](workflow/python_workflow.md)
+* Managing versions and libraries in a larger process = [Manage Libraries](workflow/manage_libraries.md)
+* What to do when the code fails = [exception_handling.ipynb](workflow/exception_handling.ipynb)
 * Testing you code = [python_testing.ipynb](testing/python_testing.ipynb)
 
 ## Standard Style
