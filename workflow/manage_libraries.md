@@ -225,7 +225,7 @@ dependencies:
 </pre>
 
 # Summary <a name="summary"></a>
-Managing versions and dependencies for a small number of libraries is manageable by hand by as the project scales it is best to use something else to do the work for you.
+Managing versions and dependencies for a small number of libraries is manageable by hand, but as the project scales it is best to use something else to do the work for you.
 
 Conda can install Python and the libraries you want and put them into a separate environment so different projects do not interfeer with each other if they have conflicts.
 
