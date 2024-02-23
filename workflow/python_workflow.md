@@ -43,13 +43,13 @@ The values from the _args_ are used to see what other code/functions will be exe
 
 We have a file in the same directory called _library_example.py_. This file is recognized to be a Python file since it has the .py file extension. This means we can import variables or functions from that file.
 
-`from library_example import argument_function, more_complicated_function`
+`from library_example import argument_function`
 
-This line will read _library_example.py_ and import the argument_function, more_complicated_function functions. They are not executed just read into memory and made available for use. In the _main()_ function we call 
+This line will read _library_example.py_ and import the argument_function function. It not executed just read into memory and made available for use. In the _main()_ function we call 
 
 `result, value1, value2 = argument_function(args.argument, 'spam and eggs', value2=args.true_false_keyword)`
 
-We can write as many Python files in the current directoy as we want to organize the variables or functions. If we want to better organize the structure we can put Python files in sub directories. We just need to provide the full path including sub directories when we import the functins or varibles.
+We can write as many Python files in the current directoy as we want to organize the variables or functions. If we want to better organize the structure we can put Python files in sub directories. We just need to provide the relative path including sub directories when we import the functins or varibles.
 
 <pre>
 from sub_directory.more_complicated import more_complicated_function
@@ -58,7 +58,7 @@ from sub_directory.more_complicated import IMPORTED_VARIABLE
 
 While this example shows how a variable can be imported this is not the preferred method. There are other ways to import and manage variables.
 
-Look in the _sub_directory_. You will see the Python file we called to perform the import _sub_directory/more_complicated.py_ and you will also see an empty file _sub_directory/__init__.py_ . While not strictly needed for this folder to work it is for other more advanced projects. General rule is that each folder should have a _\_\_init\_\__.py file.
+Look in the _sub_directory_. You will see the Python file we called to perform the import _sub_directory/more_complicated.py_ and you will also see an empty file _sub_directory/\_\_init\_\_.py_ . While not strictly needed for this folder to work it is for other more advanced projects. General rule is that each folder should have a _\_\_init\_\__.py file. The file does not need to contain anything.
 
 Other than _argparse_ everything in _main_example.py_ is code written by us and imported for execution. As the program becomes more complicated we will import libraries that are distributed with Python (like argparse) or some that need to be installed (like numpy, scipy, Xarray, Pandas). For a single project that does not share code, this example will be similar to what you build.
 
@@ -76,14 +76,14 @@ python
 
 This will show the full path to the file imported when _import copy_ is executed. In this instance you can see the version of Python used is installed in the miniconda area and is in python version 3.11. _copy_ came preinstalled.
 
+Pandas does not come preinstalled with the Python version so I had to install it. The install put it in the _site-packages_ area which is where the packages I install are located.
+
 <pre>
 python
 >>> import pandas
 >>> pandas.__file__
   '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/site-packages/pandas/__init__.py'
 </pre>
-
-Pandas does not come preinstalled with the Python version so I had to install it with pip. The install put it in the _site-packages_ area which is where the packages I install are located.
 
 The reason this directory path is available is that the path is on my _PATH_ environment variable. The _PATH_ environment variable is how the system knows where to look. Python will look for a file that can be imported matching the module you request starting at the first path in PATH (left side) and continues through each path (separated with :) until it finds the module. When found it quits looking. That means we can have the same module "installed" in multiple locations but *Python will always use the first one found*.
 
@@ -92,7 +92,7 @@ echo $PATH
 /opt/local/bin:/opt/local/sbin:/Users/Galahad/miniconda3/envs/dqo-base/bin:/Users/Galahad/miniconda3/condabin:/Users/Galahad/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin: ... and some more ...
 </pre>
 
-We can see this by looking at the list of paths Python has ready to search. Python has used the PATH environment varible to search for locations that contain Python packages/files. Paths that do not have Python related files are ignored. We can use the sys Python module to see what paths are loaded and ready to use. The '' path is the current working directory.
+We can see this by looking at the list of paths Python has ready to search. Python has used the PATH environment varible to search for locations that contain Python packages/files. Paths that do not have Python related files are ignored. We can use the _sys_ Python module to see what paths are loaded and ready to use. The '' path is the current working directory.
 
 <pre>
 python
