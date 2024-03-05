@@ -122,7 +122,7 @@ python
 
 Notice how the two paths set in PYTHONPATH are prepended to the Python path listings. It knows that if I set PYTHONPATH those are most likely to contain files I am interested in using and should be used first. So I could use multiple locations to better orgnaize my code.
 
-It's not recomended but for some projects you may want to add a path after the Python interpreter is started or in your Python program. You can edit the sys.path directly so the program knows where to search. It is not recomeneded because the added path is not global and will cause you to bang your head against the wall some day.
+It's not recomended but for some projects you may want to add a path after the Python interpreter is started or in your Python program. You can edit the sys.path directly so the program knows where to search. It is not recomeneded because the added path is not global to the system (it is global to this instance of Python) and will cause you to bang your head against the wall some day.
 
 <pre>
 python
@@ -180,3 +180,18 @@ easy-install.pth
 </pre>
 
 The ~/.local directory is not typically added to the $PATH environment variable as default, but may be set up to be added on your system. If so the library you import could be read from this directory or this directory may redirect the import to another path on your system.
+
+If you do not want Python to read in ~/.local as a default you can turn this off by setting an environment variable. Setting this variable (to basically anything) will tell Python to not import any libraries found in the ~/.local directory paths.
+<pre>
+> export PYTHONNOUSERSITE=1
+> echo $PYTHONNOUSERSITE
+1
+> python
+  import sys
+  sys.path
+  ['',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python311.zip',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/lib-dynload',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/site-packages']
+</pre>
