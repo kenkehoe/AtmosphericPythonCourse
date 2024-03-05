@@ -140,3 +140,43 @@ python
 Notice how the path is added to the end of the list. If there is a copy in one of the other paths it will use that version.
 
 So what does this mean? Well we can create a single locations to put our library module that contains functions that will be used by multiple projects. We can then set PYTHONPATH in our .bashrc or .bash_profile file to always point to that directory. Then no matter which project we are working on, the library functions are available to Python for import. And, since there is only one copy of the code in the libray area all our updates/fixes only need to be done once to be updated for all our projects. The general rule is copy/paste code as few times as possible. If you don't follow this rule you will spend hours trying to understand why.
+
+## Other path setting information
+As you add more libraries through other directories you may run into some confusing results. There are a few other ways Python will update the _sys.path_, so here is a list to help explain them in case you need to understand to solve some problem.
+
+### PYTHONUSERBASE
+The PYTHONUSERBASE environment variable is used to set the user base directory. This is a directory for specific user's code, often the location to put paths to code you develop elsewhere and install with _pip_ editable instalation. You can think of this as a symbolic link to the code you edit so your changes take effect immediately without needing to reinstall. Following our example above if the PYTHONUSERBASE environment variable is set so the sys.path will be updated.
+
+<pre>
+export PYTHONUSERBASE="/Users/Galahad/.py_rh9"
+python
+>>> import sys
+>>> sys.path.append("/home/me/mypy")
+>>> sys.path
+  ['', '/path/to/a/python/directory', '/second/python/directory',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/lib-dynload',
+  '/Users/Galahad/.local/lib/python3.11/site-packages',
+  '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/site-packages',
+  '/Users/Galahad/.py_rh7/lib/python3.11/site-packages',
+  '/home/me/mypy']
+</pre>
+
+Notice that the PYTHONPATH paths are set first just after the current directory. Then the PYTHONUSERBASE paths expanded to the directory containing Python files. Finally the path appened with sys.path.append().
+
+### .local directory
+On Linux and Mac systems a hidden directory in the user's home directory called _.local_ contains files and paths to application specific information. Often this will contain installations of executibles in the _/bin_ directory and library modules in _/lib_ directory. Python will typically separate different major.minor versions of Python istalation into different folders. For example your home directory .local folder could contian multiple Python version library folders.
+
+<pre>
+> ls /Users/Galahad/.local
+  LICENSE.txt bin         lib         setup.cfg   share
+> ls /Users/Galahad/.local/lib
+  python3.11 python3.6  python3.7  python3.8  python3.9
+> ls /Users/Galahad/.local/lib/python3.11/site-packages/
+__pycache__
+act_atmos-1.0.4.post377.dev0+g4bf0e1e6a.dist-info
+dqlib.egg-link
+easy-install.pth
+</pre>
+
+The ~/.local directory is not typically added to the $PATH environment variable as default, but may be set up to be added on your system. If so the library you import could be read from this directory or this directory may redirect the import to another path on your system.
