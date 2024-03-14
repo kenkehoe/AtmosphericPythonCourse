@@ -6,12 +6,12 @@
 # A basic "key-value" pair
 a_variable_name: "A value to list with the variable"
 b_variable_name: A value to list with the variable but no quotes. Some assumptions are made.
-c_variable_name: 1  # this is interpred as an int
-d_variable_name: 11.  # this is interpred as a float
+c_variable_name: 1  # this is interpreted as an int
+d_variable_name: 11.  # this is interpreted as a float
 
-# We can also have a list of values not just one value. A list is defined
+# We can also have a list of values, not just one value. A list is defined
 # by starting the row with "- " characters. A list element can contain any
-# python interpretable object, sting, int, float, dictionary, list.
+# python interpretable object, string, int, float, dictionary, list.
 d_list_name:
     - 1  # this is an int
     - 2.  # this is a float
@@ -21,7 +21,7 @@ d_list_name:
     - 'three or four'  # this is a string
     - "this is a string
        with a return in the YAML file
-       but not once it it is read in." # using ' or " will work the same
+       but not once it is read in." # using ' or " will work the same
     - >
         This is a different
         way to have multiline text
@@ -36,7 +36,7 @@ d_list_name:
     - 'False'  # but this is stored as a string
     - use: True  # this is a way to set configuration to do something or not. It's a dictionary.
 
-# When you have metadata that needs to be stored YAML is a great
+# When you have metadata that needs to be stored, YAML is a great
 # format. Here is an example you may use. Notice how the different
 # levels are defined by spaces, just like python loops. This is read
 # in as a dictionary of dictionaries.
