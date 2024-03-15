@@ -38,7 +38,7 @@ Jupyter lab can be run locally from terminal window with:
 
 Running Jupyter Lab on a GML server allows you to browse your home directory and run 
 code on GML servers.  GML IT and I are in the process of setting up a Jupyter Hub server
-that will simplfy access and login, but you can easily run a Jupyter Lab now using ssh with 
+that will simplify access and login, but you can easily run a Jupyter Lab now using ssh with 
 a local port redirect.
 
 *Choose a port to avoid conflicts with other users
@@ -70,5 +70,5 @@ In the terminal window, note the 'token' at the end of the start up text.  Copy 
 http://localhost:15472/lab
 
 Paste the token in to the token field at the bottom of the page and enter a new password.
-Navigate to dask folder an open notebook files.  Shift+enter will execute code blocks.
+Navigate to dask folder and open notebook files.  Shift+enter will execute code blocks.
 
