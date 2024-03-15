@@ -49,7 +49,7 @@ This line will read _library_example.py_ and import the argument_function functi
 
 `result, value1, value2 = argument_function(args.argument, 'spam and eggs', value2=args.true_false_keyword)`
 
-We can write as many Python files in the current directoy as we want to organize the variables or functions. If we want to better organize the structure we can put Python files in sub directories. We just need to provide the relative path (including sub directories) when we import the functions or variables.
+We can write as many Python files in the current directory as we want to organize the variables or functions. If we want to better organize the structure we can put Python files in sub directories. We just need to provide the relative path (including sub directories) when we import the functions or variables.
 
 <pre>
 from sub_directory.more_complicated import more_complicated_function
@@ -58,7 +58,7 @@ from sub_directory.more_complicated import IMPORTED_VARIABLE
 
 While this example shows how a variable can be imported, this is not the preferred method. There are other ways to import and manage variables.
 
-Look in the _sub_directory_. You will see the Python file we called to perform the import _sub_directory/more_complicated.py_ and you will also see an empty file _sub_directory/\_\_init\_\_.py_ . While not strictly needed for this folder to work, it is needed for other more advanced projects. A general rule of thumb is that each folder should have a _\_\_init\_\__.py file. The file does not need to contain anything.
+Look in the _sub_directory_. You will see the Python file we called to perform the import _sub_directory/more_complicated.py_ and you will also see an empty file _sub_directory/\_\_init\_\_.py_ . While not strictly needed for this folder to work, it is needed for other more advanced projects. A general rule of thumb is that each folder should have an _\_\_init\_\__.py file. The file does not need to contain anything.
 
 Other than _argparse_ everything in _main_example.py_ is code written by us and imported for execution. As the program becomes more complicated, we will import libraries that are distributed with Python (like argparse) or some that need to be installed (like numpy, scipy, Xarray, Pandas). For a single project that does not share code, this example will be similar to what you build.
 
@@ -105,7 +105,7 @@ python
   '/Users/Galahad/miniconda3/envs/dqo-base/lib/python3.11/site-packages']
 </pre>
 
-We can add paths to files by appending them to PATH, but that's a little strange since we are adding a path to Python files in the system environment variable that is shared by all other programs. It would be better if we could add paths to Python stuff with just a Python thing. Well we can with PYTHONPATH environment variable. Here I will use Bash shell to create the PYTHONPATH environment variable and set it to two paths.
+We can add paths to files by appending them to PATH, but that's a little strange since we are adding a path to Python files in the system environment variable that is shared by all other programs. It would be better if we could add paths to Python stuff with just a Python thing. Well we can with the PYTHONPATH environment variable. Here I will use Bash shell to create the PYTHONPATH environment variable and set it to two paths.
 
 <pre>
 export PYTHONPATH="/path/to/a/python/directory:/second/python/directory"
@@ -139,13 +139,13 @@ python
 
 Notice how the path is added to the end of the list. If there is a copy in one of the other paths it will use that version.
 
-So what does this mean? Well we can create a single location to put our library module that contains functions that will be used by multiple projects. We can then set PYTHONPATH in our .bashrc or .bash_profile file to always point to that directory. Then no matter which project we are working on, the library functions are available to Python for import. And, since there is only one copy of the code in the library area, all of our updates/fixes only need to be done once to be updated for all our projects. The general rule of thumb is to copy/paste code as few times as possible. If you don't follow this rule, you will spend hours trying to understand why.
+So what does this mean? Well we can create a single location to put our library module that contains functions that will be used by multiple projects. We can then set PYTHONPATH in our .bashrc or .bash_profile file to always point to that directory. Then no matter which project we are working on, the library functions are available to Python for import. And, since there is only one copy of the code in the library area, all of our updates/fixes only need to be done once to be updated for all of our projects. The general rule of thumb is to copy/paste code as few times as possible. If you don't follow this rule, you will spend hours trying to understand why.
 
 ## Other path setting information
 As you add more libraries through other directories you may run into some confusing results. There are a few other ways Python will update the _sys.path_, so here is a list to help explain them in case you need to understand to solve some problem.
 
 ### PYTHONUSERBASE
-The PYTHONUSERBASE environment variable is used to set the user base directory. This is a directory for a specific user's code, often the location to put paths to code you develop elsewhere and install with _pip_ editable installation. You can think of this as a symbolic link to the code you edit so your changes take effect immediately without needing to reinstall. Following our example above, if the PYTHONUSERBASE environment variable is set the sys.path will be updated.
+The PYTHONUSERBASE environment variable is used to set the user base directory. This is a directory for a specific user's code, often the location to put paths to code you develop elsewhere and install with _pip_ editable installation. You can think of this as a symbolic link to the code you edit so your changes take effect immediately without needing to reinstall. Following our example above, if the PYTHONUSERBASE environment variable is set, the sys.path will be updated.
 
 <pre>
 export PYTHONUSERBASE="/Users/Galahad/.py_rh9"
@@ -165,7 +165,7 @@ python
 Notice that the PYTHONPATH paths are set first just after the current directory. Then the PYTHONUSERBASE paths expanded to the directory containing Python files. Finally the path appended with sys.path.append().
 
 ### .local directory
-On Linux and Mac systems a hidden directory in the user's home directory called _.local_ contains files and paths to application specific information. Often this will contain installations of executables in the _/bin_ directory and library modules in _/lib_ directory. Python will typically separate different major.minor versions of Python installation into different folders. For example your home directory .local folder could contain multiple Python version library folders.
+On Linux and Mac systems a hidden directory in the user's home directory called _.local_ contains files and paths to application specific information. Often this will contain installations of executables in the _/bin_ directory and library modules in _/lib_ directory. Python will typically separate different major.minor versions of Python installation into different folders. For example, your home directory .local folder could contain multiple Python version library folders.
 
 <pre>
 > ls /Users/Galahad/.local
@@ -181,7 +181,7 @@ easy-install.pth
 
 The ~/.local directory is not typically added to the $PATH environment variable as default, but may be set up to be added on your system. If so, the library you import could be read from this directory or this directory may redirect the import to another path on your system.
 
-If you do not want Python to read in ~/.local as a default you can turn this off by setting an environment variable. Setting this variable (to basically anything) will tell Python to not import any libraries found in the ~/.local directory paths.
+If you do not want Python to read in ~/.local as a default, you can turn this off by setting an environment variable. Setting this variable (to basically anything) will tell Python to not import any libraries found in the ~/.local directory paths.
 <pre>
 > export PYTHONNOUSERSITE=1
 > echo $PYTHONNOUSERSITE
