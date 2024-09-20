@@ -17,7 +17,7 @@ This means the top level directory is called _datetime_ with a file called _date
 A flat structure has the importable files from the packge directly in the main folder of the package. The src layout has another level with a directory called /src. The recomended structure is to use the src layout for reasons listed [here](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/).
 
 ## Required and optional files
-A package has a number of required and optional files/directories. Many of the files can be created automatically when using GitHub or GitLab to create the repository. There are options to create the standard files. I suggest letting GitHub/GitLab create these for you. They have options for the language adn licenses type.
+A package has a number of required and optional files/directories. Many of the files can be created automatically when using GitHub or GitLab to create the repository. There are options to create the standard files. I suggest letting GitHub/GitLab create these for you. They have options for the language and licenses type.
 
 <pre>
   LICENSE
@@ -31,7 +31,7 @@ If a package needs to be built there will need to be instructions. The currently
 
 The _pyproject.toml_ file contains metada needed by the _build_ command to build the package. You can just copy some other file or [read the documentation](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/). Because the new method needs to handle other established methods, and people are building new ones there are plenty of optoins. For now you can start with the example one in this repository. The metada in the file is used during the build process to populate some required and optional values. As you desire more automation or complexity the file will grow with options to work with other tools to set values for you (like version from _Git_ tags or fixing linting with _ruff_).
 
-Depending on how you want to implemnt the additional feature you may also still want a _setup.py_ file. This is the older method to provide instructions to the package build process. Most of the instructions that were in the _setup.py_ file can now be put in the _pyproject.toml_ but if an instruction or metadata is not able to be put into _pyproject.toml_ the _setup.py_ file is still executed.
+Depending on how you want to implement the additional feature you may also still want a _setup.py_ file. This is the older method to provide instructions to the package build process. Most of the instructions that were in the _setup.py_ file can now be put in the _pyproject.toml_ but if an instruction or metadata is not able to be put into _pyproject.toml_ the _setup.py_ file is still executed.
 
 ## Directory structure
 For the flat directory structure you may only have one file that contains all the functions or methods. This is fine and will work. For the src structure there will be an additional directory called /src which will contain the folder of the package name.
@@ -46,6 +46,20 @@ Then when the user wants to see the version number of their package they can pri
 <pre>
 import act
 act.__version__
+</pre>
+
+There is an anoying thing about \__inti__.py files and /src or flat structure. The \__init__.py file will tell Python the folder contains code to be read in. But when the \__init__.py file is in the /src folder it will not be executed. This requires an addition directory layer. So if there is code in the \__init__.py file to be executed your directory strucure will require an additional layer. Here is the pacakge _wildcat_ with its directory structure.
+
+<pre>
+wildcat/
+|-- LICENSE
+|-- README.md
+|-- pyproject.toml
+|-- src/
+|   +-- __init__.py
+|   +-- wildcat/
+|      +-- wildcat.py
+|      +-- __init__.py
 </pre>
 
 ## Building and installing
