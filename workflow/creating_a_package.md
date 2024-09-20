@@ -47,3 +47,55 @@ Then when the user wants to see the version number of their package they can pri
 import act
 act.__version__
 </pre>
+
+## Building and installing
+A file can be imported for use with Python by simply importing the file (assuming it is in the same directory or in the PATH or PYTHONPATH)
+<pre>
+import awesome_file
+result = awesome_file.awesome_program(stuff, more stuff)
+</pre>
+
+or importing the function from the file (assuming it is in the same directory or in the PATH or PYTHONPATH).
+<pre>
+from awesome_file import awesome_program
+result = awesome_program(stuff, more stuff)
+</pre>
+
+But since we are talking about building a package we will be building the package and installing it into the Python lib area we will be using. The safest and most reliabe way to use Python is by creating a virtual environment of some sort typical with a package manager. There are many differnt ways and types of virtual environments but they all perform the same basic function. We can control the environment and packages install including the versions. This gives us control over our own project so we are not dependent on another project's requirements for package or versions. Common package managers to create the virtual environment inclue conda or Python venv. We can create the base virtual environment and then add packages to that environment to our specifications including the version of Python.
+
+For this example lets use Python venv. This will create a folder in the current directory that will use the Python we normally use and contain the libraries we want to use for this project. Since only the libraries we want to use must be installed we will notice that the normal libraries will not be present until we install them in the new venv.
+
+First we create the virtual environment. Notice we are going to use the Python we are currently using to make the virtual environent and we are naming the newly created virtual environment _venv_.
+<pre>
+python -m venv venv
+</pre>
+Then we activate the newly create environment. This can be done at anytime and we do not need to create the environment every time we want to use it. Once the environment is create it will be available for use. When the environment is activated we should see some additional text at the start of the command line indicating the environment is acvive. When we no longer want to operate in that environment we can exit with _deactivate_.
+<pre>
+>
+. venv/bin/activate
+(venv) > deactivate
+>
+</pre>
+
+Since we want to build the project into an installable packge we need to install the package that will read our commands and build the package. When we install the _build_ packge we should be in the _venv_ environment so the _pip_ install is done into that package manager. This allows us to control where it is installed, removing it when we want and the version.
+<pre>
+. venv/bin/activate
+(venv) > pip install build
+</pre>
+
+Now that we have our package created, the virtual environment built and running, and needed python packages installed we can build the package.
+<pre>
+(venv) > python3 -m build .
+</pre>
+
+This will build the package into a new folder called _dist_. The files in that folder can be used to install the package we just built on this or another machine. But notice the install would come from a static file. So any future updates would not be realized. This would be helpful for a produciton system where we do not want and testing or development changes to be implemented until we install them. But for development this would be a pain to need to rebuild every time we make a single change. _pip_ understands this need and has the  -e _editable_ option for installing. Using this option we can make changes to our package and they will be relaized immediatly. Notice we are using "." to indicate what to install with pip. This means install the package in the current directory so you need to be in the correct directory when running this command.
+<pre>
+(venv) > pip install -e .
+</pre>
+
+Now that we have the package installed we can import it and call any of the functions.
+<pre>
+(venv) > python
+>>> from awesome_file import awesome_program
+>>> result = awesome_program(stuff, more stuff)
+</pre>
